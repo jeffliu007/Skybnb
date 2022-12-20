@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "production") {
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return queryInterface.createTable(
-      "Reviews",
+      "Spots",
       {
         id: {
           allowNull: false,
@@ -16,44 +16,65 @@ module.exports = {
           primaryKey: true,
           type: Sequelize.INTEGER,
         },
-        spotId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: "Spots",
-          },
-          onDelete: "CASCADE",
-        },
-        userId: {
+        ownerId: {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
             model: "Users",
+            key: "id",
           },
           onDelete: "CASCADE",
         },
-        review: {
+        address: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        stars: {
-          type: Sequelize.INTEGER,
+        city: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        state: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        country: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        lat: {
+          type: Sequelize.DECIMAL,
+        },
+        lng: {
+          type: Sequelize.DECIMAL,
+        },
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        description: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        price: {
+          type: Sequelize.DECIMAL,
           allowNull: false,
         },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
+          defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
         updatedAt: {
           allowNull: false,
           type: Sequelize.DATE,
+          defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
         },
       },
       options
     );
   },
   down: async (queryInterface, Sequelize) => {
-    options.tableName = "Reviews";
+    options.tableName = "Spots";
     return queryInterface.dropTable(options);
   },
 };
