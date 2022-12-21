@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
         required: true,
       },
     ],
-    group: ["Spot.Id"],
+    group: ["Spot.id"],
   });
   return res.json({
     Spots: allSpots,
