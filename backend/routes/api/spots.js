@@ -20,6 +20,56 @@ const { Op } = require("sequelize");
 
 const router = express.Router();
 
+const allSpotsValidation = [
+  check("address")
+    .exists({ checkFalsy: true })
+    .withMessage("Street address is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 256 })
+    .withMessage("Address provided must be less than 256 characters"),
+  check("city")
+    .exists({ checkFalsy: true })
+    .withMessage("City is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("City name must be less than 100 characters"),
+  check("state")
+    .exists({ checkFalsy: true })
+    .withMessage("State is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("State name must be less than 100 characters"),
+  check("country")
+    .exists({ checkFalsy: true })
+    .withMessage("Country is required")
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("Country name must be less than 100 characters"),
+  check("lat")
+    .exists({ checkFalsy: true })
+    .withMessage("Latitude is not valid")
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("Latitude must be less than 100 characters"),
+  check("lng")
+    .exists({ checkFalsy: true })
+    .withMessage("Longitude is not valid")
+    .isLength({ min: 0 })
+    .isLength({ max: 100 })
+    .withMessage("Longitude must be less than 100 characters"),
+  check("name")
+    .exists({ checkFalsy: true })
+    .isLength({ max: 50 })
+    .withMessage("Name must be less than 50 characters"),
+  check("description")
+    .exists({ checkFalsy: true })
+    .withMessage("Description is required"),
+  check("price")
+    .exists({ checkFalsy: true })
+    .withMessage("Price per day is required"),
+  handleValidationErrors,
+];
+
 //get all spots
 router.get("/", async (req, res) => {
   const allSpots = await Spot.findAll({
@@ -206,6 +256,28 @@ router.get("/:spotId", async (req, res, next) => {
   // return res.json(specificSpot);
 });
 
-//continue on creating a spot tomorrow
+//creating a new spot
+
+router.post("/", requireAuth, allSpotsValidation, async (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+
+  let user = req.user;
+
+  let newSpot = await Spot.create({
+    ownerId: user.id,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  });
+  res.status = 201;
+  return res.json(newSpot);
+});
 
 module.exports = router;
