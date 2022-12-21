@@ -16,47 +16,53 @@ const {
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
-const { TimeoutError } = require("sequelize");
-const user = require("../../db/models/user");
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
 //get all spots
 router.get("/", async (req, res) => {
   const allSpots = await Spot.findAll({
-    attributes: [
-      "id",
-      "ownerId",
-      "address",
-      "city",
-      "state",
-      "country",
-      "lat",
-      "lng",
-      "name",
-      "description",
-      "price",
-      "createdAt",
-      "updatedAt",
-      [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
-      [sequelize.col("url"), "previewImage"],
-    ],
     include: [
       {
         model: Review,
-        attributes: [],
-        required: true,
       },
       {
         model: SpotImage,
-        attributes: [],
-        required: true,
       },
     ],
-    group: ["Spot.id"],
   });
+
+  let Spots = [];
+  for (let i = 0; i < allSpots.length; i++) {
+    let spot = allSpots[i];
+
+    const review = await spot.getReviews({
+      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
+    });
+    spot = spot.toJSON();
+    spot.avgRating = review[0].dataValues.avgRating;
+    const previewImage = await SpotImage.findOne({
+      where: {
+        preview: true,
+        spotId: spot.id,
+      },
+    });
+
+    if (previewImage) {
+      spot.previewImage = previewImage.toJSON().url;
+    } else {
+      spot.previewImage = "Preview image currently does not exist";
+    }
+    Spots.push(spot);
+    if (Spots.length === 0) return res.json("You do not have any spots");
+
+    delete spot.Reviews;
+    delete spot.SpotImages;
+  }
+
   return res.json({
-    Spots: allSpots,
+    Spots,
   });
 });
 
@@ -71,7 +77,7 @@ router.get("/current", requireAuth, async (req, res) => {
     },
   });
 
-  const arrOfSpots = [];
+  const Spots = [];
 
   for (let i = 0; i < usersSpots.length; i++) {
     let spot = usersSpots[i];
@@ -93,11 +99,11 @@ router.get("/current", requireAuth, async (req, res) => {
     } else {
       spot.previewImage = "Preview image currently does not exist";
     }
-    arrOfSpots.push(spot);
-    if (arrOfSpots.length === 0) return res.json("You do not have any spots");
+    Spots.push(spot);
+    if (Spots.length === 0) return res.json("You do not have any spots");
   }
   return res.json({
-    arrOfSpots,
+    Spots,
   });
 });
 
