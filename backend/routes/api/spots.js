@@ -258,7 +258,7 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
   if (user.id !== spot.ownerId) {
     const err = new Error("Unauthorized user");
     err.status = 404;
-    err.message("Unauthorized user");
+    err.message = "Unauthorized user";
     return next(err);
   }
 
@@ -278,5 +278,58 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 });
 
 //edit a spot
+router.put(
+  "/:spotId",
+  requireAuth,
+  allSpotsValidation,
+  async (req, res, next) => {
+    const user = req.user;
+    const spotId = req.params.spotId;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      err.message = "Spot couldn't be found";
+      err.title = "No spot found";
+      return next(err);
+    }
+
+    if (user.id !== spot.ownerId) {
+      const err = new Error("Unauthorized user");
+      err.status = 404;
+      err.message = "Unauthorized user";
+      return next(err);
+    }
+
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
+
+    spot.set({
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    });
+
+    await spot.save();
+    return res.json(spot);
+  }
+);
 
 module.exports = router;
