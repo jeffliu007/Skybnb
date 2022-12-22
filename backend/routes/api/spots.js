@@ -212,48 +212,6 @@ router.get("/:spotId", async (req, res, next) => {
   delete specificSpot.Reviews;
 
   res.json(specificSpot);
-  // const reviewNum = await Review.count({
-  //   where: {
-  //     spotId: id,
-  //   },
-  // });
-  // // console.log(reviewNum);
-
-  // const specificSpot = await Spot.findOne({
-  //   where: {
-  //     id: id,
-  //   },
-  //   attributes: [
-  //     "id",
-  //     "ownerId",
-  //     "address",
-  //     "city",
-  //     "state",
-  //     "country",
-  //     "lat",
-  //     "lng",
-  //     "name",
-  //     "description",
-  //     "price",
-  //     "createdAt",
-  //     "updatedAt",
-  //     [sequelize.fn("AVG", sequelize.col("stars")), "avgRating"],
-  //     [sequelize.col("url"), "previewImage"],
-  //   ],
-  //   include: [
-  //     {
-  //       model: Review,
-  //       attributes: [],
-  //       required: true,
-  //     },
-  //     {
-  //       model: SpotImage,
-  //       attributes: [],
-  //       required: true,
-  //     },
-  //   ],
-  // });
-  // return res.json(specificSpot);
 });
 
 //creating a new spot
@@ -279,5 +237,46 @@ router.post("/", requireAuth, allSpotsValidation, async (req, res, next) => {
   res.status = 201;
   return res.json(newSpot);
 });
+
+//add image to a spot based on the spot's id
+
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+  const user = req.user;
+  const spotId = req.params.spotId;
+  const { url, preview } = req.body;
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    err.message = "Spot couldn't be found";
+    err.title = "No spot found";
+    return next(err);
+  }
+
+  if (user.id !== spot.ownerId) {
+    const err = new Error("Unauthorized user");
+    err.status = 404;
+    err.message("Unauthorized user");
+    return next(err);
+  }
+
+  let newImage = await SpotImage.create({
+    url,
+    preview,
+    spotId,
+  });
+
+  newImage = newImage.toJSON();
+
+  delete newImage.spotId;
+  delete newImage.createdAt;
+  delete newImage.updatedAt;
+
+  return res.json(newImage);
+});
+
+//edit a spot
 
 module.exports = router;
