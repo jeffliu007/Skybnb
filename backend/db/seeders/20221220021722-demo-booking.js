@@ -28,6 +28,12 @@ module.exports = {
           startDate: new Date(2022, 10, 17),
           endDate: new Date(2022, 11, 7),
         },
+        {
+          spotId: 4,
+          userId: 4,
+          startDate: new Date(2022, 8, 19),
+          endDate: new Date(2022, 9, 17),
+        },
       ],
       {}
     );
@@ -39,7 +45,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: { [Op.in]: [1, 2, 3] },
+        spotId: { [Op.in]: [1, 2, 3, 4] },
       },
       {}
     );

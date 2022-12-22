@@ -41,11 +41,23 @@ module.exports = {
           city: "Los Angeles",
           state: "CA",
           country: "USA",
-          lat: 34.04,
+          lat: 34.14,
           lng: 118.56,
           name: "Ocean Getaway",
           description: "Steps to the ocean, beautiful location.",
           price: 118,
+        },
+        {
+          ownerId: 4,
+          address: "9999 Tester Drive",
+          city: "Seattle",
+          state: "WA",
+          country: "USA",
+          lat: 99.94,
+          lng: -99.99,
+          name: "Testing facility",
+          description: "Testing new seed data",
+          price: 999,
         },
       ],
       {}
@@ -59,7 +71,7 @@ module.exports = {
       options,
       {
         ownerId: {
-          [Op.in]: [1, 2, 3],
+          [Op.in]: [1, 2, 3, 4],
         },
       },
       {}

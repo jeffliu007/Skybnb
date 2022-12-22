@@ -17,16 +17,70 @@ module.exports = {
           stars: 3,
         },
         {
-          spotId: 2,
+          spotId: 1,
           userId: 2,
+          review: "It was honestly alright",
+          stars: 4,
+        },
+        {
+          spotId: 1,
+          userId: 3,
+          review: "Could have been better",
+          stars: 3,
+        },
+        {
+          spotId: 1,
+          userId: 4,
+          review: "I hated this place but we lived",
+          stars: 2,
+        },
+        {
+          spotId: 2,
+          userId: 1,
           review: "Absolute blast, loved my stay",
           stars: 4,
         },
         {
-          spotId: 3,
+          spotId: 2,
+          userId: 2,
+          review: "Loved my stay",
+          stars: 4,
+        },
+        {
+          spotId: 2,
           userId: 3,
+          review: "Couldn't be more pleased with this place",
+          stars: 5,
+        },
+        {
+          spotId: 3,
+          userId: 1,
           review: "Stunning views all around",
           stars: 5,
+        },
+        {
+          spotId: 3,
+          userId: 2,
+          review: "Gorgeous property!!",
+          stars: 5,
+        },
+        {
+          spotId: 3,
+          userId: 3,
+          review: "Simple, no complaints",
+          stars: 3,
+        },
+        {
+          spotId: 4,
+          userId: 1,
+          review: "Can't complain, decent spot",
+          stars: 3,
+        },
+        {
+          spotId: 4,
+          userId: 2,
+          review: "Mediocre but not bad",
+          stars: 4,
         },
       ],
       {}
@@ -39,7 +93,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: { [Op.in]: [1, 2, 3] },
+        spotId: { [Op.in]: [1, 2, 3, 4] },
       },
       {}
     );
