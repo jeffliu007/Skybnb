@@ -288,18 +288,18 @@ router.put(
 
     const spot = await Spot.findByPk(spotId);
 
+    if (user.id !== spot.ownerId) {
+      const err = new Error("Unauthorized user");
+      err.status = 404;
+      err.message = "Unauthorized user";
+      return next(err);
+    }
+
     if (!spot) {
       const err = new Error("Spot couldn't be found");
       err.status = 404;
       err.message = "Spot couldn't be found";
       err.title = "No spot found";
-      return next(err);
-    }
-
-    if (user.id !== spot.ownerId) {
-      const err = new Error("Unauthorized user");
-      err.status = 404;
-      err.message = "Unauthorized user";
       return next(err);
     }
 
@@ -331,5 +331,36 @@ router.put(
     return res.json(spot);
   }
 );
+
+//delete a spot by id
+
+router.delete("/:spotId", requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const user = req.user;
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (user.id !== spot.ownerId) {
+    const err = new Error("Unauthorized user");
+    err.status = 404;
+    err.message = "Unauthorized user";
+    return next(err);
+  }
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    err.message = "Spot couldn't be found";
+    err.title = "No spot found";
+    return next(err);
+  }
+
+  spot.destroy();
+
+  return res.json({
+    message: "Successfully deleted",
+    statusCode: res.statusCode,
+  });
+});
 
 module.exports = router;
