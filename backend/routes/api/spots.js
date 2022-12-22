@@ -218,7 +218,7 @@ router.get("/:spotId", async (req, res, next) => {
 
   if (!avg) avg = "No reviews yet";
   else jsonSpot.avgStarRating = avg;
-
+  jsonSpot.Owner = jsonSpot.User;
   //remove the tables we edited
   delete jsonSpot.User;
   delete jsonSpot.Reviews;
@@ -374,14 +374,5 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     statusCode: res.statusCode,
   });
 });
-
-//start Reviews tomorrrow
-
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//questions for alec during standUP
-//how would I add new seed data to the users, do I use the long db seed data method he posted or just delete sqldatabase
-//how should I input new review seed data to find if my avg func works since
-//each review is tied to a user, do I just let each user create mutliple reviews
-// or just pretend that each user has reviewed each others airbnbs so I can get more data <--- this one
 
 module.exports = router;
