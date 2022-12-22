@@ -25,6 +25,11 @@ module.exports = {
           url: "https://images.pexels.com/photos/3217505/pexels-photo-3217505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
           preview: true,
         },
+        {
+          spotId: 4,
+          url: "https://images.pexels.com/photos/5998138/pexels-photo-5998138.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          preview: true,
+        },
       ],
       {}
     );
@@ -36,7 +41,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: { [Op.in]: [1, 2, 3] },
+        spotId: { [Op.in]: [1, 2, 3, 4] },
       },
       {}
     );

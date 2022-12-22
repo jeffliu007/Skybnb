@@ -76,40 +76,43 @@ router.get("/", async (req, res) => {
     include: [
       {
         model: Review,
+        attributes: ["stars"],
       },
       {
         model: SpotImage,
+        attributes: ["url", "preview"],
       },
     ],
   });
 
   let Spots = [];
-  for (let i = 0; i < allSpots.length; i++) {
-    let spot = allSpots[i];
-
-    const review = await spot.getReviews({
-      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
-    });
+  allSpots.forEach((spot) => {
     spot = spot.toJSON();
-    spot.avgRating = review[0].dataValues.avgRating;
-    const previewImage = await SpotImage.findOne({
-      where: {
-        preview: true,
-        spotId: spot.id,
-      },
+    let sum = 0;
+    let amt = spot.Reviews.length;
+
+    spot.Reviews.forEach((rev) => {
+      sum += rev.stars;
+      let avg = sum / amt;
+
+      if (!avg) avg = "No reviews yet";
+
+      spot.avgRating = avg;
+
+      spot.SpotImages.forEach((img) => {
+        if (img.preview === true) {
+          spot.previewImage = img.url;
+        } else spot.previewImage = "No images uploaded yet";
+      });
     });
 
-    if (previewImage) {
-      spot.previewImage = previewImage.toJSON().url;
-    } else {
-      spot.previewImage = "Preview image currently does not exist";
-    }
-    Spots.push(spot);
-    if (Spots.length === 0) return res.json("You do not have any spots");
+    if (spot.SpotImages.length === 0)
+      spot.previewImage = "No images uploaded yet";
 
     delete spot.Reviews;
     delete spot.SpotImages;
-  }
+    Spots.push(spot);
+  });
 
   return res.json({
     Spots,
@@ -121,40 +124,48 @@ router.get("/", async (req, res) => {
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
 
-  const usersSpots = await Spot.findAll({
-    where: {
-      ownerId: user.id,
-    },
-  });
-
-  const Spots = [];
-
-  for (let i = 0; i < usersSpots.length; i++) {
-    let spot = usersSpots[i];
-
-    const review = await spot.getReviews({
-      attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
-    });
-    spot = spot.toJSON();
-    spot.avgRating = review[0].dataValues.avgRating;
-    const previewImage = await SpotImage.findOne({
-      where: {
-        preview: true,
-        spotId: spot.id,
+  const usersSpots = await user.getSpots({
+    include: [
+      {
+        model: Review,
+        attributes: ["stars"],
       },
+      {
+        model: SpotImage,
+        attributes: ["url", "preview"],
+      },
+    ],
+  });
+  let Spots = [];
+  usersSpots.forEach((spot) => {
+    spot = spot.toJSON();
+    let sum = 0;
+    let amt = spot.Reviews.length;
+
+    spot.Reviews.forEach((rev) => {
+      sum += rev.stars;
+      let avg = sum / amt;
+
+      if (!avg) avg = "No reviews yet";
+
+      spot.avgRating = avg;
+
+      spot.SpotImages.forEach((img) => {
+        if (img.preview === true) {
+          spot.previewImage = img.url;
+        } else spot.previewImage = "No images uploaded yet";
+      });
     });
 
-    if (previewImage) {
-      spot.previewImage = previewImage.toJSON().url;
-    } else {
-      spot.previewImage = "Preview image currently does not exist";
-    }
+    if (spot.SpotImages.length === 0)
+      spot.previewImage = "No images uploaded yet";
+
+    delete spot.SpotImages;
+    delete spot.Reviews;
     Spots.push(spot);
-    if (Spots.length === 0) return res.json("You do not have any spots");
-  }
-  return res.json({
-    Spots,
   });
+  if (!Spots) res.json("No spots available");
+  else res.json({ Spots: Spots });
 });
 
 //get specific spot by id
@@ -197,21 +208,22 @@ router.get("/:spotId", async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-
-  const avgRev = await Review.findAll({
-    attributes: [[sequelize.fn("AVG", sequelize.col("stars")), "avgRating"]],
+  let jsonSpot = spot.toJSON();
+  jsonSpot.numReviews = jsonSpot.Reviews.length;
+  let sum = 0;
+  jsonSpot.Reviews.forEach((rev) => {
+    sum += rev.stars;
   });
+  let avg = sum / jsonSpot.numReviews;
 
-  const specificSpot = spot.toJSON();
+  if (!avg) avg = "No reviews yet";
+  else jsonSpot.avgStarRating = avg;
 
-  specificSpot.avgStarRating = avgRev[0].dataValues.avgRating;
-  specificSpot.numReviews = specificSpot.Reviews.length;
-  specificSpot.Owner = specificSpot.User;
   //remove the tables we edited
-  delete specificSpot.User;
-  delete specificSpot.Reviews;
+  delete jsonSpot.User;
+  delete jsonSpot.Reviews;
 
-  res.json(specificSpot);
+  res.json(jsonSpot);
 });
 
 //creating a new spot
@@ -362,5 +374,14 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     statusCode: res.statusCode,
   });
 });
+
+//start Reviews tomorrrow
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//questions for alec during standUP
+//how would I add new seed data to the users, do I use the long db seed data method he posted or just delete sqldatabase
+//how should I input new review seed data to find if my avg func works since
+//each review is tied to a user, do I just let each user create mutliple reviews
+// or just pretend that each user has reviewed each others airbnbs so I can get more data <--- this one
 
 module.exports = router;
