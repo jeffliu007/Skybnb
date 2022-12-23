@@ -504,7 +504,6 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   if (user.id === spot.ownerId) {
     const err = new Error("Spot cannot belong to current user");
     err.status = 404;
-    err.message = "Spot cannot belong to current user";
     err.title = "Invalid user action";
     return next(err);
   }
@@ -512,8 +511,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   if (endDate <= startDate) {
     const err = new Error("endDate cannot be on or before startDate");
     err.status = 400;
-    err.message = "Validation error";
-    err.title = "Invalid user action";
+    err.title = "Validation error";
     return next(err);
   }
 
@@ -532,11 +530,11 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
 
     //account for conflicting dates
     if (prevStart >= buildStart && prevStart <= buildEnd) {
-      groupedErr.startDate = "Start date conflicts with an existing booking";
+      groupedErr.startDate = "Start date invalid";
     }
 
     if (prevEnd >= buildStart && prevEnd <= buildEnd) {
-      groupedErr.endDate = "End date conflicts with an existing booking";
+      groupedErr.endDate = "End date invalid";
     }
   });
 
