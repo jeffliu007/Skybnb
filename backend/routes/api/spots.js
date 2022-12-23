@@ -12,63 +12,18 @@ const {
   User,
   Booking,
   sequelize,
+  ReviewImage,
 } = require("../../db/models");
 
 const { check } = require("express-validator");
-const { handleValidationErrors } = require("../../utils/validation");
+const {
+  handleValidationErrors,
+  allSpotsValidation,
+  allReviewsValidation,
+} = require("../../utils/validation");
 const { Op } = require("sequelize");
 
 const router = express.Router();
-
-const allSpotsValidation = [
-  check("address")
-    .exists({ checkFalsy: true })
-    .withMessage("Street address is required")
-    .isLength({ min: 0 })
-    .isLength({ max: 256 })
-    .withMessage("Address provided must be less than 256 characters"),
-  check("city")
-    .exists({ checkFalsy: true })
-    .withMessage("City is required")
-    .isLength({ min: 0 })
-    .isLength({ max: 100 })
-    .withMessage("City name must be less than 100 characters"),
-  check("state")
-    .exists({ checkFalsy: true })
-    .withMessage("State is required")
-    .isLength({ min: 0 })
-    .isLength({ max: 100 })
-    .withMessage("State name must be less than 100 characters"),
-  check("country")
-    .exists({ checkFalsy: true })
-    .withMessage("Country is required")
-    .isLength({ min: 0 })
-    .isLength({ max: 100 })
-    .withMessage("Country name must be less than 100 characters"),
-  check("lat")
-    .exists({ checkFalsy: true })
-    .withMessage("Latitude is not valid")
-    .isLength({ min: 0 })
-    .isLength({ max: 100 })
-    .withMessage("Latitude must be less than 100 characters"),
-  check("lng")
-    .exists({ checkFalsy: true })
-    .withMessage("Longitude is not valid")
-    .isLength({ min: 0 })
-    .isLength({ max: 100 })
-    .withMessage("Longitude must be less than 100 characters"),
-  check("name")
-    .exists({ checkFalsy: true })
-    .isLength({ max: 50 })
-    .withMessage("Name must be less than 50 characters"),
-  check("description")
-    .exists({ checkFalsy: true })
-    .withMessage("Description is required"),
-  check("price")
-    .exists({ checkFalsy: true })
-    .withMessage("Price per day is required"),
-  handleValidationErrors,
-];
 
 //get all spots
 router.get("/", async (req, res) => {
@@ -374,5 +329,100 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     statusCode: res.statusCode,
   });
 });
+
+// get all rev by spotId
+
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const id = req.params.spotId;
+
+  const allRev = await Review.findAll({
+    where: {
+      spotId: id,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: [
+            "username",
+            "hashedPassword",
+            "email",
+            "createdAt",
+            "updatedAt",
+          ],
+        },
+      },
+      {
+        model: ReviewImage,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "reviewId"],
+        },
+      },
+    ],
+  });
+
+  if (allRev.length === 0) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    err.title = "Spot doesn't exist";
+    return next(err);
+  }
+
+  res.json({
+    Reviews: allRev,
+  });
+});
+
+//create a rev for a spot  based on spot id
+router.post(
+  "/:spotId/reviews",
+  requireAuth,
+  allReviewsValidation,
+  async (req, res, next) => {
+    const user = req.user;
+    const id = req.params.spotId;
+    const { stars, review } = req.body;
+
+    const spot = await Spot.findByPk(id);
+
+    const allRev = await Review.findAll({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      err.message = "Spot couldn't be found";
+      err.title = "No spot found";
+      return next(err);
+    } else if (spot && !allRev) {
+      const err = new Error("No reviews currently exist");
+      err.status = 404;
+      err.message = "No reviews";
+      err.title = "No reviews found";
+    }
+
+    allRev.forEach((rev) => {
+      if (rev.spotId === parseInt(id)) {
+        const err = new Error("User already has a review for this spot");
+        err.status = 403;
+        err.title = "A review has already been submitted";
+
+        return next(err);
+      }
+    });
+
+    const newRev = await Review.create({
+      review,
+      stars,
+      userId: user.id,
+      spotId: spot.id,
+    });
+
+    res.json(newRev);
+  }
+);
 
 module.exports = router;
