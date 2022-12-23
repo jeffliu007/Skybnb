@@ -75,4 +75,73 @@ router.get("/current", requireAuth, async (req, res) => {
   });
 });
 
+//add image to review based on rev id
+
+router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const id = req.params.reviewId;
+  const { url } = req.body;
+
+  const usersRev = await Review.findOne({
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: ReviewImage,
+        attributes: {
+          exclude: ["reviewId", "createdAt", "updatedAt"],
+        },
+      },
+    ],
+  });
+
+  if (!usersRev) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    err.message = "No reviews yet";
+    return next(err);
+  }
+
+  if (user.id !== usersRev.userId) {
+    const err = new Error("Unauthorized user");
+    err.status = 404;
+    err.message = "Unauthorized user";
+    return next(err);
+  }
+
+  usersRev.ReviewImages.forEach((rev) => {
+    if (url === rev.dataValues.url) {
+      const err = new Error(
+        "This url/image already exists, please choose a different url"
+      );
+      err.status = 403;
+      err.message = "Chosen Url already exists";
+      return next(err);
+    }
+  });
+
+  if (usersRev.ReviewImages.length > 10) {
+    const err = new Error(
+      "Maximum number of images for this resource was reached"
+    );
+    err.status = 403;
+    err.message = "Maximum number of images for this resource was reached";
+    return next(err);
+  }
+
+  let newReviewImg = await ReviewImage.create({
+    url,
+    reviewId: id,
+  });
+
+  newReviewImg = newReviewImg.toJSON();
+
+  delete newReviewImg.reviewId;
+  delete newReviewImg.createdAt;
+  delete newReviewImg.updatedAt;
+
+  res.json(newReviewImg);
+});
+
 module.exports = router;
