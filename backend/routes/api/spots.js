@@ -27,6 +27,21 @@ const router = express.Router();
 
 //get all spots
 router.get("/", async (req, res) => {
+  let { page, size } = req.query;
+
+  page = parseInt(page);
+  size = parseInt(size);
+  if (!page) page = 1;
+  else if (page > 10) page = 10;
+  if (!size) size = 10;
+  else if (size > 20) size = 20;
+
+  let pagination = {};
+  if (page >= 1 && size >= 1) {
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
+  }
+
   const allSpots = await Spot.findAll({
     include: [
       {
@@ -38,6 +53,7 @@ router.get("/", async (req, res) => {
         attributes: ["url", "preview"],
       },
     ],
+    ...pagination,
   });
 
   let Spots = [];
