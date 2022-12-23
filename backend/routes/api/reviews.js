@@ -16,10 +16,15 @@ const {
 } = require("../../db/models");
 
 const { check } = require("express-validator");
-const { handleValidationErrors } = require("../../utils/validation");
+const {
+  handleValidationError,
+  allReviewsValidation,
+} = require("../../utils/validation");
 const { Op } = require("sequelize");
 
 const router = express.Router();
+
+//get current users reviews
 
 router.get("/current", requireAuth, async (req, res) => {
   const { user } = req;
@@ -70,7 +75,7 @@ router.get("/current", requireAuth, async (req, res) => {
     else rev.Spot.previewImage = "No images uploaded yet";
     allRevs.push(rev);
   }
-  res.json({
+  return res.json({
     Reviews: allRevs,
   });
 });
@@ -141,7 +146,75 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   delete newReviewImg.createdAt;
   delete newReviewImg.updatedAt;
 
-  res.json(newReviewImg);
+  return res.json(newReviewImg);
+});
+
+//edit a review
+router.put(
+  "/:reviewId",
+  requireAuth,
+  allReviewsValidation,
+
+  async (req, res, next) => {
+    const { user } = req;
+    const id = req.params.reviewId;
+    const { review, stars } = req.body;
+
+    const revId = await Review.findByPk(id);
+
+    if (!revId) {
+      const err = new Error("Review couldn't be found");
+      err.status = 404;
+      err.message = "Review couldn't be found";
+      return next(err);
+    }
+    if (user.id !== revId.userId) {
+      const err = new Error("Unauthorized user");
+      err.status = 404;
+      err.message = "Unauthorized user";
+      return next(err);
+    }
+
+    revId.set({
+      review,
+      stars,
+      updatedAt: new Date(),
+    });
+
+    await revId.save();
+
+    return res.json(revId);
+  }
+);
+
+//delete a review
+
+router.delete("/:reviewId", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const id = req.params.reviewId;
+
+  const revId = await Review.findByPk(id);
+
+  if (!revId) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    err.message = "Review couldn't be found";
+    return next(err);
+  }
+
+  if (user.id !== revId.userId) {
+    const err = new Error("Unauthorized user");
+    err.status = 404;
+    err.message = "Unauthorized user";
+    return next(err);
+  }
+
+  revId.destroy();
+
+  return res.json({
+    message: "Successfully deleted",
+    statusCode: res.statusCode,
+  });
 });
 
 module.exports = router;

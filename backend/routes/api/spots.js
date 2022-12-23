@@ -252,6 +252,17 @@ router.put(
   async (req, res, next) => {
     const user = req.user;
     const spotId = req.params.spotId;
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -269,18 +280,6 @@ router.put(
       err.title = "No spot found";
       return next(err);
     }
-
-    const {
-      address,
-      city,
-      state,
-      country,
-      lat,
-      lng,
-      name,
-      description,
-      price,
-    } = req.body;
 
     spot.set({
       address,
@@ -368,7 +367,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     return next(err);
   }
 
-  res.json({
+  return res.json({
     Reviews: allRev,
   });
 });
@@ -421,7 +420,7 @@ router.post(
       spotId: spot.id,
     });
 
-    res.json(newRev);
+    return res.json(newRev);
   }
 );
 
