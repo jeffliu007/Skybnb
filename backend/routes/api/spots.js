@@ -481,4 +481,77 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 });
 
+//create a booking for a spot based on spot id
+
+router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const user = req.user;
+  const id = req.params.spotId;
+  const { startDate, endDate } = req.body;
+
+  const spot = await Spot.findByPk(id);
+  const groupedErr = {};
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    err.message = "Spot couldn't be found";
+    err.title = "No spot found";
+    return next(err);
+  }
+
+  const allBookings = await Booking.findAll();
+
+  if (user.id === spot.ownerId) {
+    const err = new Error("Spot cannot belong to current user");
+    err.status = 404;
+    err.message = "Spot cannot belong to current user";
+    err.title = "Invalid user action";
+    return next(err);
+  }
+
+  if (endDate <= startDate) {
+    const err = new Error("endDate cannot be on or before startDate");
+    err.status = 400;
+    err.message = "Validation error";
+    err.title = "Invalid user action";
+    return next(err);
+  }
+
+  const currBuild = await Booking.build({
+    startDate,
+    endDate,
+    spotId: spot.id,
+    userId: user.id,
+  });
+
+  allBookings.forEach((booking) => {
+    let prevStart = booking.startDate.getTime();
+    let prevEnd = booking.startDate.getTime();
+    let buildStart = currBuild.startDate.getTime();
+    let buildEnd = currBuild.endDate.getTime();
+
+    //account for conflicting dates
+    if (prevStart >= buildStart && prevStart <= buildEnd) {
+      groupedErr.startDate = "Start date conflicts with an existing booking";
+    }
+
+    if (prevEnd >= buildStart && prevEnd <= buildEnd) {
+      groupedErr.endDate = "End date conflicts with an existing booking";
+    }
+  });
+
+  if (Object.values(groupedErr).length > 0) {
+    const err = new Error(
+      "Sorry this spot is already booked for the specified dates"
+    );
+    err.status = 403;
+    err.title = "Spot unavailable";
+    return next(err);
+  }
+
+  await currBuild.save();
+
+  return res.json(currBuild);
+});
+
 module.exports = router;
