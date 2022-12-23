@@ -25,6 +25,8 @@ const { compareSync } = require("bcryptjs");
 
 const router = express.Router();
 
+//get bookings for current user
+
 router.get("/current", requireAuth, async (req, res, next) => {
   const { user } = req;
 

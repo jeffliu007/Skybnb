@@ -424,4 +424,61 @@ router.post(
   }
 );
 
+//get all bookings for a spot based on spot id
+router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const user = req.user;
+  const id = req.params.spotId;
+
+  const spot = await Spot.findByPk(id);
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    err.message = "Spot couldn't be found";
+    err.title = "No spot found";
+    return next(err);
+  }
+
+  const allBookings = await Booking.findAll({
+    where: {
+      spotId: spot.id,
+    },
+    include: [
+      {
+        model: User,
+        attributes: {
+          exclude: [
+            "username",
+            "hashedPassword",
+            "email",
+            "createdAt",
+            "updatedAt",
+          ],
+        },
+      },
+    ],
+  });
+
+  if (user.id === spot.ownerId) {
+    return res.json({ Bookings: allBookings });
+  } else {
+    const nonUserBooking = [];
+
+    allBookings.forEach((booking) => {
+      booking = booking.toJSON();
+
+      delete booking.id;
+      delete booking.userId;
+      delete booking.createdAt;
+      delete booking.updatedAt;
+      delete booking.User;
+      nonUserBooking.push(booking);
+    });
+
+    return res.json({
+      Bookings: nonUserBooking,
+    });
+  }
+});
+
 module.exports = router;
