@@ -53,6 +53,8 @@ router.get("/", async (req, res) => {
   //!!!!!!!
   //!!!!!!!!!
 
+  //advanced query branch only
+
   const allSpots = await Spot.findAll({
     include: [
       {
