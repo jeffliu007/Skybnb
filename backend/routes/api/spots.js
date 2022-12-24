@@ -46,10 +46,10 @@ router.get("/", async (req, res) => {
   if (
     page <= 0 ||
     size <= 0 ||
-    minLat < -90 ||
-    maxLat > 90 ||
-    minLng < -180 ||
-    maxLng > 180 ||
+    minLat >= -90 ||
+    maxLat <= 90 ||
+    minLng >= -180 ||
+    maxLng <= 180 ||
     minPrice < 0 ||
     maxPrice < 0
   ) {
