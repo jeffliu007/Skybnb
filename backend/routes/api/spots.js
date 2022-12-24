@@ -27,6 +27,7 @@ const router = express.Router();
 
 //get all spots
 router.get("/", async (req, res) => {
+  //query checks
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
     req.query;
 
@@ -34,8 +35,10 @@ router.get("/", async (req, res) => {
   size = parseInt(size);
   if (!page) page = 1;
   else if (page > 10) page = 10;
+  else if (page < 1) throw new Error("Page must be greater than or equal to 1");
   if (!size) size = 10;
   else if (size > 20) size = 20;
+  else if (size < 1) throw new Error("Size must be greater than or equal to 1");
 
   let pagination = {};
   if (page >= 1 && size >= 1) {
@@ -43,17 +46,46 @@ router.get("/", async (req, res) => {
     pagination.offset = size * (page - 1);
   }
 
-  //need to work on finishing advanced query params
-  //!!!!!!!
-  //!!!!!!!!!
-  //!!!!!!!
-  //!!!!!!!!!
-  //!!!!!!!
-  //!!!!!!!!!
-  //!!!!!!!
-  //!!!!!!!!!
+  let where = {};
+
+  if (minLng)
+    where.lng = {
+      [Op.gte]: minLng,
+    };
+
+  if (maxLng)
+    where.lng = {
+      [Op.lte]: maxLng,
+    };
+
+  if (minLat)
+    where.lat = {
+      [Op.gte]: minLat,
+    };
+
+  if (maxLat)
+    where.lat = {
+      [Op.lte]: maxLat,
+    };
+
+  if (minPrice < 0) {
+    throw new Error("Minimum price must be greater than or equal to 0");
+  } else if (minPrice)
+    where.price = {
+      [Op.gte]: minPrice,
+    };
+
+  if (maxPrice < 0) {
+    throw new Error("Maximum price must be greater than or equal to 0");
+  } else if (maxPrice)
+    where.price = {
+      [Op.lte]: maxPrice,
+    };
+
+  //query check ends
 
   const allSpots = await Spot.findAll({
+    where,
     include: [
       {
         model: Review,
