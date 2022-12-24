@@ -43,32 +43,15 @@ router.get("/", async (req, res) => {
     pagination.offset = size * (page - 1);
   }
 
-  if (
-    page <= 0 ||
-    size <= 0 ||
-    minLat < -90 ||
-    maxLat > 90 ||
-    minLng < -180 ||
-    maxLng > 180 ||
-    minPrice < 0 ||
-    maxPrice < 0
-  ) {
-    res.status(400);
-    return res.json({
-      message: "Validation Error",
-      statusCode: 400,
-      errors: {
-        page: "Page must be greater than or equal to 1",
-        size: "Size must be greater than or equal to 1",
-        maxLat: "Maximum latitude is invalid",
-        minLat: "Minimum latitude is invalid",
-        minLng: "Maximum longitude is invalid",
-        maxLng: "Minimum longitude is invalid",
-        minPrice: "Maximum price must be greater than or equal to 0",
-        maxPrice: "Minimum price must be greater than or equal to 0",
-      },
-    });
-  }
+  //need to work on finishing advanced query params
+  //!!!!!!!
+  //!!!!!!!!!
+  //!!!!!!!
+  //!!!!!!!!!
+  //!!!!!!!
+  //!!!!!!!!!
+  //!!!!!!!
+  //!!!!!!!!!
 
   const allSpots = await Spot.findAll({
     include: [
