@@ -12,7 +12,11 @@ function Navigation({ isLoaded }) {
       <ul>
         <li>
           <NavLink exact to="/">
-            Home
+            <img
+              src={process.env.PUBLIC_URL + "/images/Nav-Logo.png"}
+              alt="Nav-Logo"
+              className="Home-Logo"
+            />
           </NavLink>
         </li>
         {isLoaded && (
