@@ -1,3 +1,7 @@
 .hidden {
   display: none;
 }
+
+.NavMain {
+  border-bottom: 1px solid rgb(214, 210, 210);
+}
