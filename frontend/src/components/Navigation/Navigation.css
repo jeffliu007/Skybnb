@@ -2,12 +2,36 @@
   display: none;
 }
 
-.NavMain {
+.Nav-Main {
   border-bottom: 1px solid rgb(214, 210, 210);
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  justify-content: space-between;
 }
 
 .Home-Logo {
   height: 64px;
   width: 118px;
   object-fit: contain;
+}
+
+.Nav-Home-Button {
+  margin-left: 73px;
+  display: flex;
+}
+
+.Nav-Profile-Button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+body {
+  margin-top: 0px;
 }
