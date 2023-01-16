@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSpots } from "../../store/spots";
 import { SpotCards } from "./SpotCards";
+import "./HomePage.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { fetchAllSpots } from "../../store/spots";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./HomePage.css";
 
 export const SpotCards = ({ spot }) => {
   let { id, city, state, price, name, avgRating, previewImage } = spot;
@@ -14,7 +15,15 @@ export const SpotCards = ({ spot }) => {
     <NavLink className={"SpotCardsContainer"} to={`/spots/${id}`} key={name}>
       <div className="cardMain">
         <div className="img-holder">
-          <img src={previewImage} />
+          <img src={previewImage} className="prevImg" />
+        </div>
+        <div className="cardContents">
+          <div className="card-Location-Rating">
+            {`${city}, ${state}`}
+            <div className="card-Rating">{avgRating}</div>
+          </div>
+          <div className="cardName">{name}</div>
+          <div className="cardPrice">{`${price} night`}</div>
         </div>
       </div>
     </NavLink>
