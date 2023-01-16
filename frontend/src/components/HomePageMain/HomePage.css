@@ -15,7 +15,7 @@
 }
 
 .cardMain {
-  border: 1px hidden black;
+  border: 1px black;
   display: flex;
   flex-direction: column;
   border-radius: 10px;

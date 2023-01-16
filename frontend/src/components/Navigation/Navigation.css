@@ -5,3 +5,9 @@
 .NavMain {
   border-bottom: 1px solid rgb(214, 210, 210);
 }
+
+.Home-Logo {
+  height: 64px;
+  width: 118px;
+  object-fit: contain;
+}
