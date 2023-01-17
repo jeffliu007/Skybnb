@@ -1,16 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSpot, fetchSingleSpot } from "../../store/spots";
+import { fetchSingleSpot, removeSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 
 export const SingleSpotPage = () => {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.singleSpot);
-
   Object.values(spot);
 
+  const history = useHistory();
   const { spotId } = useParams();
 
   useEffect(() => {
@@ -32,9 +32,8 @@ export const SingleSpotPage = () => {
     avgStarRating,
   } = spot;
 
-  const handleDelete = (e) => {
-    dispatch(deleteSpot(spotId));
-    e.preventDefault();
+  const handleDelete = async (e) => {
+    await dispatch(removeSpot(spotId)).then(history.push("/"));
   };
   //finish handle delete
 
@@ -55,7 +54,7 @@ export const SingleSpotPage = () => {
         <p>{description}</p>
       </div>
       <div className="deleteSpot">
-        <button>Delete Spot</button>
+        <button onClick={(e) => handleDelete()}>Delete Spot</button>
       </div>
     </div>
   );

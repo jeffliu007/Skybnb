@@ -87,6 +87,14 @@ export const createSpot = (spot, url) => async (dispatch) => {
   return res;
 };
 
+export const removeSpot = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "DELETE",
+  });
+  if (res.ok) dispatch(deleteSpot(spotId));
+  return res;
+};
+
 //normalize flatten helper
 const normalizeData = (spots) => {
   const spotData = {};
@@ -125,8 +133,10 @@ const spotReducer = (state = initialState, action) => {
       return shallowState2;
     }
     case DELETE_SPOT: {
-      delete shallowState[action.spot.id];
-      return shallowState;
+      const shallowState2 = { ...state, singleSpot: {} };
+      shallowState2.allSpots[action.id] = action.spot;
+      shallowState2.singleSpot = action.spot;
+      return shallowState2;
     }
     default:
       return state;
