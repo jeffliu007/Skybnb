@@ -8,7 +8,6 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const loadInitSpots = useSelector((state) => state.spots);
   const spots = Object.values(loadInitSpots.allSpots);
-
   useEffect(() => {
     dispatch(fetchAllSpots());
   }, [dispatch]);

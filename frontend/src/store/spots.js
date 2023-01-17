@@ -4,6 +4,8 @@ const ADD_SPOT = "spots/ADD_SPOT";
 
 const LOAD_ALLSPOTS = "spots/LOAD_ALLSPOTS";
 
+const LOAD_SINGLESPOT = "spots/LOAD_SINGLESPOT";
+
 // reg actions
 
 export const addSpot = (spot, url) => {
@@ -21,14 +23,32 @@ export const loadAllSpots = (spots) => {
   };
 };
 
+export const loadSingleSpot = (spot) => {
+  return {
+    type: LOAD_SINGLESPOT,
+    spot,
+  };
+};
+
 //thunks
 
 export const fetchAllSpots = () => async (dispatch) => {
-  const res = await csrfFetch("api/spots");
+  const res = await csrfFetch("/api/spots");
 
   if (res.ok) {
     const allSpots = await res.json();
     await dispatch(loadAllSpots(allSpots));
+    return allSpots;
+  }
+};
+
+export const fetchSingleSpot = (spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`);
+
+  if (res.ok) {
+    const spot = await res.json();
+    await dispatch(loadSingleSpot(spot));
+    return spot;
   }
 };
 
@@ -71,6 +91,12 @@ const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALLSPOTS: {
       shallowState.allSpots = normalizeData(action.spots);
+      return shallowState;
+    }
+    case LOAD_SINGLESPOT: {
+      shallowState.singleSpot = {
+        ...action.spot,
+      };
       return shallowState;
     }
     default:
