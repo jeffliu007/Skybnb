@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
+import AddNewSpotModal from "../CreateSpotModal";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -31,8 +32,11 @@ function Navigation({ isLoaded }) {
         </NavLink>
       </div>
       {isLoaded && (
-        <div className="Nav-Profile-Button">
-          <ProfileButton user={sessionUser} />
+        <div className="Create-Profile">
+          <AddNewSpotModal />
+          <div className="Nav-Profile-Button">
+            <ProfileButton user={sessionUser} />
+          </div>
         </div>
       )}
     </div>

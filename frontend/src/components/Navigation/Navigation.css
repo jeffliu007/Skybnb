@@ -23,7 +23,7 @@
 }
 
 .Nav-Home-Button {
-  margin-left: 69px;
+  margin-left: 4.5%;
   display: flex;
 }
 
@@ -39,4 +39,11 @@ body {
 
 .nav-bar-shadow {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.Create-Profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 4.5%;
 }

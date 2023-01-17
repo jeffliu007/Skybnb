@@ -1,0 +1,7 @@
+.hideForm {
+  display: none;
+}
+
+.revealForm {
+  display: flex;
+}
