@@ -6,13 +6,14 @@ const LOAD_ALLSPOTS = "spots/LOAD_ALLSPOTS";
 
 const LOAD_SINGLESPOT = "spots/LOAD_SINGLESPOT";
 
+const DELETE_SPOT = "spots/DELETE_SPOT";
+
 // reg actions
 
-export const addSpot = (spot, url) => {
+export const addSpot = (spot) => {
   return {
     type: ADD_SPOT,
     spot,
-    url,
   };
 };
 
@@ -30,6 +31,13 @@ export const loadSingleSpot = (spot) => {
   };
 };
 
+export const deleteSpot = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    spot: spotId,
+  };
+};
+
 //thunks
 
 export const fetchAllSpots = () => async (dispatch) => {
@@ -37,6 +45,7 @@ export const fetchAllSpots = () => async (dispatch) => {
 
   if (res.ok) {
     const allSpots = await res.json();
+    console.log(allSpots);
     await dispatch(loadAllSpots(allSpots));
     return allSpots;
   }
@@ -52,24 +61,30 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
   }
 };
 
-export const createSpot = (spot, payload) => async (dispatch) => {
+export const createSpot = (spot, url) => async (dispatch) => {
   const res = await csrfFetch("/api/spots", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot),
   });
-
-  let body = await res.json();
-  let url = payload.url;
   if (res.ok) {
-    const newRes = await csrfFetch(`/api/spots/${body.id}/images`, {
+    const spotData = await res.json();
+    const newRes = await csrfFetch(`/api/spots/${spotData.id}/images`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ url, preview: true }),
     });
-    await dispatch(addSpot(body, url));
+
+    if (newRes.ok) {
+      const imageData = await newRes.json();
+      spotData.previewImage = imageData.url;
+      console.log(spotData, `spotdata`);
+      dispatch(addSpot(spotData));
+      return spotData;
+    }
   }
-  return body;
+
+  return res;
 };
 
 //normalize flatten helper
@@ -97,6 +112,20 @@ const spotReducer = (state = initialState, action) => {
       shallowState.singleSpot = {
         ...action.spot,
       };
+      return shallowState;
+    }
+    case ADD_SPOT: {
+      // shallowState.allSpots = { ...state.allSpots };
+      // let spot = action.spot;
+      // spot.previewImage = action.url;
+      // shallowState.allSpots[spot.id] = spot;
+      // return shallowState;
+      const shallowState2 = { ...state, singleSpot: {} };
+      shallowState2.allSpots[action.spot.id] = action.spot;
+      return shallowState2;
+    }
+    case DELETE_SPOT: {
+      delete shallowState[action.spot.id];
       return shallowState;
     }
     default:

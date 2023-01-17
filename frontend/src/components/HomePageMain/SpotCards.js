@@ -2,8 +2,9 @@ import { NavLink } from "react-router-dom";
 import "./HomePage.css";
 
 export const SpotCards = ({ spot }) => {
-  let { id, city, state, price, name, avgRating, previewImage } = spot;
+  let { id, city, state, price, name, avgRating, previewImage, url } = spot;
 
+  if (spot.length < 0) return null;
   if (previewImage && previewImage === "No images uploaded yet")
     previewImage =
       "https://img.freepik.com/premium-vector/modern-minimal-found-error-icon-oops-page-found-404-error-page-found-with-concept_599740-716.jpg?w=2000";

@@ -31,20 +31,20 @@ router.get("/", async (req, res) => {
   let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } =
     req.query;
 
-  page = parseInt(page);
-  size = parseInt(size);
-  if (!page) page = 1;
-  else if (page > 10) page = 10;
-  else if (page < 1) throw new Error("Page must be greater than or equal to 1");
-  if (!size) size = 10;
-  else if (size > 20) size = 20;
-  else if (size < 1) throw new Error("Size must be greater than or equal to 1");
+  // page = parseInt(page);
+  // size = parseInt(size);
+  // if (!page) page = 1;
+  // else if (page > 10) page = 10;
+  // else if (page < 1) throw new Error("Page must be greater than or equal to 1");
+  // if (!size) size = 10;
+  // else if (size > 20) size = 20;
+  // else if (size < 1) throw new Error("Size must be greater than or equal to 1");
 
-  let pagination = {};
-  if (page >= 1 && size >= 1) {
-    pagination.limit = size;
-    pagination.offset = size * (page - 1);
-  }
+  // let pagination = {};
+  // if (page >= 1 && size >= 1) {
+  //   pagination.limit = size;
+  //   pagination.offset = size * (page - 1);
+  // }
 
   let where = {};
 
@@ -96,7 +96,7 @@ router.get("/", async (req, res) => {
         attributes: ["url", "preview"],
       },
     ],
-    ...pagination,
+    // ...pagination,
   });
 
   let Spots = [];
@@ -112,12 +112,12 @@ router.get("/", async (req, res) => {
       if (!avg) avg = "No reviews yet";
 
       spot.avgRating = avg;
+    });
 
-      spot.SpotImages.forEach((img) => {
-        if (img.preview === true) {
-          spot.previewImage = img.url;
-        } else spot.previewImage = "No images uploaded yet";
-      });
+    spot.SpotImages.forEach((img) => {
+      if (img.preview === true) {
+        spot.previewImage = img.url;
+      } else spot.previewImage = "No images uploaded yet";
     });
 
     if (spot.SpotImages.length === 0)
