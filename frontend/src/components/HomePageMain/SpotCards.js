@@ -1,7 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { fetchAllSpots } from "../../store/spots";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 
 export const SpotCards = ({ spot }) => {

@@ -1,0 +1,41 @@
+.SingleSpot-Main-Container {
+  display: flex;
+  margin-left: 390px;
+  margin-right: 390px;
+  padding-top: 100px;
+  flex-direction: column;
+}
+
+.Spot-Image-Container {
+  object-fit: cover;
+  display: flex;
+  width: 80%;
+  height: 60%;
+  border-radius: 12px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.SingleSpot-Name-Rating {
+  position: relative;
+  padding-left: 10%;
+}
+
+#SpotImgLayout-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Hosted-By-Section {
+  border-bottom: 0.5px solid rgb(210, 208, 208);
+  position: relative;
+  margin-left: 10%;
+  padding-bottom: 16px;
+}
+
+.Single-Spot-Description {
+  position: relative;
+  margin-left: 10%;
+  padding-bottom: 16px;
+}

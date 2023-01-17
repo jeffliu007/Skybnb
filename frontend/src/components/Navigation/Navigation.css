@@ -3,7 +3,7 @@
 }
 
 .Nav-Main {
-  border-bottom: 1px solid rgb(214, 210, 210);
+  border-bottom: 0.5px solid rgb(214, 210, 210);
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -13,6 +13,7 @@
   right: 0;
   z-index: 1;
   justify-content: space-between;
+  padding: 6px;
 }
 
 .Home-Logo {
@@ -22,7 +23,7 @@
 }
 
 .Nav-Home-Button {
-  margin-left: 73px;
+  margin-left: 69px;
   display: flex;
 }
 
@@ -34,4 +35,8 @@
 
 body {
   margin-top: 0px;
+}
+
+.nav-bar-shadow {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
