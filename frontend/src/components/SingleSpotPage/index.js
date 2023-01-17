@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
+import { SpotPageImgLayout } from "./SpotPageImgLayout";
 
 export const SingleSpotPage = () => {
   const dispatch = useDispatch();
-  const loadInitSpot = useSelector((state) => state.spots.singleSpot);
+  const spot = useSelector((state) => state.spots.singleSpot);
 
-  Object.values(loadInitSpot);
-
-  console.log(`this is load init spot ${loadInitSpot}`);
+  Object.values(spot);
 
   const { spotId } = useParams();
 
@@ -18,7 +17,7 @@ export const SingleSpotPage = () => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId]);
 
-  if (!loadInitSpot) return null;
+  if (!spot) return null;
 
   const {
     name,
@@ -30,14 +29,26 @@ export const SingleSpotPage = () => {
     city,
     state,
     country,
-  } = loadInitSpot;
+    avgStarRating,
+  } = spot;
 
   return (
-    <>
-      <div className="SingleSpot-Main-Container">
-        <div className="=SingleSpot-Title">name {loadInitSpot.name}</div>
+    <div className="SingleSpot-Main-Container">
+      <div className="SingleSpot-Name-Rating">
+        <h1>{name}</h1>
+        <div className="SingleSpot-Rating-Review-Location">
+          {`${avgStarRating} stars`},{`${numReviews} reviews`},
+          {`${city}, ${state}, ${country}`}
+        </div>
       </div>
-    </>
+      <div>
+        <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
+      </div>
+      <h3 className="Hosted-By-Section">Entire home hosted</h3>
+      <div className="Single-Spot-Description">
+        <p>{description}</p>
+      </div>
+    </div>
   );
 };
 
