@@ -3,8 +3,10 @@ import "./HomePage.css";
 
 export const SpotCards = ({ spot }) => {
   let { id, city, state, price, name, avgRating, previewImage, url } = spot;
+  let roundedAvgRating = parseFloat(avgRating).toFixed(2);
 
-  if (spot.length < 0) return null;
+  if (roundedAvgRating.length < 0) return null;
+
   if (previewImage && previewImage === "No images uploaded yet")
     previewImage =
       "https://img.freepik.com/premium-vector/modern-minimal-found-error-icon-oops-page-found-404-error-page-found-with-concept_599740-716.jpg?w=2000";
@@ -18,7 +20,9 @@ export const SpotCards = ({ spot }) => {
         <div className="cardContents">
           <div className="card-Location-Rating">
             {`${city}, ${state}`}
-            <div className="card-Rating">{avgRating}</div>
+            <div className="card-Rating">
+              {!avgRating ? (roundedAvgRating = null) : roundedAvgRating}
+            </div>
           </div>
           <div className="cardName">{name}</div>
           <div className="cardPrice">{`${price} night`}</div>

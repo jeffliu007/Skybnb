@@ -5,7 +5,7 @@ export const EditSpotModal = () => {
   return (
     <div className="Edit-Spot-Button">
       <OpenModalButton
-        buttonText="Edit Spot"
+        buttonText="Edit Your Spot"
         modalComponent={<EditModalForm />}
         className="Edit-Spot-Button"
       />
