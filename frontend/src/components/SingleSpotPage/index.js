@@ -49,7 +49,7 @@ export const SingleSpotPage = () => {
           </div>
           <div className="edit-and-delete">
             <div className="deleteSpot">
-              <button onClick={(e) => handleDelete()}>Delete Spot</button>
+              <button onClick={(e) => handleDelete()}>Delete Your Spot</button>
             </div>
             <div className="editSpot">
               <EditSpotModal />

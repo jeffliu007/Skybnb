@@ -54,7 +54,6 @@ export const fetchAllSpots = () => async (dispatch) => {
 
   if (res.ok) {
     const allSpots = await res.json();
-    console.log(allSpots);
     await dispatch(loadAllSpots(allSpots));
     return allSpots;
   }
