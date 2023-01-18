@@ -25,7 +25,7 @@ export const SpotCards = ({ spot }) => {
             </div>
           </div>
           <div className="cardName">{name}</div>
-          <div className="cardPrice">{`${price} night`}</div>
+          <div className="cardPrice">{`$${price} per night`}</div>
         </div>
       </div>
     </NavLink>
