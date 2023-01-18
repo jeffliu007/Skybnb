@@ -39,3 +39,9 @@
   margin-left: 10%;
   padding-bottom: 16px;
 }
+
+.edit-and-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

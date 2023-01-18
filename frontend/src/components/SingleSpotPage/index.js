@@ -1,16 +1,17 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteSpot, fetchSingleSpot } from "../../store/spots";
+import { fetchSingleSpot, removeSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
+import EditSpotModal from "../SingleSpotEditModal";
 
 export const SingleSpotPage = () => {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.singleSpot);
-
   Object.values(spot);
 
+  const history = useHistory();
   const { spotId } = useParams();
 
   useEffect(() => {
@@ -32,9 +33,8 @@ export const SingleSpotPage = () => {
     avgStarRating,
   } = spot;
 
-  const handleDelete = (e) => {
-    dispatch(deleteSpot(spotId));
-    e.preventDefault();
+  const handleDelete = async (e) => {
+    await dispatch(removeSpot(spotId)).then(history.push("/"));
   };
   //finish handle delete
 
@@ -42,20 +42,27 @@ export const SingleSpotPage = () => {
     <div className="SingleSpot-Main-Container">
       <div className="SingleSpot-Name-Rating">
         <h1>{name}</h1>
-        <div className="SingleSpot-Rating-Review-Location">
-          {`${avgStarRating} stars`},{`${numReviews} reviews`},
-          {`${city}, ${state}, ${country}`}
+        <div className="SingleSpot-Rating-Review-Location-Buttons">
+          <div className="SingleSpot-Rating-Review-Location">
+            {`${avgStarRating} stars`},{`${numReviews} reviews`},
+            {`${city}, ${state}, ${country} for an amazing $${price} per night`}
+          </div>
+          <div className="edit-and-delete">
+            <div className="deleteSpot">
+              <button onClick={(e) => handleDelete()}>Delete Spot</button>
+            </div>
+            <div className="editSpot">
+              <EditSpotModal />
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
-      </div>
-      <h3 className="Hosted-By-Section">Entire home hosted</h3>
-      <div className="Single-Spot-Description">
-        <p>{description}</p>
-      </div>
-      <div className="deleteSpot">
-        <button>Delete Spot</button>
+        <div>
+          <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
+        </div>
+        <h3 className="Hosted-By-Section">Entire home hosted</h3>
+        <div className="Single-Spot-Description">
+          <p>{description}</p>
+        </div>
       </div>
     </div>
   );

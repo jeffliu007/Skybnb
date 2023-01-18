@@ -10,6 +10,12 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
+  const demoLogin = () => {
+    return dispatch(
+      sessionActions.login({ credential: "Demo-lition", password: "password" })
+    );
+  };
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -70,6 +76,12 @@ function ProfileButton({ user }) {
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
+              />
+            </li>
+            <li>
+              <OpenModalButton
+                buttonText="Demo Log In"
+                onButtonClick={demoLogin}
               />
             </li>
           </>
