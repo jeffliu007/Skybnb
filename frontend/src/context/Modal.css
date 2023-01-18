@@ -37,3 +37,18 @@
 .CreateFormButton:hover {
   background-color: rgb(240, 239, 239);
 }
+
+.CreateFB2 {
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  margin-top: 2px;
+  border: 1px hidden black;
+  background-color: white;
+  font-size: 105%;
+  display: flex;
+}
+
+.CreateFB2:hover {
+  background-color: rgb(240, 239, 239);
+}
