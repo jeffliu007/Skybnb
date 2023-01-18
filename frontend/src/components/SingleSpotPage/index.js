@@ -5,6 +5,7 @@ import { fetchSingleSpot, removeSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 import EditSpotModal from "../SingleSpotEditModal";
+import AllSpotReviews from "../ReviewsAll";
 
 export const SingleSpotPage = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ export const SingleSpotPage = () => {
           <p className="descriptionPtag">{description}</p>
         </div>
         <div className="Reviews-Container">
-          <h2>Reviews</h2>
+          <AllSpotReviews />
         </div>
       </div>
     </div>
