@@ -1,13 +1,13 @@
-import OpenModalButton from "../OpenModalButton";
+import { OpenModalButtonEditSpot } from "../OpenModalButton";
 import { EditModalForm } from "./EditModalForm";
+import "./EditModalForm.css";
 
 export const EditSpotModal = () => {
   return (
-    <div className="Edit-Spot-Button">
-      <OpenModalButton
-        buttonText="Edit Spot"
+    <div>
+      <OpenModalButtonEditSpot
+        buttonText={`Edit`}
         modalComponent={<EditModalForm />}
-        className="Edit-Spot-Button"
       />
     </div>
   );

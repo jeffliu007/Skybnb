@@ -36,7 +36,10 @@ export const SingleSpotPage = () => {
   const handleDelete = async (e) => {
     await dispatch(removeSpot(spotId)).then(history.push("/"));
   };
-  //finish handle delete
+
+  function randomNumGen() {
+    return Math.floor(Math.random() * 6) + 1;
+  }
 
   return (
     <div className="SingleSpot-Main-Container">
@@ -48,20 +51,27 @@ export const SingleSpotPage = () => {
             {`${city}, ${state}, ${country} for an amazing $${price} per night`}
           </div>
           <div className="edit-and-delete">
-            <div className="deleteSpot">
-              <button onClick={(e) => handleDelete()}>Delete Your Spot</button>
-            </div>
             <div className="editSpot">
               <EditSpotModal />
             </div>
+            <button
+              onClick={(e) => handleDelete()}
+              className="CreateFormButton2"
+            >
+              <i className="fa-regular fa-trash-can"></i>
+            </button>
           </div>
         </div>
         <div>
           <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
         </div>
-        <h3 className="Hosted-By-Section">Entire home hosted</h3>
         <div className="Single-Spot-Description">
-          <p>{description}</p>
+          <h3 className="Hosted-By-Section">Entire home hosted by</h3>
+          <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
+          <p className="descriptionPtag">{description}</p>
+        </div>
+        <div className="Reviews-Container">
+          <h2>Reviews</h2>
         </div>
       </div>
     </div>

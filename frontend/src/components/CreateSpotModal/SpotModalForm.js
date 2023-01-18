@@ -19,15 +19,22 @@ export const SpotModalForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //use effect2
+  //use effect
 
   // useEffect(() => {
   //   let formValidationErr = [];
 
-  //   if (!address) formValidationErr.push("Address required");
+  //   if (address.length === 0) formValidationErr.push("Address is required");
+  //   if (city.length === 0) formValidationErr.push("City is required");
+  //   if (state.length === 0) formValidationErr.push("State is required");
+  //   if (country.length === 0) formValidationErr.push("Country is required");
+  //   if (name.length === 0) formValidationErr.push("Name is required");
+  //   if (description.length === 0)
+  //     formValidationErr.push("Description is required");
+  //   if (price < 1) formValidationErr.push("Price must be greater than 1");
 
   //   setErrors(formValidationErr);
-  // }, [address]);
+  // }, [address, city, state, country, name, description, price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
