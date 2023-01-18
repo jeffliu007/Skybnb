@@ -139,17 +139,11 @@ const spotReducer = (state = initialState, action) => {
       return shallowState;
     }
     case LOAD_SINGLESPOT: {
-      shallowState.singleSpot = {
-        ...action.spot,
-      };
-      return shallowState;
+      const shallowState2 = { ...state, allSpots: { ...action.spot } };
+      shallowState2.singleSpot = { ...action.spot };
+      return shallowState2;
     }
     case ADD_SPOT: {
-      // shallowState.allSpots = { ...state.allSpots };
-      // let spot = action.spot;
-      // spot.previewImage = action.url;
-      // shallowState.allSpots[spot.id] = spot;
-      // return shallowState;
       const shallowState2 = { ...state, singleSpot: {} };
       shallowState2.allSpots[action.spot.id] = action.spot;
       return shallowState2;

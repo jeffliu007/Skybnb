@@ -52,7 +52,6 @@ export const SpotModalForm = () => {
       lng: 70.0,
       lat: 90.0,
     };
-    console.log(body.url);
 
     return dispatch(createSpot(body, url))
       .then((res) => history.push(`/spots/${res.id}`))
