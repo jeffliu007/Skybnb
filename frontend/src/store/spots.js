@@ -38,7 +38,7 @@ const loadSingleSpot = (spot) => {
 const deleteSpot = (spotId) => {
   return {
     type: DELETE_SPOT,
-    spot: spotId,
+    spotId,
   };
 };
 
@@ -153,8 +153,17 @@ const spotReducer = (state = initialState, action) => {
     }
     case DELETE_SPOT: {
       const shallowState = { ...state, singleSpot: {} };
-      shallowState.allSpots[action.id] = action.spot;
-      shallowState.singleSpot = action.spot;
+
+      const shallowAllSpots = { ...shallowState.allSpots };
+      console.log("shallow all spots here ->", shallowAllSpots, action.spotId);
+      console.log(
+        "after first shallow allspot",
+        shallowAllSpots[action.spotId]
+      );
+
+      delete shallowAllSpots[action.spotId];
+      console.log("shallow all spots here ->", shallowAllSpots);
+      shallowState.allSpots = shallowAllSpots;
       return shallowState;
     }
     case UPDATE_SPOT: {

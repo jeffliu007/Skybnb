@@ -5,6 +5,7 @@ import { CreateNewReviewModal } from "./CreateReviewModal";
 import { useEffect, useState } from "react";
 import { deleteSpotReview } from "../../store/reviews";
 import "./ReviewsAll.css";
+import { resetAll } from "../../store/spots";
 
 export const AllSpotReviews = ({ avgStars }) => {
   const [loadedReviews, setLoadedReviews] = useState(false);
@@ -22,14 +23,14 @@ export const AllSpotReviews = ({ avgStars }) => {
 
   const numOfRev = allReviews.length;
 
-  const specificRev = allReviews.find((rev) => rev.userId === currUser.id);
+  const specificRev = allReviews.find((rev) => currUser?.id === rev?.userId);
 
   useEffect(() => {
     dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
   }, [dispatch]);
 
-  const handleDelete = (e) => {
-    return dispatch(deleteSpotReview(specificRev));
+  const handleDelete = async (e) => {
+    await dispatch(deleteSpotReview(specificRev)).then(resetAll());
   };
 
   if (!loadedReviews) return null;
@@ -48,7 +49,9 @@ export const AllSpotReviews = ({ avgStars }) => {
 
         <CreateNewReviewModal />
 
-        <button onClick={handleDelete}>Delete</button>
+        {specificRev && (
+          <button onClick={handleDelete}>Delete Your Last Review</button>
+        )}
       </div>
 
       <div className="inner-container-spot-rev">

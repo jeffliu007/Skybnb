@@ -6,19 +6,26 @@ import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 import EditSpotModal from "../SingleSpotEditModal";
 import AllSpotReviews from "../ReviewsAll";
+import { resetAll } from "../../store/spots";
 
 export const SingleSpotPage = () => {
   const [loadedImage, setloadedImage] = useState(false);
+  const [ownedUser, setOwnedUser] = useState(false);
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.singleSpot);
-  Object.values(spot);
+  const spotArr = Object.values(spot);
+
+  const currUser = useSelector((state) => state.session.user);
 
   const history = useHistory();
   const { spotId } = useParams();
 
   useEffect(() => {
+    // if (currUser && currUser?.id === spot?.Owner?.id) console.log("yes");
+    // else console.log("no");
+
     dispatch(fetchSingleSpot(spotId)).then(() => setloadedImage(true));
-  }, [dispatch, spotId]);
+  }, [dispatch, spotId, ownedUser]);
 
   const {
     name,
@@ -57,17 +64,21 @@ export const SingleSpotPage = () => {
             <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
           </div>
           <div className="Single-Spot-Description">
-            <div className="edit-and-delete">
-              <div className="editSpot">
-                <EditSpotModal />
+            {currUser && currUser?.id === spot?.Owner?.id ? (
+              <div className="edit-and-delete">
+                <div className="editSpot">
+                  <EditSpotModal />
+                </div>
+                <button
+                  onClick={(e) => handleDelete()}
+                  className="CreateFormButton2"
+                >
+                  <i className="fa-regular fa-trash-can"></i>
+                </button>
               </div>
-              <button
-                onClick={(e) => handleDelete()}
-                className="CreateFormButton2"
-              >
-                <i className="fa-regular fa-trash-can"></i>
-              </button>
-            </div>
+            ) : (
+              <div> </div>
+            )}
             <h3 className="Hosted-By-Section">Entire home hosted by</h3>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
             <p className="descriptionPtag">{description}</p>
