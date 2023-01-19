@@ -152,17 +152,30 @@ const spotReducer = (state = initialState, action) => {
       return shallowState;
     }
     case DELETE_SPOT: {
-      const shallowState = { ...state, singleSpot: {} };
+      const shallowState = {
+        ...state,
+        singleSpot: {},
+        allSpots: { ...state.allSpots },
+      };
 
+      // const newArr = Object.values(state.allSpots);
+      // console.log("neww array here", newArr);
+      // const finalAllSpots = {};
+      // newArr.forEach((spot) => {
+      //   console.log(
+      //     "forEach here --> ??",
+      //     spot.id !== +action.spotId,
+      //     spot.id,
+      //     +action.spotId
+      //   );
+      //   if (spot.id !== +action.spotId) finalAllSpots[spot.id] = spot;
+      // });
+      // console.log("final all spots", finalAllSpots);
+      // shallowState.allSpots = finalAllSpots;
+
+      delete shallowState.allSpots[action.spotId];
       const shallowAllSpots = { ...shallowState.allSpots };
-      console.log("shallow all spots here ->", shallowAllSpots, action.spotId);
-      console.log(
-        "after first shallow allspot",
-        shallowAllSpots[action.spotId]
-      );
-
       delete shallowAllSpots[action.spotId];
-      console.log("shallow all spots here ->", shallowAllSpots);
       shallowState.allSpots = shallowAllSpots;
       return shallowState;
     }

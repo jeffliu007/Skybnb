@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSpotReviews } from "../../store/reviews";
 import { CreateNewReviewModal } from "./CreateReviewModal";
@@ -11,6 +11,7 @@ export const AllSpotReviews = ({ avgStars }) => {
   const [loadedReviews, setLoadedReviews] = useState(false);
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const { spotId } = useParams();
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const currUser = useSelector((state) => state.session.user);
@@ -27,13 +28,19 @@ export const AllSpotReviews = ({ avgStars }) => {
 
   useEffect(() => {
     dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
-  }, [dispatch]);
+  }, [dispatch, numOfRev]);
 
-  const handleDelete = async (e) => {
-    await dispatch(deleteSpotReview(specificRev)).then(resetAll());
+  const handleDelete = (e) => {
+    dispatch(deleteSpotReview(specificRev)).then(() =>
+      history.push(`/spots/${spotId}`)
+    );
   };
-
-  if (!loadedReviews) return null;
+  if (!loadedReviews)
+    return (
+      <div className="blank-review-add-button">
+        <CreateNewReviewModal alreadyRev={specificRev} />
+      </div>
+    );
 
   return (
     <div className="spot-reviews-container">
@@ -55,15 +62,16 @@ export const AllSpotReviews = ({ avgStars }) => {
       </div>
 
       <div className="inner-container-spot-rev">
-        {allReviews.map(({ stars, User, review, id }) => (
-          <div className="individual-review-card" key={id}>
-            <div>{User.firstName} add Icon here</div>
-            <div>
-              review comments
-              <p>{review}</p>
+        {allReviews &&
+          allReviews.map(({ stars, User, review, id }) => (
+            <div className="individual-review-card" key={id}>
+              <div>{User.firstName} add Icon here</div>
+              <div>
+                review comments
+                <p>{review}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

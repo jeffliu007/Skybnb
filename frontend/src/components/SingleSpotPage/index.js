@@ -40,8 +40,8 @@ export const SingleSpotPage = () => {
     avgStarRating,
   } = spot;
 
-  const handleDelete = async (e) => {
-    await dispatch(removeSpot(spotId)).then(history.push("/"));
+  const handleDelete = (e) => {
+    dispatch(removeSpot(spotId)).then(() => history.push("/"));
   };
 
   function randomNumGen() {
@@ -69,10 +69,7 @@ export const SingleSpotPage = () => {
                 <div className="editSpot">
                   <EditSpotModal />
                 </div>
-                <button
-                  onClick={(e) => handleDelete()}
-                  className="CreateFormButton2"
-                >
+                <button onClick={handleDelete} className="CreateFormButton2">
                   <i className="fa-regular fa-trash-can"></i>
                 </button>
               </div>

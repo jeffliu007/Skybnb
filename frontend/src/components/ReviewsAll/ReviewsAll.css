@@ -14,3 +14,21 @@
   justify-content: space-between;
   margin-top: 3%;
 }
+
+.blank-review-add-button {
+  border-radius: 10px;
+  width: 20%;
+  margin-top: 2%;
+  border: 1px hidden black;
+  background-color: rgb(239, 236, 236);
+  font-size: 110%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding-bottom: 10px;
+}
+
+.blank-review-add-button:hover {
+  background-color: rgb(195, 189, 189);
+}

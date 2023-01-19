@@ -4,7 +4,7 @@ import { createSpotReviews } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
-export const ReviewModalForm = () => {
+export const ReviewModalForm = ({ alreadyRev }) => {
   // const [errors, setErrors] = useState([]);
   const [comments, setComments] = useState("");
   const [rating, setRating] = useState("");
@@ -17,6 +17,8 @@ export const ReviewModalForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(alreadyRev);
 
     const newUserInfo = {
       User: currUser,
