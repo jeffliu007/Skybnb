@@ -62,7 +62,7 @@ const allSpotsValidation = [
     .exists({ checkFalsy: true })
     .isLength({ min: 0 })
     .isLength({ max: 1500 })
-    .withMessage("Description must be shorter than 1500 characters"),
+    .withMessage("Description must be shorter than 1500"),
   check("price")
     .exists({ checkFalsy: true })
     .withMessage("Price per day is required"),

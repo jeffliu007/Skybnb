@@ -1,12 +1,11 @@
 import { useParams, useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleSpot, removeSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 import EditSpotModal from "../SingleSpotEditModal";
 import AllSpotReviews from "../ReviewsAll";
-import { useState } from "react";
 
 export const SingleSpotPage = () => {
   const [loadedImage, setloadedImage] = useState(false);
@@ -42,9 +41,8 @@ export const SingleSpotPage = () => {
     return Math.floor(Math.random() * 6) + 1;
   }
 
-  if (!loadedImage) {
-    return null;
-  } else
+  if (!loadedImage) return null;
+  else
     return (
       <div className="SingleSpot-Main-Container">
         <div className="SingleSpot-Name-Rating">

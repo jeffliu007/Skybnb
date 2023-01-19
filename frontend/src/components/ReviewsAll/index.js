@@ -1,15 +1,18 @@
-import reviewsReducer from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSpotReviews } from "../../store/reviews";
 import { CreateNewReviewModal } from "./CreateReviewModal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { deleteSpotReview } from "../../store/reviews";
 import "./ReviewsAll.css";
 
 export const AllSpotReviews = ({ avgStars }) => {
+  const [loadedReviews, setLoadedReviews] = useState(false);
+
   const dispatch = useDispatch();
   const { spotId } = useParams();
   const oldAllReviews = useSelector((state) => state.reviews.spot);
+  const currUser = useSelector((state) => state.session.user);
 
   const allReviews = Object.values(oldAllReviews);
 
@@ -19,27 +22,33 @@ export const AllSpotReviews = ({ avgStars }) => {
 
   const numOfRev = allReviews.length;
 
-  useEffect(() => {
-    dispatch(loadSpotReviews(spotId));
-  }, [spotId, dispatch, allReviews, numOfRev]);
+  const specificRev = allReviews.find((rev) => rev.userId === currUser.id);
 
-  if (!oldAllReviews) return null;
+  useEffect(() => {
+    dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
+  }, [dispatch]);
+
+  const handleDelete = (e) => {
+    return dispatch(deleteSpotReview(specificRev));
+  };
+
+  if (!loadedReviews) return null;
 
   return (
     <div className="spot-reviews-container">
-      {/* <h1>{`${newAvgStars == "NaN" ? "No ratings yet" : newAvgStars} ·
-       ${
-         numOfRev === undefined || numOfRev == "NaN"
-           ? "No Reviews yet"
-           : numOfRev === 1
-           ? numOfRev + " Review"
-           : numOfRev + " Reviews"
-       }`}</h1> */}
       <div className="reviews-header">
-        <h3>{`${
-          newAvgStars == "NaN" ? "No ratings yet" : newAvgStars + " Stars"
-        } ${numOfRev + " Review/s"}`}</h3>
+        <h3>{`${newAvgStars == "NaN" ? "No ratings yet" : newAvgStars} ·
+        ${
+          numOfRev === undefined || numOfRev == "NaN"
+            ? "No Reviews yet"
+            : numOfRev === 1
+            ? numOfRev + " Review"
+            : numOfRev + " Reviews"
+        }`}</h3>
+
         <CreateNewReviewModal />
+
+        <button onClick={handleDelete}>Delete</button>
       </div>
 
       <div className="inner-container-spot-rev">
