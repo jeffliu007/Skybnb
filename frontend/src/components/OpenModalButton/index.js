@@ -60,19 +60,25 @@ export function OpenModalButtonEditSpot({
   );
 }
 
-//notes
+export function OpenModalButtonCreateRev({
+  modalComponent, // component to render inside the modal
+  buttonText, // text of the button that opens the modal
+  onButtonClick, // optional: callback function that will be called once the button that opens the modal is clicked
+  onModalClose, // optional: callback function that will be called once the modal is closed
+}) {
+  const { setModalContent, setOnModalClose } = useModal();
 
-// Now, let's say you wanted to print "Greeting completed" in the console logs whenever the user closes the "Hello World!" modal. You could add the following callback function as the onModalClose prop to the OpenModalButton component:
+  const onClick = () => {
+    if (typeof onButtonClick === "function") onButtonClick();
+    if (typeof onModalClose === "function") setOnModalClose(onModalClose);
+    setModalContent(modalComponent);
+  };
 
-// const Greeting = () => {
-//   return (
-//     <OpenModalButton
-//       buttonText="Greeting"
-//       modalComponent={<h2>Hello World!</h2>}
-//       onButtonClick={() => console.log("Greeting initiated")}
-//       onModalClose={() => console.log("Greeting completed")}
-//     />
-//   );
-// };
+  return (
+    <button onClick={onClick} className="Add-review-button">
+      {buttonText}
+    </button>
+  );
+}
 
 export default OpenModalButton;

@@ -5,6 +5,7 @@ import { fetchSingleSpot, removeSpot } from "../../store/spots";
 import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 import EditSpotModal from "../SingleSpotEditModal";
+import AllSpotReviews from "../ReviewsAll";
 
 export const SingleSpotPage = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,6 @@ export const SingleSpotPage = () => {
   useEffect(() => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId]);
-
-  if (!spot) return null;
 
   const {
     name,
@@ -41,6 +40,8 @@ export const SingleSpotPage = () => {
     return Math.floor(Math.random() * 6) + 1;
   }
 
+  if (!spot) return null;
+
   return (
     <div className="SingleSpot-Main-Container">
       <div className="SingleSpot-Name-Rating">
@@ -50,6 +51,11 @@ export const SingleSpotPage = () => {
             {`${avgStarRating} stars`},{`${numReviews} reviews`},
             {`${city}, ${state}, ${country} for an amazing $${price} per night`}
           </div>
+        </div>
+        <div>
+          <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
+        </div>
+        <div className="Single-Spot-Description">
           <div className="edit-and-delete">
             <div className="editSpot">
               <EditSpotModal />
@@ -61,17 +67,12 @@ export const SingleSpotPage = () => {
               <i className="fa-regular fa-trash-can"></i>
             </button>
           </div>
-        </div>
-        <div>
-          <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
-        </div>
-        <div className="Single-Spot-Description">
           <h3 className="Hosted-By-Section">Entire home hosted by</h3>
           <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
           <p className="descriptionPtag">{description}</p>
         </div>
         <div className="Reviews-Container">
-          <h2>Reviews</h2>
+          <AllSpotReviews avgStars={avgStarRating} />
         </div>
       </div>
     </div>

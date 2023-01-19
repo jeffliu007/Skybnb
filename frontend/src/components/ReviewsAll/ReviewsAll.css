@@ -1,0 +1,16 @@
+.inner-container-spot-rev {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 80%;
+  margin-top: 3%;
+}
+
+.individual-review-card {
+  display: flex;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3%;
+}

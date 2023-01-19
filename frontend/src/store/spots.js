@@ -10,37 +10,39 @@ const DELETE_SPOT = "spots/DELETE_SPOT";
 
 const UPDATE_SPOT = "spots/UPDATE_SPOT";
 
+const RESET = "spots/RESET";
+
 // reg actions
 
-export const addSpot = (spot) => {
+const addSpot = (spot) => {
   return {
     type: ADD_SPOT,
     spot,
   };
 };
 
-export const loadAllSpots = (spots) => {
+const loadAllSpots = (spots) => {
   return {
     type: LOAD_ALLSPOTS,
     spots,
   };
 };
 
-export const loadSingleSpot = (spot) => {
+const loadSingleSpot = (spot) => {
   return {
     type: LOAD_SINGLESPOT,
     spot,
   };
 };
 
-export const deleteSpot = (spotId) => {
+const deleteSpot = (spotId) => {
   return {
     type: DELETE_SPOT,
     spot: spotId,
   };
 };
 
-export const editSpot = (spot) => {
+const editSpot = (spot) => {
   return {
     type: UPDATE_SPOT,
     spot,
@@ -63,9 +65,9 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`);
 
   if (res.ok) {
-    const spot = await res.json();
-    await dispatch(loadSingleSpot(spot));
-    return spot;
+    const spotData = await res.json();
+    await dispatch(loadSingleSpot(spotData));
+    return spotData;
   }
 };
 
@@ -117,11 +119,10 @@ export const updateSpot = (updatedSpot, spotDetails) => async (dispatch) => {
   return res;
 };
 
-//normalize flatten helper
-const normalizeData = (spots) => {
-  const spotData = {};
-  spots.Spots.forEach((singleSpot) => (spotData[singleSpot.id] = singleSpot));
-  return spotData;
+export const resetAll = () => {
+  return {
+    type: RESET,
+  };
 };
 
 //reducer
@@ -132,32 +133,37 @@ const initialState = {
 };
 
 const spotReducer = (state = initialState, action) => {
-  const shallowState = { ...state };
   switch (action.type) {
     case LOAD_ALLSPOTS: {
-      shallowState.allSpots = normalizeData(action.spots);
+      const shallowState = { ...state, singleSpot: {} };
+      action.spots.Spots.forEach((ss) => {
+        shallowState.allSpots[ss.id] = ss;
+      });
       return shallowState;
     }
     case LOAD_SINGLESPOT: {
-      const shallowState2 = { ...state, allSpots: { ...action.spot } };
-      shallowState2.singleSpot = { ...action.spot };
-      return shallowState2;
+      const shallowState = { ...state, singleSpot: {} };
+      shallowState.singleSpot = action.spot;
+      return shallowState;
     }
     case ADD_SPOT: {
-      const shallowState2 = { ...state, singleSpot: {} };
-      shallowState2.allSpots[action.spot.id] = action.spot;
-      return shallowState2;
+      const shallowState = { ...state, singleSpot: {} };
+      shallowState.allSpots[action.spot.id] = action.spot;
+      return shallowState;
     }
     case DELETE_SPOT: {
-      const shallowState2 = { ...state, singleSpot: {} };
-      shallowState2.allSpots[action.id] = action.spot;
-      shallowState2.singleSpot = action.spot;
-      return shallowState2;
+      const shallowState = { ...state, singleSpot: {} };
+      shallowState.allSpots[action.id] = action.spot;
+      shallowState.singleSpot = action.spot;
+      return shallowState;
     }
     case UPDATE_SPOT: {
-      const shallowState2 = { ...state, singleSpot: {} };
-      shallowState2.singleSpot = action.spot;
-      return shallowState2;
+      const shallowState = { ...state, singleSpot: {} };
+      shallowState.singleSpot = action.spot;
+      return shallowState;
+    }
+    case RESET: {
+      return;
     }
     default:
       return state;

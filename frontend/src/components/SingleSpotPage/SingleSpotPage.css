@@ -43,8 +43,9 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  justify-content: space-between;
+  justify-content: space-around;
   padding-top: 10px;
+  margin-left: 88%;
 }
 
 .CreateFormButton2 {
@@ -53,6 +54,11 @@
   background-color: white;
   border-radius: 5px;
   font-size: 19px;
+  margin-left: 20%;
+  height: 40%;
+  width: 40%;
+  display: flex;
+  align-items: center;
 }
 
 .CreateFormButton2:hover {
