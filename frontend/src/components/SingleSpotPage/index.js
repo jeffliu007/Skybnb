@@ -19,8 +19,6 @@ export const SingleSpotPage = () => {
     dispatch(fetchSingleSpot(spotId));
   }, [dispatch, spotId]);
 
-  if (!spot) return null;
-
   const {
     name,
     description,
@@ -42,6 +40,8 @@ export const SingleSpotPage = () => {
     return Math.floor(Math.random() * 6) + 1;
   }
 
+  if (!spot) return null;
+
   return (
     <div className="SingleSpot-Main-Container">
       <div className="SingleSpot-Name-Rating">
@@ -51,6 +51,11 @@ export const SingleSpotPage = () => {
             {`${avgStarRating} stars`},{`${numReviews} reviews`},
             {`${city}, ${state}, ${country} for an amazing $${price} per night`}
           </div>
+        </div>
+        <div>
+          <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
+        </div>
+        <div className="Single-Spot-Description">
           <div className="edit-and-delete">
             <div className="editSpot">
               <EditSpotModal />
@@ -62,17 +67,12 @@ export const SingleSpotPage = () => {
               <i className="fa-regular fa-trash-can"></i>
             </button>
           </div>
-        </div>
-        <div>
-          <SpotPageImgLayout spot={spot} spotImg={SpotImages} />
-        </div>
-        <div className="Single-Spot-Description">
           <h3 className="Hosted-By-Section">Entire home hosted by</h3>
           <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
           <p className="descriptionPtag">{description}</p>
         </div>
         <div className="Reviews-Container">
-          <AllSpotReviews />
+          <AllSpotReviews avgStars={avgStarRating} />
         </div>
       </div>
     </div>

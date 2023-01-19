@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./HomePage.css";
+import { useEffect } from "react";
 
 export const SpotCards = ({ spot }) => {
   let { id, city, state, price, name, avgRating, previewImage, url } = spot;

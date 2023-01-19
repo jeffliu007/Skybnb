@@ -10,6 +10,8 @@ const DELETE_SPOT = "spots/DELETE_SPOT";
 
 const UPDATE_SPOT = "spots/UPDATE_SPOT";
 
+const RESET = "spots/RESET";
+
 // reg actions
 
 const addSpot = (spot) => {
@@ -63,9 +65,9 @@ export const fetchSingleSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`);
 
   if (res.ok) {
-    const spot = await res.json();
-    await dispatch(loadSingleSpot(spot));
-    return spot;
+    const spotData = await res.json();
+    await dispatch(loadSingleSpot(spotData));
+    return spotData;
   }
 };
 
@@ -117,11 +119,10 @@ export const updateSpot = (updatedSpot, spotDetails) => async (dispatch) => {
   return res;
 };
 
-//normalize flatten helper
-const normalizeData = (spots) => {
-  const spotData = {};
-  spots.Spots.forEach((singleSpot) => (spotData[singleSpot.id] = singleSpot));
-  return spotData;
+export const resetAll = () => {
+  return {
+    type: RESET,
+  };
 };
 
 //reducer
@@ -134,13 +135,15 @@ const initialState = {
 const spotReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_ALLSPOTS: {
-      const shallowState2 = { ...state };
-      shallowState2.allSpots = normalizeData(action.spots);
-      return shallowState2;
+      const shallowState = { ...state, singleSpot: {} };
+      action.spots.Spots.forEach((ss) => {
+        shallowState.allSpots[ss.id] = ss;
+      });
+      return shallowState;
     }
     case LOAD_SINGLESPOT: {
-      const shallowState = { ...state, allSpots: { ...action.spot } };
-      shallowState.singleSpot = { ...action.spot };
+      const shallowState = { ...state, singleSpot: {} };
+      shallowState.singleSpot = action.spot;
       return shallowState;
     }
     case ADD_SPOT: {
@@ -158,6 +161,9 @@ const spotReducer = (state = initialState, action) => {
       const shallowState = { ...state, singleSpot: {} };
       shallowState.singleSpot = action.spot;
       return shallowState;
+    }
+    case RESET: {
+      return;
     }
     default:
       return state;
