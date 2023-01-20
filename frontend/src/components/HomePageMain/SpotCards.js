@@ -27,9 +27,7 @@ export const SpotCards = ({ spot }) => {
           <div className="card-Location-Rating">
             <div className="only-location">{`${city}, ${state}`}</div>
             <div className="card-Rating">
-              <span>
-                <i className="fas fa-star"></i>
-              </span>
+              <span>{!avgRating ? " " : <i className="fas fa-star"></i>}</span>
               {roundedAvgRating == "NaN" ? " " : roundedAvgRating}
             </div>
           </div>

@@ -6,7 +6,6 @@ import "./SingleSpotPage.css";
 import { SpotPageImgLayout } from "./SpotPageImgLayout";
 import EditSpotModal from "../SingleSpotEditModal";
 import AllSpotReviews from "../ReviewsAll";
-import { resetAll } from "../../store/spots";
 
 export const SingleSpotPage = () => {
   const [loadedImage, setloadedImage] = useState(false);
@@ -18,9 +17,11 @@ export const SingleSpotPage = () => {
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const allReviews = Object.values(oldAllReviews);
   const numOfRev = allReviews?.length;
-
   const history = useHistory();
   const { spotId } = useParams();
+  const [revealReview, setRevealReview] = useState(false);
+
+  const specificRev = allReviews.find((rev) => rev);
 
   useEffect(() => {
     // if (currUser && currUser?.id === spot?.Owner?.id) console.log("yes");
@@ -62,20 +63,20 @@ export const SingleSpotPage = () => {
           <div className="SingleSpot-Rating-Review-Location">
             <div className="reviews-header">
               <div className="starPlusRev">
-                <h3 className="starPlusRev2">
-                  <span>
-                    {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
-                    <i className="fas fa-star"></i> ·
-                  </span>
-                  {`
-                      ${
-                        numOfRev === undefined || numOfRev == "NaN"
-                          ? "No Reviews yet"
-                          : numOfRev === 1
-                          ? numOfRev + " Review"
-                          : numOfRev + " Reviews"
-                      }`}
-                </h3>
+                {numReviews && (
+                  <h3 className="starPlusRev2">
+                    <span>
+                      {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
+                      <i className="fas fa-star"></i> ·
+                    </span>
+                    {(revealReview && numOfRev === undefined) ||
+                    numOfRev == "NaN"
+                      ? "No Reviews yet"
+                      : numOfRev === 1
+                      ? numOfRev + " Review"
+                      : numOfRev + " Reviews"}
+                  </h3>
+                )}
               </div>
             </div>
             <div className="location-header">

@@ -14,7 +14,7 @@ export const AllSpotReviews = ({ avgStars }) => {
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const currUser = useSelector((state) => state.session.user);
 
-  const currSpot = useSelector((state) => state.spots.singleSpot);
+  //const currSpot = useSelector((state) => state.spots.singleSpot);
 
   const allReviews = Object.values(oldAllReviews);
 
@@ -80,7 +80,7 @@ export const AllSpotReviews = ({ avgStars }) => {
               <div className="trashcan-container">
                 {User.id === currUser?.id && (
                   <button onClick={handleDelete} className="trashcan-Reviews">
-                    <i class="fa-solid fa-trash-can"></i>
+                    <i className="fa-solid fa-trash-can"></i>
                   </button>
                 )}
               </div>
