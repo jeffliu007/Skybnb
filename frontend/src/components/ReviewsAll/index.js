@@ -75,7 +75,7 @@ export const AllSpotReviews = ({ avgStars }) => {
                 </div>
               </div>
               <div className="review-text">
-                <p>{review}</p>
+                <p className="review-text-p">{review}</p>
               </div>
               <div className="trashcan-container">
                 {User.id === currUser?.id && (

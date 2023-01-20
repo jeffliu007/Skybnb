@@ -104,7 +104,9 @@ export const SingleSpotPage = () => {
               Entire home hosted by {Owner?.firstName}
             </h3>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
-            <p className="descriptionPtag">{description}</p>
+            <div className="descriptionPtag">
+              <p>{description}</p>
+            </div>
           </div>
           <div className="Reviews-Container">
             <AllSpotReviews avgStars={avgStarRating} />

@@ -81,3 +81,21 @@ body {
 .logOut-button {
   cursor: pointer;
 }
+
+.profile-dropdown {
+  position: absolute;
+  list-style-type: none;
+  padding: 0;
+  margin-right: 3%;
+  text-align: center;
+}
+
+li:not(:first-child) {
+  margin-top: 10px;
+}
+li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.profile-button-container {
+}

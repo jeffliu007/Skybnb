@@ -28,6 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .CreateFormButton {
@@ -65,13 +66,14 @@
   border-radius: 10px;
   width: 100%;
   height: 60%;
-  margin-top: 3%;
+  margin-top: 2.5%;
   border: 1px hidden black;
   background-color: rgb(239, 236, 236);
   font-size: 105%;
   display: flex;
   align-items: flex-start;
   cursor: pointer;
+  padding: 10px;
 }
 .Add-review-button:hover {
   background-color: rgb(199, 196, 196);
@@ -79,13 +81,14 @@
 
 .submit-button {
   border: 1px hidden black;
-  height: 100%;
-  width: 120%;
+  height: 120%;
+  width: 130%;
   font-size: 1rem;
   position: relative;
-  margin-top: 15px;
+  margin-top: 17px;
   border-radius: 8px;
   cursor: pointer;
+  padding: 5px;
 }
 
 .submit-button:hover {

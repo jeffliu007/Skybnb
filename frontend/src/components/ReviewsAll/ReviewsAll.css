@@ -55,6 +55,10 @@
 
 .review-text {
   display: flex;
+  word-wrap: break-word;
+}
+
+.review-text-p {
 }
 
 .name-plus-date {

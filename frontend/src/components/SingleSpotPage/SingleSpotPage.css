@@ -37,6 +37,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  width: 100%;
 }
 
 .edit-and-delete {
@@ -70,6 +71,7 @@
   width: 100%;
   height: 100%;
   padding-top: 20px;
+  word-wrap: break-word;
 }
 
 .Hosted-Footer {
