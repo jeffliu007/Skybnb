@@ -14,6 +14,8 @@ export const AllSpotReviews = ({ avgStars }) => {
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const currUser = useSelector((state) => state.session.user);
 
+  const currSpot = useSelector((state) => state.spots.singleSpot);
+
   const allReviews = Object.values(oldAllReviews);
 
   const avgStars2 = parseFloat(avgStars);
@@ -26,7 +28,7 @@ export const AllSpotReviews = ({ avgStars }) => {
 
   useEffect(() => {
     dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
-  }, [dispatch, numOfRev]);
+  }, [dispatch, numOfRev, newAvgStars]);
 
   const handleDelete = async (e) => {
     await dispatch(deleteSpotReview(specificRev));
@@ -41,7 +43,7 @@ export const AllSpotReviews = ({ avgStars }) => {
   return (
     <div className="spot-reviews-container">
       <div className="reviews-header">
-        <h3>{`${newAvgStars == "NaN" ? "No ratings yet" : newAvgStars} ·
+        <h3>{`${newAvgStars == "NaN" ? " " : newAvgStars + " ·"}
         ${
           numOfRev === undefined || numOfRev == "NaN"
             ? "No Reviews yet"
