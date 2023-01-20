@@ -21,12 +21,13 @@
 #modal-content {
   position: absolute;
   background-color: rgb(255, 255, 255);
-  color: red;
-  height: 50%;
-  width: 20%;
+  color: rgb(5, 5, 5);
+  height: 73%;
+  width: 17%;
   border-radius: 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .CreateFormButton {
@@ -72,4 +73,18 @@
 }
 .Add-review-button:hover {
   background-color: rgb(199, 196, 196);
+}
+
+.submit-button {
+  border: 1px hidden black;
+  height: 100%;
+  width: 120%;
+  font-size: 1rem;
+  position: relative;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+.submit-button:hover {
+  background-color: rgb(204, 204, 204);
 }
