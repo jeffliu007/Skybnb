@@ -41,13 +41,14 @@
   flex-direction: column;
   justify-content: space-around;
   height: 20%;
-  font-size: 1vw;
+  font-size: 0.91vw;
   margin-bottom: 20px;
 }
 
 .card-Rating {
   display: flex;
   justify-content: space-around;
+  margin-right: -27px;
 }
 
 .cardName {
@@ -61,10 +62,19 @@
   font-weight: 700;
 }
 .cardPrice {
-  margin-top: 9px;
+  margin-bottom: 23px;
 }
 
 .SpotCardsContainer {
   width: 100%;
   height: 80%;
+}
+
+#removeNavLink-UnderLines {
+  text-decoration: none;
+  color: black;
+}
+
+.only-location {
+  font-weight: bold;
 }

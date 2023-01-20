@@ -17,7 +17,7 @@ export const SingleSpotPage = () => {
   const currUser = useSelector((state) => state.session.user);
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const allReviews = Object.values(oldAllReviews);
-  const numOfRev = allReviews.length;
+  const numOfRev = allReviews?.length;
 
   const history = useHistory();
   const { spotId } = useParams();
@@ -40,6 +40,7 @@ export const SingleSpotPage = () => {
     state,
     country,
     avgStarRating,
+    Owner,
   } = spot;
 
   const handleDelete = (e) => {
@@ -50,7 +51,7 @@ export const SingleSpotPage = () => {
     return Math.floor(Math.random() * 6) + 1;
   }
 
-  let roundedAvgStar = avgStarRating.toFixed(2);
+  let roundedAvgStar = avgStarRating?.toFixed(2);
 
   if (!loadedImage) return null;
   else
@@ -61,22 +62,26 @@ export const SingleSpotPage = () => {
           <div className="SingleSpot-Rating-Review-Location-Buttons">
             <div className="SingleSpot-Rating-Review-Location">
               <div className="reviews-header">
-                <h3>
-                  <span>
-                    {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
-                    <i className="fas fa-star"></i> ·
-                  </span>
-                  {`
-  ${
-    numOfRev === undefined || numOfRev == "NaN"
-      ? "No Reviews yet"
-      : numOfRev === 1
-      ? numOfRev + " Review"
-      : numOfRev + " Reviews"
-  }`}
-                </h3>
+                <div className="starPlusRev">
+                  <h3>
+                    <span>
+                      {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
+                      <i className="fas fa-star"></i> ·
+                    </span>
+                    {`
+                      ${
+                        numOfRev === undefined || numOfRev == "NaN"
+                          ? "No Reviews yet"
+                          : numOfRev === 1
+                          ? numOfRev + " Review"
+                          : numOfRev + " Reviews"
+                      }`}
+                  </h3>
+                </div>
               </div>
-              {`${city}, ${state}, ${country} for an amazing $${price} per night`}
+              <div className="location-header">
+                {`${city}, ${state}, ${country} for $${price} per night`}
+              </div>
             </div>
           </div>
           <div>
@@ -95,7 +100,9 @@ export const SingleSpotPage = () => {
             ) : (
               <div> </div>
             )}
-            <h3 className="Hosted-By-Section">Entire home hosted by</h3>
+            <h3 className="Hosted-By-Section">
+              Entire home hosted by {Owner?.firstName}
+            </h3>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
             <p className="descriptionPtag">{description}</p>
           </div>

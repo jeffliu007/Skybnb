@@ -80,3 +80,27 @@
 .Reviews-Container {
   border-top: 1px solid rgb(222, 220, 220);
 }
+
+.SingleSpot-Rating-Review-Location {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.starPlusRev {
+  font-size: 13px;
+}
+
+.location-header {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 120%;
+  text-decoration: underline;
+}
+
+.reviews-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

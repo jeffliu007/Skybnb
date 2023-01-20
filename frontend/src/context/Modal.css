@@ -39,6 +39,7 @@
   border: 1px hidden black;
   background-color: white;
   font-size: 90%;
+  cursor: pointer;
 }
 
 .CreateFormButton:hover {
