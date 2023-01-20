@@ -23,9 +23,9 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="login-form-container">
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="login-inner-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -38,6 +38,7 @@ function LoginFormModal() {
             value={credential}
             onChange={(e) => setCredential(e.target.value)}
             required
+            className="login-form-input"
           />
         </label>
         <label>
@@ -47,11 +48,14 @@ function LoginFormModal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="login-form-input"
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit" className="submit-button">
+          Log In
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 
