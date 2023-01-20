@@ -14,6 +14,7 @@
   width: calc(50% - 10px);
   margin: 5px;
   flex-direction: column;
+  word-wrap: break-word;
 }
 
 .reviews-header {
@@ -53,12 +54,15 @@
   flex-direction: row;
 }
 
-.review-text {
-  display: flex;
-  word-wrap: break-word;
+.review-text-p {
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.review-text-p {
+.review-text {
+  text-overflow: ellipsis;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .name-plus-date {
