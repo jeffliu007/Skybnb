@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 export const EditModalForm = () => {
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const ownedSpot = useSelector((state) => state.spots.singleSpot);
+  const [address, setAddress] = useState(ownedSpot.address);
+  const [city, setCity] = useState(ownedSpot.city);
+  const [state, setState] = useState(ownedSpot.state);
+  const [country, setCountry] = useState(ownedSpot.country);
+  const [name, setName] = useState(ownedSpot.name);
+  const [description, setDescription] = useState(ownedSpot.description);
+  const [price, setPrice] = useState(ownedSpot.price);
   const { closeModal } = useModal();
   const [errors, setErrors] = useState([]);
-  const ownedSpot = useSelector((state) => state.spots.singleSpot);
 
   const dispatch = useDispatch();
   const history = useHistory();
