@@ -8,6 +8,7 @@ import "./ReviewsAll.css";
 
 export const AllSpotReviews = ({ avgStars }) => {
   const [loadedReviews, setLoadedReviews] = useState(false);
+  const [revExpanded, setReviewExpanded] = useState(false);
 
   const dispatch = useDispatch();
   const { spotId } = useParams();

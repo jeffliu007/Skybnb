@@ -148,7 +148,7 @@ export const SpotModalForm = () => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <button type="submit" className="submit-button">
