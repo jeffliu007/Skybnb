@@ -462,6 +462,7 @@ router.post(
       err.status = 404;
       err.message = "No reviews";
       err.title = "No reviews found";
+      return next(err);
     }
 
     let alreadyExistFlag = false;

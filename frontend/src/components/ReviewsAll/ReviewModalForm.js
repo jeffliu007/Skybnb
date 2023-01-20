@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpotReviews } from "../../store/reviews";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
 export const ReviewModalForm = () => {
@@ -10,7 +9,6 @@ export const ReviewModalForm = () => {
   const [errors, setErrors] = useState([]);
   const currUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory();
   const { closeModal } = useModal();
   const spotId = useSelector((state) => state.spots.singleSpot.id);
   const oldReviews = useSelector((state) => state.reviews.spot);
@@ -31,10 +29,11 @@ export const ReviewModalForm = () => {
     };
     return dispatch(createSpotReviews(spotId, newReview, newUserInfo))
       .then(closeModal)
-      .then(history.push(`/spots/${spotId}`))
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors([data.errors]);
+        if (data && data.errors) {
+          setErrors([data.errors]);
+        }
       });
   };
 

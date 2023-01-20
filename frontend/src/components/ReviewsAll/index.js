@@ -51,12 +51,7 @@ export const AllSpotReviews = ({ avgStars }) => {
             ? numOfRev + " Review"
             : numOfRev + " Reviews"
         }`}</h3>
-
-        <CreateNewReviewModal />
-
-        {specificRev && (
-          <button onClick={handleDelete}>Delete Your Last Review</button>
-        )}
+        {!specificRev && <CreateNewReviewModal />}
       </div>
 
       <div className="inner-container-spot-rev">
@@ -67,6 +62,11 @@ export const AllSpotReviews = ({ avgStars }) => {
               <div>
                 review comments
                 <p>{review}</p>
+                {User.id === currUser?.id && (
+                  <button onClick={handleDelete}>
+                    Delete Your Last Review
+                  </button>
+                )}
               </div>
             </div>
           ))}
