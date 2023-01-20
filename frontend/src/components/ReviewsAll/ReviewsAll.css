@@ -66,8 +66,10 @@
 }
 
 .date-banner-review {
-  color: rgb(0, 0, 0);
+  color: rgb(141, 140, 140);
   margin-left: 3%;
+  display: flex;
+  align-items: center;
 }
 
 .trashcan-Reviews {
@@ -105,4 +107,30 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+}
+
+/* .fa-user-pen {
+  border: 1px solid red;
+  border-radius: 50%;
+  background-color: #333;
+} */
+
+i.fa-solid.fa-user-pen {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(193, 193, 193, 0.593);
+  padding: 9px;
+  margin-right: 2px;
+}
+
+i.fa-solid.fa-user-pen::before {
+  display: block;
+  margin-left: -2px;
+  margin-top: -2px;
+}
+
+.starPlusRev2 {
+  margin: 0;
 }

@@ -69,7 +69,7 @@ export const AllSpotReviews = ({ avgStars }) => {
                   <i className="fa-solid fa-user-pen"></i> {User.firstName}
                 </div>
                 <div className="date-banner-review">
-                  {" "}
+                  {" · "}
                   {createdAt.slice(5, 7)} {createdAt.slice(4, 5)}{" "}
                   {createdAt.slice(0, 4)}
                 </div>
