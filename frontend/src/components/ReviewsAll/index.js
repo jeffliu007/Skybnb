@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSpotReviews } from "../../store/reviews";
 import { CreateNewReviewModal } from "./CreateReviewModal";
@@ -22,17 +22,21 @@ export const AllSpotReviews = ({ avgStars }) => {
 
   const numOfRev = allReviews.length;
 
-  const specificRev = allReviews.find((rev) => rev.userId === currUser.id);
+  const specificRev = allReviews.find((rev) => currUser?.id === rev?.userId);
 
   useEffect(() => {
     dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
-  }, [dispatch]);
+  }, [dispatch, numOfRev]);
 
-  const handleDelete = (e) => {
-    return dispatch(deleteSpotReview(specificRev));
+  const handleDelete = async (e) => {
+    await dispatch(deleteSpotReview(specificRev));
   };
-
-  if (!loadedReviews) return null;
+  if (!loadedReviews)
+    return (
+      <div className="blank-review-add-button">
+        <CreateNewReviewModal alreadyRev={specificRev} />
+      </div>
+    );
 
   return (
     <div className="spot-reviews-container">
@@ -48,19 +52,22 @@ export const AllSpotReviews = ({ avgStars }) => {
 
         <CreateNewReviewModal />
 
-        <button onClick={handleDelete}>Delete</button>
+        {specificRev && (
+          <button onClick={handleDelete}>Delete Your Last Review</button>
+        )}
       </div>
 
       <div className="inner-container-spot-rev">
-        {allReviews.map(({ stars, User, review, id }) => (
-          <div className="individual-review-card" key={id}>
-            <div>{User.firstName} add Icon here</div>
-            <div>
-              review comments
-              <p>{review}</p>
+        {allReviews &&
+          allReviews.map(({ stars, User, review, id }) => (
+            <div className="individual-review-card" key={id}>
+              <div>{User.firstName} add Icon here</div>
+              <div>
+                review comments
+                <p>{review}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

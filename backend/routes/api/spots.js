@@ -464,15 +464,21 @@ router.post(
       err.title = "No reviews found";
     }
 
+    let alreadyExistFlag = false;
+
     allRev.forEach((rev) => {
       if (rev.spotId === parseInt(id)) {
-        const err = new Error("User already has a review for this spot");
-        err.status = 403;
-        err.title = "A review has already been submitted";
-
-        return next(err);
+        alreadyExistFlag = true;
       }
     });
+
+    if (alreadyExistFlag) {
+      const err = new Error("User already has a review for this spot");
+      err.status = 403;
+      err.title = "A review has already been submitted";
+
+      return next(err);
+    }
 
     const newRev = await Review.create({
       review,

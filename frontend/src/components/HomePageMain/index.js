@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSpots } from "../../store/spots";
 import { SpotCards } from "./SpotCards";
@@ -6,13 +6,14 @@ import "./HomePage.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const [loadedPage, setLoadedPage] = useState(false);
   const loadInitSpots = useSelector((state) => state.spots);
   const spots = Object.values(loadInitSpots.allSpots);
   useEffect(() => {
-    dispatch(fetchAllSpots());
+    dispatch(fetchAllSpots()).then(() => setLoadedPage(true));
   }, [dispatch]);
 
-  if (Object.keys(loadInitSpots).length < 1) return null;
+  if (!loadedPage) return null;
 
   return (
     <>
