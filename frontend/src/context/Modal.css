@@ -20,7 +20,13 @@
 
 #modal-content {
   position: absolute;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
+  color: red;
+  height: 50%;
+  width: 20%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .CreateFormButton {

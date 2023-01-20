@@ -5,13 +5,11 @@ import { CreateNewReviewModal } from "./CreateReviewModal";
 import { useEffect, useState } from "react";
 import { deleteSpotReview } from "../../store/reviews";
 import "./ReviewsAll.css";
-import { resetAll } from "../../store/spots";
 
 export const AllSpotReviews = ({ avgStars }) => {
   const [loadedReviews, setLoadedReviews] = useState(false);
 
   const dispatch = useDispatch();
-  const history = useHistory();
   const { spotId } = useParams();
   const oldAllReviews = useSelector((state) => state.reviews.spot);
   const currUser = useSelector((state) => state.session.user);
@@ -30,10 +28,8 @@ export const AllSpotReviews = ({ avgStars }) => {
     dispatch(loadSpotReviews(spotId)).then(() => setLoadedReviews(true));
   }, [dispatch, numOfRev]);
 
-  const handleDelete = (e) => {
-    dispatch(deleteSpotReview(specificRev)).then(() =>
-      history.push(`/spots/${spotId}`)
-    );
+  const handleDelete = async (e) => {
+    await dispatch(deleteSpotReview(specificRev));
   };
   if (!loadedReviews)
     return (

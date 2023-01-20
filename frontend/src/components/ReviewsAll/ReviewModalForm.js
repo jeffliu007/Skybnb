@@ -4,32 +4,31 @@ import { createSpotReviews } from "../../store/reviews";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 
-export const ReviewModalForm = ({ alreadyRev }) => {
-  // const [errors, setErrors] = useState([]);
-  const [comments, setComments] = useState("");
-  const [rating, setRating] = useState("");
+export const ReviewModalForm = () => {
+  const [review, setReview] = useState("");
+  const [stars, setStars] = useState("");
   const [errors, setErrors] = useState([]);
   const currUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
   const spotId = useSelector((state) => state.spots.singleSpot.id);
+  const oldReviews = useSelector((state) => state.reviews.spot);
+  const allReviews = Object.values(oldReviews);
+  const alreadyRev = allReviews.find((rev) => currUser?.id === rev?.userId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(alreadyRev);
+    const newReview = {
+      review,
+      stars,
+    };
 
     const newUserInfo = {
       User: currUser,
       ReviewImages: [],
     };
-
-    const newReview = {
-      review: comments,
-      stars: rating,
-    };
-
     return dispatch(createSpotReviews(spotId, newReview, newUserInfo))
       .then(closeModal)
       .then(history.push(`/spots/${spotId}`))
@@ -42,6 +41,10 @@ export const ReviewModalForm = ({ alreadyRev }) => {
   if (!currUser) {
     return <div>Please log in</div>;
   }
+
+  // if (!alreadyRev) {
+  //   return <div>already reviewed</div>;
+  // }
 
   return (
     <div>
@@ -56,14 +59,14 @@ export const ReviewModalForm = ({ alreadyRev }) => {
           Comments:
           <input
             type="text"
-            value={comments}
-            onChange={(e) => setComments(e.target.value)}
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
             required
           />
         </label>
         <label>
           Star Rating
-          <select value={rating} onChange={(e) => setRating(e.target.value)}>
+          <select value={stars} onChange={(e) => setStars(e.target.value)}>
             <option value="">Choose 1-5</option>
             <option value="5">5</option>
             <option value="4">4</option>

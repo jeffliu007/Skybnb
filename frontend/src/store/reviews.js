@@ -49,9 +49,14 @@ export const createSpotReviews =
       body: JSON.stringify(review),
     });
 
+    console.log(" <----before if res.ok here", res);
+
     if (res.ok) {
       const body = await res.json();
       const newBody = { ...body, ...newUserInfo };
+
+      console.log("newbody starts here -> ", newBody);
+
       await dispatch(createSpotReviewsAction(newBody));
       return res;
     }
@@ -86,7 +91,7 @@ export const reviewsReducer = (state = initialState, action) => {
     }
     case DELETE_SPOT_REVIEWS: {
       const shallowState = { spot: { ...state.spot }, user: {} };
-      delete shallowState.spot[action.reviewId];
+      delete shallowState.spot[action.review.id];
       return shallowState;
     }
     default:
