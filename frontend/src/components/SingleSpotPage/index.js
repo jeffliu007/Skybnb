@@ -50,6 +50,8 @@ export const SingleSpotPage = () => {
     return Math.floor(Math.random() * 6) + 1;
   }
 
+  let roundedAvgStar = avgStarRating.toFixed(2);
+
   if (!loadedImage) return null;
   else
     return (
@@ -58,23 +60,21 @@ export const SingleSpotPage = () => {
           <h1>{name}</h1>
           <div className="SingleSpot-Rating-Review-Location-Buttons">
             <div className="SingleSpot-Rating-Review-Location">
-              <div>
-                {avgStarRating && avgStarRating <= 1 ? (
-                  <div>{avgStarRating} star</div>
-                ) : avgStarRating === undefined ? (
-                  <div></div>
-                ) : avgStarRating > 1 ? (
-                  <div>{avgStarRating} stars</div>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div>
-                {numReviews && numReviews == 1 ? (
-                  <div>{numReviews} Review</div>
-                ) : (
-                  <div>{numReviews} Reviews</div>
-                )}
+              <div className="reviews-header">
+                <h3>
+                  <span>
+                    {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
+                    <i className="fas fa-star"></i> ·
+                  </span>
+                  {`
+  ${
+    numOfRev === undefined || numOfRev == "NaN"
+      ? "No Reviews yet"
+      : numOfRev === 1
+      ? numOfRev + " Review"
+      : numOfRev + " Reviews"
+  }`}
+                </h3>
               </div>
               {`${city}, ${state}, ${country} for an amazing $${price} per night`}
             </div>
