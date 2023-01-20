@@ -3,7 +3,7 @@ import ReviewModalForm from "./ReviewModalForm";
 
 export const CreateNewReviewModal = () => {
   return (
-    <div>
+    <div className="add-rev-container">
       <OpenModalButtonCreateRev
         buttonText="Add New Review"
         modalComponent={<ReviewModalForm />}

@@ -6,6 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  margin-top: 5%;
 }
 
 .individual-review-card {
@@ -19,6 +20,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 3%;
+  flex-direction: row;
 }
 
 .blank-review-add-button {
@@ -93,4 +95,10 @@
 
 .form-input-review:hover {
   background-color: rgb(241, 241, 241);
+}
+
+.add-rev-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
