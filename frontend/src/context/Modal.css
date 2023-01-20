@@ -71,6 +71,7 @@
   font-size: 105%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .Add-review-button:hover {
   background-color: rgb(199, 196, 196);
@@ -84,6 +85,7 @@
   position: relative;
   margin-top: 15px;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .submit-button:hover {

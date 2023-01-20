@@ -84,3 +84,13 @@
   display: flex;
   justify-content: flex-start;
 }
+
+.form-input-review {
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.form-input-review:hover {
+  background-color: rgb(241, 241, 241);
+}
