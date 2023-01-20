@@ -49,13 +49,9 @@ export const createSpotReviews =
       body: JSON.stringify(review),
     });
 
-    console.log(" <----before if res.ok here", res);
-
     if (res.ok) {
       const body = await res.json();
       const newBody = { ...body, ...newUserInfo };
-
-      console.log("newbody starts here -> ", newBody);
 
       await dispatch(createSpotReviewsAction(newBody));
       return res;

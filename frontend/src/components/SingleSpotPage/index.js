@@ -14,8 +14,10 @@ export const SingleSpotPage = () => {
   const dispatch = useDispatch();
   const spot = useSelector((state) => state.spots.singleSpot);
   const spotArr = Object.values(spot);
-
   const currUser = useSelector((state) => state.session.user);
+  const oldAllReviews = useSelector((state) => state.reviews.spot);
+  const allReviews = Object.values(oldAllReviews);
+  const numOfRev = allReviews.length;
 
   const history = useHistory();
   const { spotId } = useParams();
@@ -25,7 +27,7 @@ export const SingleSpotPage = () => {
     // else console.log("no");
 
     dispatch(fetchSingleSpot(spotId)).then(() => setloadedImage(true));
-  }, [dispatch, spotId, ownedUser]);
+  }, [dispatch, spotId, ownedUser, numOfRev]);
 
   const {
     name,
@@ -56,7 +58,24 @@ export const SingleSpotPage = () => {
           <h1>{name}</h1>
           <div className="SingleSpot-Rating-Review-Location-Buttons">
             <div className="SingleSpot-Rating-Review-Location">
-              {`${avgStarRating} stars`},{`${numReviews} reviews`},
+              <div>
+                {avgStarRating && avgStarRating <= 1 ? (
+                  <div>{avgStarRating} star</div>
+                ) : avgStarRating === undefined ? (
+                  <div></div>
+                ) : avgStarRating > 1 ? (
+                  <div>{avgStarRating} stars</div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div>
+                {numReviews && numReviews == 1 ? (
+                  <div>{numReviews} Review</div>
+                ) : (
+                  <div>{numReviews} Reviews</div>
+                )}
+              </div>
               {`${city}, ${state}, ${country} for an amazing $${price} per night`}
             </div>
           </div>
