@@ -13,19 +13,26 @@ export const SpotCards = ({ spot }) => {
       "https://img.freepik.com/premium-vector/modern-minimal-found-error-icon-oops-page-found-404-error-page-found-with-concept_599740-716.jpg?w=2000";
 
   return (
-    <NavLink className={"SpotCardsContainer"} to={`/spots/${id}`} key={name}>
+    <NavLink
+      className={"SpotCardsContainer"}
+      to={`/spots/${id}`}
+      key={name}
+      id="removeNavLink-UnderLines"
+    >
       <div className="cardMain">
         <div className="img-holder">
           <img src={previewImage} className="prevImg" />
         </div>
         <div className="cardContents">
           <div className="card-Location-Rating">
-            {`${city}, ${state}`}
+            <div className="only-location">{`${city}, ${state}`}</div>
             <div className="card-Rating">
-              {!avgRating ? (roundedAvgRating = null) : roundedAvgRating}
+              <span>
+                <i className="fas fa-star"></i>
+              </span>
+              {roundedAvgRating == "NaN" ? " " : roundedAvgRating}
             </div>
           </div>
-          <div className="cardName">{name}</div>
           <div className="cardPrice">{`$${price} per night`}</div>
         </div>
       </div>

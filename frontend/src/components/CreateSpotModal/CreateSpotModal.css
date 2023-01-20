@@ -32,3 +32,8 @@ form {
 .form-input:hover {
   background-color: rgb(231, 231, 231);
 }
+
+.main-skybnb-create-container {
+  display: flex;
+  margin-right: 55px;
+}

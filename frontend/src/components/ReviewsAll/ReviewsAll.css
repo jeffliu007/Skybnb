@@ -1,12 +1,18 @@
 .inner-container-spot-rev {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 80%;
-  margin-top: 3%;
+  margin-top: 3%; */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .individual-review-card {
   display: flex;
+  width: calc(50% - 10px);
+  margin: 5px;
+  flex-direction: column;
 }
 
 .reviews-header {
@@ -38,4 +44,53 @@
   flex-direction: column;
   padding: 20px;
   height: 80%;
+}
+
+.name-and-icon {
+  display: flex;
+  flex-direction: row;
+}
+
+.review-text {
+  display: flex;
+}
+
+.name-plus-date {
+  display: flex;
+}
+
+.date-banner-review {
+  color: rgb(0, 0, 0);
+  margin-left: 3%;
+}
+
+.trashcan-Reviews {
+  font-size: 103%;
+  border: 1px hidden black;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trashcan-Reviews:hover {
+  background-color: rgb(209, 208, 208);
+}
+
+.trashcan-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-input-review {
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.form-input-review:hover {
+  background-color: rgb(241, 241, 241);
 }

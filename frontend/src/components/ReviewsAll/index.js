@@ -43,28 +43,44 @@ export const AllSpotReviews = ({ avgStars }) => {
   return (
     <div className="spot-reviews-container">
       <div className="reviews-header">
-        <h3>{`${newAvgStars == "NaN" ? " " : newAvgStars + " ·"}
-        ${
-          numOfRev === undefined || numOfRev == "NaN"
-            ? "No Reviews yet"
-            : numOfRev === 1
-            ? numOfRev + " Review"
-            : numOfRev + " Reviews"
-        }`}</h3>
+        <h3>
+          <span>
+            {newAvgStars == "NaN" ? " " : newAvgStars}
+            <i className="fas fa-star"></i> ·
+          </span>
+          {`
+  ${
+    numOfRev === undefined || numOfRev == "NaN"
+      ? "No Reviews yet"
+      : numOfRev === 1
+      ? numOfRev + " Review"
+      : numOfRev + " Reviews"
+  }`}
+        </h3>
         {!specificRev && <CreateNewReviewModal />}
       </div>
 
       <div className="inner-container-spot-rev">
         {allReviews &&
-          allReviews.map(({ stars, User, review, id }) => (
+          allReviews.map(({ stars, User, review, id, createdAt }) => (
             <div className="individual-review-card" key={id}>
-              <div>{User.firstName} add Icon here</div>
-              <div>
-                review comments
+              <div className="name-plus-date">
+                <div className="name-and-icon-rev">
+                  <i className="fa-solid fa-user-pen"></i> {User.firstName}
+                </div>
+                <div className="date-banner-review">
+                  {" "}
+                  {createdAt.slice(5, 7)} {createdAt.slice(4, 5)}{" "}
+                  {createdAt.slice(0, 4)}
+                </div>
+              </div>
+              <div className="review-text">
                 <p>{review}</p>
+              </div>
+              <div className="trashcan-container">
                 {User.id === currUser?.id && (
-                  <button onClick={handleDelete}>
-                    Delete Your Last Review
+                  <button onClick={handleDelete} className="trashcan-Reviews">
+                    <i class="fa-solid fa-trash-can"></i>
                   </button>
                 )}
               </div>

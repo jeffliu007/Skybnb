@@ -4,7 +4,7 @@ import SpotModalForm from "./SpotModalForm";
 
 export const AddNewSpotModal = () => {
   return (
-    <div>
+    <div className="main-skybnb-create-container">
       <OpenModalButtonCreateForm
         buttonText="Skybnb your home"
         modalComponent={<SpotModalForm />}

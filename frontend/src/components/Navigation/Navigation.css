@@ -31,6 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: -10px;
 }
 
 body {
@@ -45,5 +46,38 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 4.5%;
+  margin-right: 4%;
+}
+
+.profile-button-combined {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profButton {
+  font-size: 28px;
+  border-radius: 30px;
+  width: 109%;
+  padding: 8px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  margin-right: 5px;
+  box-shadow: 0px 0px 0px #e0dfdf;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.profButton:hover {
+  box-shadow: 3px 3px 3px rgb(175, 174, 174);
+}
+
+.fa-bars {
+  font-size: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logOut-button {
+  cursor: pointer;
 }
