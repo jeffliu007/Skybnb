@@ -25,6 +25,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -10px;
 }
 
 .Hosted-By-Section {
@@ -89,10 +90,6 @@
   justify-content: space-between;
 }
 
-.starPlusRev {
-  font-size: 13px;
-}
-
 .location-header {
   display: flex;
   justify-content: center;
@@ -105,4 +102,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.starPlusRev {
+  display: flex;
 }

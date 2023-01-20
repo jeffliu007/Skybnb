@@ -59,16 +59,15 @@ export const SingleSpotPage = () => {
       <div className="SingleSpot-Main-Container">
         <div className="SingleSpot-Name-Rating">
           <h1>{name}</h1>
-          <div className="SingleSpot-Rating-Review-Location-Buttons">
-            <div className="SingleSpot-Rating-Review-Location">
-              <div className="reviews-header">
-                <div className="starPlusRev">
-                  <h3>
-                    <span>
-                      {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
-                      <i className="fas fa-star"></i> ·
-                    </span>
-                    {`
+          <div className="SingleSpot-Rating-Review-Location">
+            <div className="reviews-header">
+              <div className="starPlusRev">
+                <h3 className="starPlusRev2">
+                  <span>
+                    {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
+                    <i className="fas fa-star"></i> ·
+                  </span>
+                  {`
                       ${
                         numOfRev === undefined || numOfRev == "NaN"
                           ? "No Reviews yet"
@@ -76,12 +75,11 @@ export const SingleSpotPage = () => {
                           ? numOfRev + " Review"
                           : numOfRev + " Reviews"
                       }`}
-                  </h3>
-                </div>
+                </h3>
               </div>
-              <div className="location-header">
-                {`${city}, ${state}, ${country} for $${price} per night`}
-              </div>
+            </div>
+            <div className="location-header">
+              {`${city}, ${state}, ${country} for $${price} per night`}
             </div>
           </div>
           <div>
