@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal";
 import { updateSpot } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import "./EditModalForm.css";
 
 export const EditModalForm = () => {
   const ownedSpot = useSelector((state) => state.spots.singleSpot);
@@ -56,7 +57,8 @@ export const EditModalForm = () => {
   };
 
   return (
-    <div>
+    <div className="inner-modal-Form2">
+      <div className="form-title">Edit your spot</div>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -70,6 +72,7 @@ export const EditModalForm = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -79,6 +82,7 @@ export const EditModalForm = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -88,6 +92,7 @@ export const EditModalForm = () => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -97,6 +102,7 @@ export const EditModalForm = () => {
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -106,6 +112,7 @@ export const EditModalForm = () => {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -115,6 +122,7 @@ export const EditModalForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
@@ -124,9 +132,12 @@ export const EditModalForm = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
+            className="form-input"
           />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" className="submit-button">
+          Submit
+        </button>
       </form>
     </div>
   );

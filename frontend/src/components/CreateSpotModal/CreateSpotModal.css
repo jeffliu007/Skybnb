@@ -5,3 +5,30 @@
 .revealForm {
   display: flex;
 }
+
+.inner-modal-Form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+}
+
+.form-title {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.form-input {
+  border: 1px solid gray;
+  margin-bottom: 20%;
+  border-radius: 0.25rem;
+}
+
+.form-input:hover {
+  background-color: rgb(231, 231, 231);
+}

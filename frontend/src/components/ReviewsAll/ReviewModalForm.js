@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpotReviews } from "../../store/reviews";
-import { useHistory } from "react-router-dom";
 import { useModal } from "../../context/Modal";
+import "./ReviewsAll.css";
 
 export const ReviewModalForm = () => {
   const [review, setReview] = useState("");
@@ -10,7 +10,6 @@ export const ReviewModalForm = () => {
   const [errors, setErrors] = useState([]);
   const currUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
-  const history = useHistory();
   const { closeModal } = useModal();
   const spotId = useSelector((state) => state.spots.singleSpot.id);
   const oldReviews = useSelector((state) => state.reviews.spot);
@@ -31,10 +30,11 @@ export const ReviewModalForm = () => {
     };
     return dispatch(createSpotReviews(spotId, newReview, newUserInfo))
       .then(closeModal)
-      .then(history.push(`/spots/${spotId}`))
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors([data.errors]);
+        if (data && data.errors) {
+          setErrors([data.errors]);
+        }
       });
   };
 
@@ -47,8 +47,8 @@ export const ReviewModalForm = () => {
   // }
 
   return (
-    <div>
-      <h2>New Review</h2>
+    <div className="review-form-container">
+      <div className="form-title">New Review</div>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -62,11 +62,16 @@ export const ReviewModalForm = () => {
             value={review}
             onChange={(e) => setReview(e.target.value)}
             required
+            className="form-input"
           />
         </label>
         <label>
           Star Rating
-          <select value={stars} onChange={(e) => setStars(e.target.value)}>
+          <select
+            value={stars}
+            onChange={(e) => setStars(e.target.value)}
+            className="form-input-review"
+          >
             <option value="">Choose 1-5</option>
             <option value="5">5</option>
             <option value="4">4</option>

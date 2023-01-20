@@ -1,0 +1,5 @@
+.inner-modal-Form2 {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}

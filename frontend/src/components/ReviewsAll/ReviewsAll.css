@@ -32,3 +32,10 @@
 .blank-review-add-button:hover {
   background-color: rgb(195, 189, 189);
 }
+
+.review-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 80%;
+}
