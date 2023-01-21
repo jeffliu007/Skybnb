@@ -39,7 +39,7 @@ export const ReviewModalForm = () => {
   };
 
   if (!currUser) {
-    return <div>Please log in</div>;
+    return <div className="no-Auth">Please log in</div>;
   }
 
   // if (!alreadyRev) {
@@ -57,13 +57,16 @@ export const ReviewModalForm = () => {
         </ul>
         <label className="review-comments-label">
           Comments:
-          <input
-            type="text"
+          <textarea
+            rows="4"
+            cols="50"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             required
             className="form-input-comments"
-          />
+          >
+            Enter your review here...
+          </textarea>
         </label>
         <label className="form-input-review-label">
           Star Rating
