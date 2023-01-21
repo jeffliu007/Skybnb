@@ -9,13 +9,18 @@
 .inner-modal-Form {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 form {
   display: flex;
-  width: 30%;
+  width: 50%;
   flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .form-title {
@@ -35,5 +40,5 @@ form {
 
 .main-skybnb-create-container {
   display: flex;
-  margin-right: 55px;
+  position: relative;
 }

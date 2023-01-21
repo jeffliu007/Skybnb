@@ -42,6 +42,9 @@ export const SingleSpotPage = () => {
     avgStarRating,
     Owner,
   } = spot;
+  console.log("num review", numReviews, "type of", typeof numReviews);
+  console.log("->>>>>>>>");
+  console.log("numofRev", numOfRev, "type of", typeof numOfRev);
 
   const handleDelete = (e) => {
     dispatch(removeSpot(spotId)).then(() => history.push("/"));
@@ -62,7 +65,21 @@ export const SingleSpotPage = () => {
           <div className="SingleSpot-Rating-Review-Location">
             <div className="reviews-header">
               <div className="starPlusRev">
-                {numReviews && (
+                {numReviews ? (
+                  <h3 className="starPlusRev2">
+                    <span>
+                      {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
+                      <i className="fas fa-star"></i> ·{" "}
+                    </span>
+                    {numReviews === 1
+                      ? numReviews + " Review"
+                      : numReviews + " Reviews"}
+                  </h3>
+                ) : (
+                  ""
+                )}
+
+                {/* {numReviews && (
                   <h3 className="starPlusRev2">
                     <span>
                       {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
@@ -70,17 +87,17 @@ export const SingleSpotPage = () => {
                     </span>
 
                     {numReviews &&
-                      (numOfRev == 0
+                      (numReviews == 0
                         ? " "
-                        : numOfRev == 1
-                        ? numOfRev + " Review"
-                        : numOfRev + " Reviews")}
+                        : numReviews == 1
+                        ? numReviews + " Review"
+                        : numReviews + " Reviews")}
                   </h3>
-                )}
+                )} */}
               </div>
             </div>
             <div className="location-header">
-              {`${city}, ${state}, ${country} for $${price} per night`}
+              {`${city}, ${state}, ${country}`}
             </div>
           </div>
           <div>
@@ -99,9 +116,14 @@ export const SingleSpotPage = () => {
             ) : (
               <div> </div>
             )}
-            <h3 className="Hosted-By-Section">
-              Entire home hosted by {Owner?.firstName}
-            </h3>
+
+            <div className="Hosted-and-Price">
+              <div className="Home-Hosted-by-div">
+                <h3 className="Hosted-by-Section">
+                  Entire home hosted by {Owner?.firstName} · ${price} per night
+                </h3>
+              </div>
+            </div>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
             <div className="descriptionPtag">
               <p>{description}</p>

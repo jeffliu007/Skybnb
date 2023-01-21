@@ -64,7 +64,9 @@ export const SpotModalForm = () => {
 
   return (
     <div className="inner-modal-Form">
-      <div className="form-title">List Home Details</div>
+      <div className="form-title">
+        <h3>List Home Details</h3>
+      </div>
       <form onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
@@ -78,7 +80,7 @@ export const SpotModalForm = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -88,7 +90,7 @@ export const SpotModalForm = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -98,7 +100,7 @@ export const SpotModalForm = () => {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -108,7 +110,7 @@ export const SpotModalForm = () => {
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -118,7 +120,7 @@ export const SpotModalForm = () => {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -128,7 +130,7 @@ export const SpotModalForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
@@ -138,7 +140,7 @@ export const SpotModalForm = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             required
-            class="form-input"
+            className="form-input"
           />
         </label>
         <label>
