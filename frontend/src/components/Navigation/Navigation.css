@@ -73,14 +73,14 @@ body {
 }
 
 .fa-bars {
-  font-size: 90%;
+  font-size: 64%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(109, 109, 109);
+  color: rgb(75, 75, 75);
 }
 .fa-user-circle {
-  color: rgb(145, 144, 144);
+  color: rgb(101, 101, 101);
 }
 
 .logOut-button {

@@ -15,6 +15,30 @@
   margin-top: 2%;
 }
 
+@media (max-width: 1600px) {
+  .HomePage {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .HomePage {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .HomePage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  .HomePage {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .cardMain {
   display: flex;
   flex-direction: column;
@@ -26,6 +50,7 @@
 .prevImg {
   width: 107%;
   height: 100%;
+  max-height: 100%;
   object-fit: cover;
   border-radius: 12px;
   vertical-align: bottom;
