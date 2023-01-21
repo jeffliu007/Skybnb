@@ -142,19 +142,20 @@ i.fa-solid.fa-user-pen::before {
 }
 
 .submit-button-review {
-  border: 1px hidden black;
-  height: 120%;
-  width: 130%;
   font-size: 1.3rem;
-  position: relative;
+  border: 1px hidden black;
   margin-top: 38px;
   border-radius: 8px;
   cursor: pointer;
-  padding: 5px;
+  padding: 9px;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.submit-button-review:hover {
+  background-color: rgb(195, 195, 195);
 }
 
 .review-comments-label {
