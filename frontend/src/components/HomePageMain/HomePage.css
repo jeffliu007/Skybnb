@@ -65,7 +65,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 20%;
   font-size: 0.91vw;
   margin-bottom: 20px;
 }
@@ -102,7 +101,4 @@
 
 .only-location {
   font-weight: bold;
-}
-.span-price {
-  font-weight: 1000;
 }

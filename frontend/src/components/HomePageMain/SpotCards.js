@@ -32,8 +32,10 @@ export const SpotCards = ({ spot }) => {
             </div>
           </div>
           <div className="cardPrice">
-            <span className="span-price">${price} </span>
-            per night
+            <span className="span-price-bold-price" style={{ fontWeight: 700 }}>
+              ${price}{" "}
+            </span>
+            <span className="span-night">night</span>
           </div>
         </div>
       </div>

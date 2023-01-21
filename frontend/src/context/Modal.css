@@ -46,13 +46,14 @@
 .CreateFormButton {
   border-radius: 25px;
   width: 100%;
-  height: 64%;
-  margin-top: 15px;
-  margin-right: 5px;
+  height: 70%;
+  margin-top: 9px;
+  margin-right: 31px;
   border: 1px hidden black;
   background-color: white;
   font-size: 90%;
   cursor: pointer;
+  padding: 14px;
 }
 
 .CreateFormButton:hover {
