@@ -30,8 +30,10 @@ form {
 
 .form-input {
   border: 1px solid gray;
-  margin-bottom: 20%;
-  border-radius: 0.25rem;
+  margin-bottom: 5%;
+  font-size: larger;
+  border-radius: 6px;
+  border: 1px solid rgb(212, 212, 212);
 }
 
 .form-input:hover {
@@ -41,4 +43,11 @@ form {
 .main-skybnb-create-container {
   display: flex;
   position: relative;
+}
+
+.create-form-element {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  width: 30%;
 }
