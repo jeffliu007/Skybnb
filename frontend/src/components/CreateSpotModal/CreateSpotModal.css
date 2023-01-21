@@ -16,6 +16,8 @@ form {
   display: flex;
   width: 30%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-title {

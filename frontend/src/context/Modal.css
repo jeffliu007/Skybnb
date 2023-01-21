@@ -89,6 +89,7 @@
   border-radius: 8px;
   cursor: pointer;
   padding: 5px;
+  background-color: white;
 }
 
 .submit-button:hover {

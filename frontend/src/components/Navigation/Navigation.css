@@ -134,7 +134,7 @@ li:not(:last-child) {
   border: 1px hidden black;
   height: 120%;
   width: 80%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   position: relative;
   margin-top: 17px;
   border-radius: 8px;

@@ -47,6 +47,8 @@
   flex-direction: column;
   padding: 20px;
   height: 80%;
+  justify-content: center;
+  align-items: center;
 }
 
 .name-and-icon {
@@ -137,4 +139,50 @@ i.fa-solid.fa-user-pen::before {
 
 .starPlusRev2 {
   margin: 0;
+}
+
+.submit-button-review {
+  border: 1px hidden black;
+  height: 120%;
+  width: 130%;
+  font-size: 1.3rem;
+  position: relative;
+  margin-top: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-comments-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-input-comments {
+  height: 50px;
+  padding: 10px;
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  border: 1px solid rgb(143, 143, 143);
+}
+
+.form-input-review-label {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-input-review {
+  border-radius: 10px;
 }

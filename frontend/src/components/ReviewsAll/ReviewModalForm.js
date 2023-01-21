@@ -55,17 +55,17 @@ export const ReviewModalForm = () => {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label>
+        <label className="review-comments-label">
           Comments:
           <input
             type="text"
             value={review}
             onChange={(e) => setReview(e.target.value)}
             required
-            className="form-input"
+            className="form-input-comments"
           />
         </label>
-        <label>
+        <label className="form-input-review-label">
           Star Rating
           <select
             value={stars}
@@ -80,7 +80,7 @@ export const ReviewModalForm = () => {
             <option value="1">1</option>
           </select>
         </label>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-button-review">
           Submit
         </button>
       </form>
