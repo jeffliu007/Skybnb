@@ -160,17 +160,18 @@ i.fa-solid.fa-user-pen::before {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .form-input-comments {
-  height: 50px;
+  height: 60px;
   padding: 10px;
-  max-width: 40%;
-  overflow: hidden;
+  max-width: 60%;
   display: flex;
-  flex-wrap: wrap;
   border-radius: 10px;
   border: 1px solid rgb(212, 212, 212);
+  resize: none;
+  overflow-y: scroll;
 }
 
 .form-input-review-label {
@@ -188,4 +189,11 @@ i.fa-solid.fa-user-pen::before {
 .no-Auth {
   font-size: 30px;
   color: rgb(222, 0, 0);
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
