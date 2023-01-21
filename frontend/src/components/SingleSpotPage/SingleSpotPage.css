@@ -1,9 +1,50 @@
 .SingleSpot-Main-Container {
-  display: flex;
-  margin-left: 390px;
-  margin-right: 390px;
+  margin-left: 350px;
+  margin-right: 350px;
   padding-top: 100px;
-  flex-direction: column;
+}
+
+@media screen and (max-width: 1600px) {
+  .SingleSpot-Main-Container {
+    margin-left: 300px;
+    margin-right: 300px;
+    padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .SingleSpot-Main-Container {
+    margin-left: 205px;
+    margin-right: 205px;
+    padding-top: 100px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .SingleSpot-Main-Container {
+    margin-left: 130px;
+    margin-right: 130px;
+    padding-top: 100px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .SingleSpot-Main-Container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .SingleSpot-Main-Container {
+    margin-left: 69px;
+    margin-right: 69px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .SingleSpot-Main-Container {
+    margin-left: 1px;
+    margin-right: 1px;
+  }
 }
 
 .Spot-Image-Container {
@@ -18,7 +59,6 @@
 
 .SingleSpot-Name-Rating {
   position: relative;
-  padding-left: 10%;
 }
 
 #SpotImgLayout-Container {
