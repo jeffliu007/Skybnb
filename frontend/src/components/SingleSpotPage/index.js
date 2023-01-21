@@ -78,22 +78,6 @@ export const SingleSpotPage = () => {
                 ) : (
                   ""
                 )}
-
-                {/* {numReviews && (
-                  <h3 className="starPlusRev2">
-                    <span>
-                      {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
-                      <i className="fas fa-star"></i> ·{" "}
-                    </span>
-
-                    {numReviews &&
-                      (numReviews == 0
-                        ? " "
-                        : numReviews == 1
-                        ? numReviews + " Review"
-                        : numReviews + " Reviews")}
-                  </h3>
-                )} */}
               </div>
             </div>
             <div className="location-header">
