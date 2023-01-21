@@ -55,8 +55,8 @@ export const ReviewModalForm = () => {
             <li key={idx}>{error}</li>
           ))}
         </ul>
-        <label className="review-comments-label">
-          Comments:
+        <div className="form-control">
+          <label className="review-comments-label">Comments:</label>
           <textarea
             rows="4"
             cols="50"
@@ -67,7 +67,7 @@ export const ReviewModalForm = () => {
           >
             Enter your review here...
           </textarea>
-        </label>
+        </div>
         <label className="form-input-review-label">
           Star Rating
           <select
