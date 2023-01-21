@@ -19,7 +19,6 @@ export const SingleSpotPage = () => {
   const numOfRev = allReviews?.length;
   const history = useHistory();
   const { spotId } = useParams();
-  const [revealReview, setRevealReview] = useState(false);
 
   const specificRev = allReviews.find((rev) => rev);
 
@@ -67,14 +66,15 @@ export const SingleSpotPage = () => {
                   <h3 className="starPlusRev2">
                     <span>
                       {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
-                      <i className="fas fa-star"></i> ·
+                      <i className="fas fa-star"></i> ·{" "}
                     </span>
-                    {(revealReview && numOfRev === undefined) ||
-                    numOfRev == "NaN"
-                      ? "No Reviews yet"
-                      : numOfRev === 1
-                      ? numOfRev + " Review"
-                      : numOfRev + " Reviews"}
+
+                    {numReviews &&
+                      (numOfRev == 0
+                        ? " "
+                        : numOfRev == 1
+                        ? numOfRev + " Review"
+                        : numOfRev + " Reviews")}
                   </h3>
                 )}
               </div>

@@ -65,6 +65,7 @@ body {
   margin-right: 5px;
   box-shadow: 0px 0px 0px #e0dfdf;
   transition: box-shadow 0.3s ease-in-out;
+  border: 1px solid rgb(220, 220, 220);
 }
 
 .profButton:hover {
@@ -76,6 +77,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: rgb(109, 109, 109);
+}
+.fa-user-circle {
+  color: rgb(145, 144, 144);
 }
 
 .logOut-button {
@@ -88,6 +93,18 @@ body {
   padding: 0;
   margin-right: 3%;
   text-align: center;
+  border: 1px solid rgb(234, 234, 234);
+  padding: 20px;
+  right: -12px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 0px #e0dfdf;
+  transition: box-shadow 0.3s ease-in-out;
+  background-color: white;
+  margin-top: 8px;
+}
+
+.profile-dropdown:hover {
+  box-shadow: 3px 3px 3px rgb(175, 174, 174);
 }
 
 li:not(:first-child) {
@@ -95,4 +112,37 @@ li:not(:first-child) {
 }
 li:not(:last-child) {
   margin-bottom: 10px;
+}
+
+.profile-dropdown-buttons {
+  border: 1px hidden black;
+  height: 100%;
+  width: 90%;
+  font-size: 0.9rem;
+  position: relative;
+  margin-top: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: white;
+}
+
+.profile-dropdown-buttons:hover {
+  background-color: rgb(199, 196, 196);
+}
+
+.submit-button-log-out {
+  border: 1px hidden black;
+  height: 120%;
+  width: 80%;
+  font-size: 1rem;
+  position: relative;
+  margin-top: 17px;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.submit-button-log-out:hover {
+  background-color: rgb(199, 196, 196);
 }

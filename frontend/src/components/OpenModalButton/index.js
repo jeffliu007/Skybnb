@@ -15,7 +15,11 @@ function OpenModalButton({
     setModalContent(modalComponent);
   };
 
-  return <button onClick={onClick}>{buttonText}</button>;
+  return (
+    <button onClick={onClick} className="profile-dropdown-buttons">
+      {buttonText}{" "}
+    </button>
+  );
 }
 
 export function OpenModalButtonCreateForm({
