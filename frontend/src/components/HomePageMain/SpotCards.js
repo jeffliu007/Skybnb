@@ -31,7 +31,10 @@ export const SpotCards = ({ spot }) => {
               {roundedAvgRating == "NaN" ? " " : roundedAvgRating}
             </div>
           </div>
-          <div className="cardPrice">{`$${price} per night`}</div>
+          <div className="cardPrice">
+            <span className="span-price">${price} </span>
+            per night
+          </div>
         </div>
       </div>
     </NavLink>
