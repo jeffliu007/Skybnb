@@ -109,6 +109,7 @@ export const SingleSpotPage = () => {
               </div>
             </div>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
+
             <div className="descriptionPtag">
               <p>{description}</p>
             </div>
