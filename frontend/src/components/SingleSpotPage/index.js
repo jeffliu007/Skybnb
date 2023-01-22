@@ -109,7 +109,7 @@ export const SingleSpotPage = () => {
               </div>
             </div>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
-            <div className="SS-spot-icons">
+            {/* <div className="SS-spot-icons">
               spot icons
               <div>self check in</div>
               <div>superhost</div>
@@ -117,7 +117,7 @@ export const SingleSpotPage = () => {
             </div>
             <div className="SS-insurance">
               insurance<div className="SS-inner-insurance">inner insurance</div>
-            </div>
+            </div> */}
             <div className="descriptionPtag">
               <p>{description}</p>
             </div>

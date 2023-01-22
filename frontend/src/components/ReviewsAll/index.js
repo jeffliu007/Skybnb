@@ -77,13 +77,15 @@ export const AllSpotReviews = ({ avgStars }) => {
               </div>
               <div className="review-text">
                 <p className="review-text-p">{review}</p>
-              </div>
-              <div className="trashcan-container">
-                {User.id === currUser?.id && (
-                  <button onClick={handleDelete} className="trashcan-Reviews">
-                    <i className="fa-solid fa-trash-can"></i>
-                  </button>
-                )}
+                <div className="trashcan-container">
+                  {User.id === currUser?.id && (
+                    <i
+                      className="fa-solid fa-trash-can"
+                      onClick={handleDelete}
+                      id="trashcan-Reviews"
+                    ></i>
+                  )}
+                </div>
               </div>
             </div>
           ))}
