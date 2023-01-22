@@ -42,9 +42,6 @@ export const SingleSpotPage = () => {
     avgStarRating,
     Owner,
   } = spot;
-  console.log("num review", numReviews, "type of", typeof numReviews);
-  console.log("->>>>>>>>");
-  console.log("numofRev", numOfRev, "type of", typeof numOfRev);
 
   const handleDelete = (e) => {
     dispatch(removeSpot(spotId)).then(() => history.push("/"));
@@ -93,9 +90,12 @@ export const SingleSpotPage = () => {
                 <div className="editSpot">
                   <EditSpotModal />
                 </div>
-                <button onClick={handleDelete} className="CreateFormButton2">
-                  <i className="fa-regular fa-trash-can"></i>
-                </button>
+                <div className="single-spot-trash-can-div">
+                  <i
+                    className="fa-regular fa-trash-can"
+                    onClick={handleDelete}
+                  ></i>
+                </div>
               </div>
             ) : (
               <div> </div>

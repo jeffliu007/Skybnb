@@ -11,7 +11,7 @@ export const SpotModalForm = () => {
   const [country, setCountry] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [url, setUrl] = useState("");
   const { closeModal } = useModal();
   const [errors, setErrors] = useState([]);
@@ -24,17 +24,11 @@ export const SpotModalForm = () => {
   // useEffect(() => {
   //   let formValidationErr = [];
 
-  //   if (address.length === 0) formValidationErr.push("Address is required");
-  //   if (city.length === 0) formValidationErr.push("City is required");
-  //   if (state.length === 0) formValidationErr.push("State is required");
-  //   if (country.length === 0) formValidationErr.push("Country is required");
-  //   if (name.length === 0) formValidationErr.push("Name is required");
-  //   if (description.length === 0)
-  //     formValidationErr.push("Description is required");
-  //   if (price < 1) formValidationErr.push("Price must be greater than 1");
+  //   if (price.split("")[0] == 0)
+  //     formValidationErr.push("Price cannot start with 0");
 
   //   setErrors(formValidationErr);
-  // }, [address, city, state, country, name, description, price]);
+  // }, [price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -141,6 +135,7 @@ export const SpotModalForm = () => {
             onChange={(e) => setPrice(e.target.value)}
             required
             className="form-input"
+            placeholder="0"
           />
         </label>
         <label>
