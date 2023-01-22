@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpotReviews } from "../../store/reviews";
 import { useModal } from "../../context/Modal";
+import LoginFormModal from "../LoginFormModal";
+import OpenModalButton from "../OpenModalButton";
 import "./ReviewsAll.css";
 
 export const ReviewModalForm = () => {
@@ -39,7 +41,11 @@ export const ReviewModalForm = () => {
   };
 
   if (!currUser) {
-    return <div className="no-Auth">Please log in</div>;
+    return (
+      <div className="no-Auth">
+        <LoginFormModal />
+      </div>
+    );
   }
 
   // if (!alreadyRev) {

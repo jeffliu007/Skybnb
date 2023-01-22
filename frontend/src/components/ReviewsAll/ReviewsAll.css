@@ -58,7 +58,6 @@
 .review-text {
   text-overflow: ellipsis;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .name-plus-date {
@@ -91,6 +90,7 @@
 .trashcan-container {
   display: flex;
   justify-content: flex-start;
+  padding: 10px;
 }
 
 .form-input-review {
@@ -187,8 +187,8 @@ i.fa-solid.fa-user-pen::before {
 }
 
 .no-Auth {
-  font-size: 30px;
-  color: rgb(222, 0, 0);
+  font-size: 20px;
+  padding: 10px;
 }
 
 .form-control {
@@ -196,4 +196,16 @@ i.fa-solid.fa-user-pen::before {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.fa-trash-can {
+  border: 1px hidden rgb(2, 2, 2);
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.fa-trash-can:hover {
+  background-color: rgb(211, 211, 211);
 }

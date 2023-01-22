@@ -16,11 +16,12 @@
 }
 
 .signup-input {
-  position: relative;
+  display: flex;
   margin-top: 2px;
   margin-bottom: 19px;
   border-radius: 6px;
   border: 1px solid rgb(212, 212, 212);
+  width: 300px;
 }
 
 .submit-button-signup {
@@ -38,4 +39,14 @@
 
 .submit-button-signup:hover {
   background-color: rgb(204, 204, 204);
+}
+
+.signup-form {
+  display: flex;
+}
+
+.signup-label-div {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
