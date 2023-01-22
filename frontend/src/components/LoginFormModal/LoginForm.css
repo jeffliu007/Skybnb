@@ -13,7 +13,7 @@
   border: 1px solid rgb(212, 212, 212);
 }
 
-.login-inner-form {
+.-form {
   display: flex;
   position: relative;
   margin-bottom: 14px;
@@ -28,4 +28,18 @@
   align-items: center;
   flex-direction: column;
   padding: 20px;
+}
+
+.errors-ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-direction: column;
+}
+.errors-li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 0, 0, 0.661);
 }
