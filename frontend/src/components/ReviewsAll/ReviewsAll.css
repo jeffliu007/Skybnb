@@ -180,6 +180,7 @@ i.fa-solid.fa-user-pen::before {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: 130%;
 }
 
 .form-input-review {
@@ -208,4 +209,33 @@ i.fa-solid.fa-user-pen::before {
 
 .fa-trash-can:hover {
   background-color: rgb(211, 211, 211);
+}
+
+.rating-container {
+  display: flex;
+  font-size: 35px;
+  gap: 10px;
+}
+
+.star-rating-title {
+  padding: 20px;
+}
+
+.fas-star {
+  font-weight: 400;
+  font-size: 36px;
+  padding: 4px;
+  color: rgb(229, 229, 229);
+}
+
+#fas-star:hover {
+  color: #ff385c;
+}
+
+.star-selected {
+  color: #ff385c;
+}
+
+.not-selected {
+  color: rgb(229, 229, 229);
 }
