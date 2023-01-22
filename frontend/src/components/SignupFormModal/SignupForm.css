@@ -40,3 +40,13 @@
 .submit-button-signup:hover {
   background-color: rgb(204, 204, 204);
 }
+
+.signup-form {
+  display: flex;
+}
+
+.signup-label-div {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
