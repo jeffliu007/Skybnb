@@ -56,9 +56,11 @@ export const ReviewModalForm = () => {
     <div className="review-form-container">
       <div className="form-title">New Review</div>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <ul className="errors-ul">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="errors-li">
+              {error}
+            </li>
           ))}
         </ul>
         <div className="form-control">
@@ -74,21 +76,21 @@ export const ReviewModalForm = () => {
             Enter your review here...
           </textarea>
         </div>
-        <label className="form-input-review-label">
-          Star Rating
-          <select
-            value={stars}
-            onChange={(e) => setStars(e.target.value)}
-            className="form-input-review"
-          >
-            <option value="">Choose 1-5</option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </select>
-        </label>
+        <div className="form-input-review-label">
+          <div className="star-rating-title">Star Rating</div>
+          <div className="rating-container">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <i
+                key={value}
+                id="fas-star"
+                className={`fa-regular fa-star ${
+                  value <= stars ? "fa-regular fa-star star-selected" : ""
+                }`}
+                onClick={() => setStars(value)}
+              ></i>
+            ))}
+          </div>
+        </div>
         <button type="submit" className="submit-button-review">
           Submit
         </button>
