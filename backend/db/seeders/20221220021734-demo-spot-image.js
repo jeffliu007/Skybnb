@@ -12,22 +12,47 @@ module.exports = {
       [
         {
           spotId: 1,
-          url: "https://images.pexels.com/photos/4450329/pexels-photo-4450329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          url: "https://images.pexels.com/photos/4450329https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800/pexels-photo-4450329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
           preview: true,
         },
         {
           spotId: 2,
-          url: "https://images.pexels.com/photos/2983674/pexels-photo-2983674.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          url: "https://images.pexels.com/photos/53610/large-home-residential-house-architecture-53610.jpeg?auto=compress&cs=tinysrgb&w=800",
           preview: true,
         },
         {
           spotId: 3,
-          url: "https://images.pexels.com/photos/3217505/pexels-photo-3217505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          url: "https://images.pexels.com/photos/7031406/pexels-photo-7031406.jpeg?auto=compress&cs=tinysrgb&w=800",
           preview: true,
         },
         {
           spotId: 4,
-          url: "https://images.pexels.com/photos/5998138/pexels-photo-5998138.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          url: "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800",
+          preview: true,
+        },
+        {
+          spotId: 5,
+          url: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800",
+          preview: true,
+        },
+        {
+          spotId: 6,
+          url: "https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg?auto=compress&cs=tinysrgb&w=800",
+          preview: true,
+        },
+        {
+          spotId: 7,
+          url: "https://images.pexels.com/photos/1115804/pexels-photo-1115804.jpeg?auto=compress&cs=tinysrgb&w=800",
+          preview: true,
+        },
+        {
+          spotId: 8,
+          url: "https://images.pexels.com/photos/7031596/pexels-photo-7031596.jpeg?auto=compress&cs=tinysrgb&w=800",
+          preview: true,
+        },
+        {
+          spotId: 10,
+          url: "https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=800",
           preview: true,
         },
       ],
