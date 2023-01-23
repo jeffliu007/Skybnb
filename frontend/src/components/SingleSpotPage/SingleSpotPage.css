@@ -154,18 +154,21 @@
   justify-content: space-between;
 }
 
-.SS-insurance {
-  border-top: 1px solid red;
-  height: 100px;
+.SS-insurance-container {
+  border-top: 1px solid rgb(222, 220, 220);
+  height: 160px;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
 .SS-inner-insurance {
-  border-top: 1px solid red;
   display: flex;
-  justify-content: center;
+  padding-top: 17px;
+  padding-bottom: 10px;
+}
+
+.skycover-icon {
 }
 
 .SS-spot-icons {
@@ -179,4 +182,80 @@
   justify-content: center;
   padding-left: 30%;
   font-size: 20px;
+}
+
+.SS-spot-icons {
+  display: flex;
+  flex-direction: column;
+}
+
+.self-check-in {
+  border-top: red;
+}
+
+.wifi-container {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgb(222, 220, 220);
+  padding-top: 30px;
+  padding-bottom: 49px;
+}
+
+.SS-spot-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wifi-description {
+  font-size: 14px;
+  display: flex;
+  margin-left: 4%;
+}
+
+.fa-wifi {
+  padding-right: 10px;
+  font-size: 17px;
+}
+
+.fa-door-closed {
+  padding-right: 10px;
+  font-size: 17px;
+}
+
+.fa-location-dot {
+  display: flex;
+  padding-right: 10px;
+  font-size: 19px;
+  padding-bottom: 30px;
+}
+
+.sss {
+  font-weight: bold;
+}
+
+.wifi-span {
+  display: flex;
+  flex-direction: row;
+}
+
+.door-span {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 52px;
+}
+
+.location-span {
+  display: flex;
+  flex-direction: row;
+}
+
+.location-container {
+  padding-bottom: 10px;
+}
+
+.skycover-img {
+  height: 47px;
+  width: 25%;
+  margin-left: -23px;
 }

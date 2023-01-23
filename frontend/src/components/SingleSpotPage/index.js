@@ -109,15 +109,47 @@ export const SingleSpotPage = () => {
               </div>
             </div>
             <h4 className="Hosted-Footer">{`${randomNumGen()} guests - ${randomNumGen()} bedrooms - ${randomNumGen()} beds - ${randomNumGen()} baths`}</h4>
-            {/* <div className="SS-spot-icons">
-              spot icons
-              <div>self check in</div>
-              <div>superhost</div>
-              <div>great location</div>
+            <div className="SS-spot-container">
+              <div className="SS-spot-icons">
+                <div className="wifi-container">
+                  <span className="wifi-span">
+                    <i class="fa-solid fa-wifi"></i>{" "}
+                    <div className="sss">
+                      Free wifi for entire duration of stay
+                    </div>
+                  </span>{" "}
+                </div>
+                <div className="self-check-in-container">
+                  <span className="door-span">
+                    <i class="fa-solid fa-door-closed"></i>{" "}
+                    <div className="sss">Self check-in</div>
+                  </span>{" "}
+                </div>
+
+                <div className="location-container">
+                  <span className="location-span">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div className="sss">Great location</div>
+                  </span>{" "}
+                </div>
+              </div>
+              <div className="SS-insurance-container">
+                <div className="skycover-icon">
+                  <img
+                    src={
+                      process.env.PUBLIC_URL +
+                      "/images/skycover-airbnb-clone.png"
+                    }
+                    className="skycover-img"
+                  />
+                </div>
+                <div className="SS-inner-insurance">
+                  Every booking includes free protection from Host
+                  cancellations, listing inaccuracies, and other issues like
+                  trouble checking in.
+                </div>
+              </div>
             </div>
-            <div className="SS-insurance">
-              insurance<div className="SS-inner-insurance">inner insurance</div>
-            </div> */}
             <div className="descriptionPtag">
               <p>{description}</p>
             </div>
