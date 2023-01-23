@@ -219,13 +219,13 @@
 }
 
 .fa-door-closed {
-  padding-right: 10px;
+  padding-right: 11px;
   font-size: 17px;
 }
 
 .fa-location-dot {
   display: flex;
-  padding-right: 10px;
+  padding-right: 13px;
   font-size: 19px;
   padding-bottom: 30px;
 }
@@ -248,6 +248,7 @@
 .location-span {
   display: flex;
   flex-direction: row;
+  margin-left: 3px;
 }
 
 .location-container {
