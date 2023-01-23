@@ -53,6 +53,8 @@ export const SingleSpotPage = () => {
 
   let roundedAvgStar = avgStarRating?.toFixed(2);
 
+  console.log("roundedstar", roundedAvgStar);
+
   if (!loadedImage) return null;
   else
     return (
@@ -113,7 +115,7 @@ export const SingleSpotPage = () => {
               <div className="SS-spot-icons">
                 <div className="wifi-container">
                   <span className="wifi-span">
-                    <i class="fa-solid fa-wifi"></i>{" "}
+                    <i className="fa-solid fa-wifi"></i>{" "}
                     <div className="sss">
                       Free wifi for entire duration of stay
                     </div>
@@ -121,14 +123,14 @@ export const SingleSpotPage = () => {
                 </div>
                 <div className="self-check-in-container">
                   <span className="door-span">
-                    <i class="fa-solid fa-door-closed"></i>{" "}
+                    <i className="fa-solid fa-door-closed"></i>{" "}
                     <div className="sss">Self check-in</div>
                   </span>{" "}
                 </div>
 
                 <div className="location-container">
                   <span className="location-span">
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i className="fa-solid fa-location-dot"></i>
                     <div className="sss">Great location</div>
                   </span>{" "}
                 </div>

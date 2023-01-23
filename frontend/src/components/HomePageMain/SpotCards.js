@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export const SpotCards = ({ spot }) => {
   let { id, city, state, price, name, avgRating, previewImage, url } = spot;
-  let roundedAvgRating = parseFloat(avgRating).toFixed(2);
+  let roundedAvgRating = avgRating.toFixed(2);
 
   if (roundedAvgRating.length < 0) return null;
 
