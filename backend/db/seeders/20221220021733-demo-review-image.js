@@ -54,10 +54,6 @@ module.exports = {
           reviewId: 11,
           url: "https://images.pexels.com/photos/5825576/pexels-photo-5825576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         },
-        {
-          reviewId: 12,
-          url: "https://images.pexels.com/photos/3952048/pexels-photo-3952048.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-        },
       ],
       {}
     );
@@ -69,7 +65,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        reviewId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+        reviewId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] },
       },
       {}
     );
