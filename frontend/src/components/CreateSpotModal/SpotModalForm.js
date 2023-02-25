@@ -19,7 +19,7 @@ export const SpotModalForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //use effect
+  //use effect test
 
   // useEffect(() => {
   //   let formValidationErr = [];
