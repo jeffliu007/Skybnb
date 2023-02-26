@@ -22,6 +22,7 @@ const {
   allReviewsValidation,
 } = require("../../utils/validation");
 const { Op } = require("sequelize");
+const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
 
 const router = express.Router();
 
@@ -268,42 +269,50 @@ router.post("/", requireAuth, allSpotsValidation, async (req, res, next) => {
 
 //add image to a spot based on the spot's id
 
-router.post("/:spotId/images", requireAuth, async (req, res, next) => {
-  const user = req.user;
-  const spotId = req.params.spotId;
-  const { url, preview } = req.body;
+router.post(
+  "/:spotId/images",
+  singleMulterUpload("file"),
+  requireAuth,
+  async (req, res, next) => {
+    const user = req.user;
+    const spotId = req.params.spotId;
+    console.log(req);
+    const { preview } = req.body;
 
-  const spot = await Spot.findByPk(spotId);
+    const imageUrl = await singlePublicFileUpload(req.file);
 
-  if (!spot) {
-    const err = new Error("Spot couldn't be found");
-    err.status = 404;
-    err.message = "Spot couldn't be found";
-    err.title = "No spot found";
-    return next(err);
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      err.message = "Spot couldn't be found";
+      err.title = "No spot found";
+      return next(err);
+    }
+
+    if (user.id !== spot.ownerId) {
+      const err = new Error("Unauthorized user");
+      err.status = 404;
+      err.message = "Unauthorized user";
+      return next(err);
+    }
+
+    let newImage = await SpotImage.create({
+      imageUrl,
+      preview,
+      spotId,
+    });
+
+    newImage = newImage.toJSON();
+
+    delete newImage.spotId;
+    delete newImage.createdAt;
+    delete newImage.updatedAt;
+
+    return res.json(newImage);
   }
-
-  if (user.id !== spot.ownerId) {
-    const err = new Error("Unauthorized user");
-    err.status = 404;
-    err.message = "Unauthorized user";
-    return next(err);
-  }
-
-  let newImage = await SpotImage.create({
-    url,
-    preview,
-    spotId,
-  });
-
-  newImage = newImage.toJSON();
-
-  delete newImage.spotId;
-  delete newImage.createdAt;
-  delete newImage.updatedAt;
-
-  return res.json(newImage);
-});
+);
 
 //edit a spot
 router.put(
