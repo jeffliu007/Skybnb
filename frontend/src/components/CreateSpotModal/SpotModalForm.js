@@ -12,23 +12,12 @@ export const SpotModalForm = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [url, setUrl] = useState("");
+  const [file, setFile] = useState(null);
   const { closeModal } = useModal();
   const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
   const history = useHistory();
-
-  //use effect test
-
-  // useEffect(() => {
-  //   let formValidationErr = [];
-
-  //   if (price.split("")[0] == 0)
-  //     formValidationErr.push("Price cannot start with 0");
-
-  //   setErrors(formValidationErr);
-  // }, [price]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,15 +34,21 @@ export const SpotModalForm = () => {
       price,
       lng: 70.0,
       lat: 90.0,
+      file,
     };
 
-    return dispatch(createSpot(body, url))
+    return dispatch(createSpot(body))
       .then((res) => history.push(`/spots/${res.id}`))
       .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors([data.errors]);
       });
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) setFile(file);
   };
 
   return (
@@ -139,11 +134,10 @@ export const SpotModalForm = () => {
           />
         </label>
         <label>
-          Url
+          Image
           <input
-            type="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            type="file"
+            onChange={handleFileUpload}
             required
             className="form-input"
           />
