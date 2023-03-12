@@ -28,17 +28,17 @@ module.exports = {
         },
         {
           email: "AaronP@user.io",
-          username: "aaronThaMan",
+          username: "AyyAyyRon",
           hashedPassword: bcrypt.hashSync("password3"),
           firstName: "Aaron",
           lastName: "Pike",
         },
         {
-          email: "JohnG@user.io",
-          username: "JGtester",
+          email: "Mikey@user.io",
+          username: "ItsMike",
           hashedPassword: bcrypt.hashSync("password4"),
-          firstName: "John",
-          lastName: "Grand",
+          firstName: "Mikey",
+          lastName: "Sen",
         },
       ],
       {}
@@ -52,7 +52,7 @@ module.exports = {
       options,
       {
         username: {
-          [Op.in]: ["Demo-lition", "EliThaGoat", "aaronThaMan", "JGtester"],
+          [Op.in]: ["Demo-lition", "EliThaGoat", "AyyAyyRon, ItsMike"],
         },
       },
       {}
