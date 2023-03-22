@@ -239,3 +239,11 @@ i.fa-solid.fa-user-pen::before {
 .not-selected {
   color: rgb(229, 229, 229);
 }
+
+.review-form {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}

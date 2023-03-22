@@ -6,15 +6,15 @@
 
 @media screen and (max-width: 1600px) {
   .SingleSpot-Main-Container {
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 170px;
+    margin-right: 170px;
     padding-top: 100px;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .SingleSpot-Main-Container {
-    margin-left: 205px;
+    margin-left: 160px;
     margin-right: 205px;
     padding-top: 100px;
   }
@@ -87,7 +87,6 @@
   position: relative;
 
   padding-top: 10px;
-  margin-left: 88%;
 }
 
 .CreateFormButton2 {
@@ -263,4 +262,24 @@
 
 .Hosted-by-Section {
   font-weight: bold;
+}
+
+.Single-Spot-Description-Container {
+  display: flex;
+  flex-direction: row;
+}
+
+.SS-Bookings {
+  width: 50%;
+  padding-left: 30px;
+  margin-top: 91px;
+}
+
+.SS-Bookings-Container {
+  height: 59%;
+  border: 2px solid green;
+  margin-top: 51px;
+  padding: 25px;
+  padding-top: 30px;
+  border-radius: 11px;
 }

@@ -61,7 +61,7 @@ export const SpotModalForm = () => {
       <div className="form-title">
         <h3>List Home Details</h3>
       </div>
-      <form onSubmit={handleSubmit} className="create-form-element">
+      <form onSubmit={handleSubmit} className="create-spot-form">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>

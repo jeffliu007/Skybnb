@@ -1,0 +1,72 @@
+.Booking-Main-Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Booking-Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Booking-Header div:nth-child(1) {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.Booking-Header span:nth-child(2) {
+  margin-right: 23%;
+}
+
+.Booking-Header div:nth-child(3) {
+  display: flex;
+  flex-direction: row;
+}
+
+.Booking-Header div:nth-child(4) {
+  padding-left: 5px;
+  font-size: small;
+}
+
+.Booking-Form-Container {
+  display: flex;
+}
+
+.Booking-Form {
+  display: flex;
+}
+
+.Booking-Input {
+  padding: 11px;
+  padding-top: 18px;
+  border-radius: 8px;
+  border: 1px solid lightgrey;
+  width: 83%;
+}
+
+.Booking-Label-In {
+  font-size: 10px;
+  position: relative;
+  top: -68%;
+  right: -9%;
+}
+
+.Booking-Label-Out {
+  font-size: 10px;
+  position: relative;
+  top: -68%;
+  right: -9%;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  background: transparent;
+  cursor: pointer;
+}

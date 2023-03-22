@@ -88,7 +88,7 @@ export const createSpot = (spot, url) => async (dispatch) => {
     if (newRes.ok) {
       const imageData = await newRes.json();
       spotData.previewImage = imageData.url;
-      console.log(spotData, `spotdata`);
+
       dispatch(addSpot(spotData));
       return spotData;
     }
