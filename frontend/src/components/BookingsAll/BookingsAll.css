@@ -95,8 +95,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: row;
   border: 1px solid rgb(158, 158, 158);
   border-radius: 12px;
-
   height: 30vh;
+  cursor: pointer;
+}
+
+.BookingsPage-Card-Holder:hover {
+  border: 2px solid #ff385c;
 }
 
 .BookingsPage-Card-Left {
@@ -203,11 +207,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgb(158, 158, 158);
-
   padding: 10px;
-
   align-items: center;
   justify-content: center;
+}
+
+.BookingsPage-Info-BottomRight div:nth-child(2) {
+  margin-left: 3px;
 }
 
 .BP1 {
