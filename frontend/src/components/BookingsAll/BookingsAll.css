@@ -31,6 +31,33 @@
 
 .Booking-Form-Container {
   display: flex;
+  flex-direction: column;
+}
+
+.Booking-Reserve-Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Booking-Reserve-Button > button {
+  width: 100%;
+  height: 6vh;
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: none;
+  border-radius: 7px;
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+  color: white;
+  font-size: large;
+}
+
+.Booking-Reserve-Button > button:hover {
+  background: linear-gradient(90deg, #e33a62, #cf367d);
+}
+
+.Booking-Form-Date-Holder {
+  display: flex;
+  flex-direction: row;
 }
 
 .Booking-Form {
@@ -59,7 +86,7 @@
   right: -9%;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+/* input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 0;
   left: 0;
@@ -69,7 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: auto;
   background: transparent;
   cursor: pointer;
-}
+} */
 
 /* Bookings page css ------------------------------> */
 
@@ -97,10 +124,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 12px;
   height: 30vh;
   cursor: pointer;
+  z-index: 1;
 }
 
 .BookingsPage-Card-Holder:hover {
-  border: 2px solid #ff385c;
+  border: 2px solid rgb(105, 105, 105);
 }
 
 .BookingsPage-Card-Left {
@@ -222,4 +250,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .BP2 {
   font-size: smaller;
+}
+
+#trashcan-BookingsPage {
+  z-index: 100;
 }

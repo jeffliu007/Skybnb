@@ -34,10 +34,9 @@ export default function NewBookingForm({ rating, numReviews, price }) {
       if (data && data.errors) setErrors(data.errors);
     });
 
-    // if (submitNewBooking) {
-    //   dispatch(loadSelfBookings(currUser.id));
-    //   history.pushState("/");
-    // }
+    if (submitNewBooking) {
+      history.push("/bookings");
+    }
   };
 
   return (
@@ -59,30 +58,32 @@ export default function NewBookingForm({ rating, numReviews, price }) {
         </ul>
         <form onSubmit={handleSubmit} className={"Booking-Form"}>
           <div className="Booking-Form-Container">
-            <div className="Booking-Start-Date">
-              <input
-                className="Booking-Input"
-                id="startDate"
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-              <label htmlFor="Booking-Label" className="Booking-Label-In">
-                CHECK IN
-              </label>
-            </div>
+            <div className="Booking-Form-Date-Holder">
+              <div className="Booking-Start-Date">
+                <input
+                  className="Booking-Input"
+                  id="startDate"
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+                <label htmlFor="Booking-Label" className="Booking-Label-In">
+                  CHECK IN
+                </label>
+              </div>
 
-            <div className="Booking-End-Date">
-              <input
-                className="Booking-Input"
-                id="endDate"
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-              <label htmlFor="Booking-Label" className="Booking-Label-Out">
-                CHECK OUT
-              </label>
+              <div className="Booking-End-Date">
+                <input
+                  className="Booking-Input"
+                  id="endDate"
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+                <label htmlFor="Booking-Label" className="Booking-Label-Out">
+                  CHECK OUT
+                </label>
+              </div>
             </div>
             <div className="Booking-Reserve-Button">
               <button type="submit">Reserve</button>

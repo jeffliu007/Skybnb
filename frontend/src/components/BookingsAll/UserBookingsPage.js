@@ -17,13 +17,7 @@ export const UserBookingsPage = () => {
 
   if (!currUser) return null;
 
-  if (!bookings)
-    return (
-      <div className="BookingsPage-Container">
-        <h1>No Upcoming Trips Available</h1>
-        <h2>Time to pack your bags and book a relaxing vacation!</h2>
-      </div>
-    );
+  if (!bookings) return null;
 
   return (
     <div>

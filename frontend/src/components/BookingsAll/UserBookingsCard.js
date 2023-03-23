@@ -1,13 +1,21 @@
 import { convertDate } from "./helperDates";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { loadSelfBookings, removeBooking } from "../../store/bookings";
 
 export const UserBookingsCard = ({ book, spotId, userId }) => {
   const history = useHistory();
   const bookings = useSelector((state) => state.bookings.user);
+  const dispatch = useDispatch();
 
   const handleBookingClick = () => {
     history.push(`/spots/${book.spotId}`);
+  };
+
+  const handleDelete = async () => {
+    const deletedBooking = await dispatch(removeBooking(+book?.id));
+    history.push("/bookings");
+    dispatch(loadSelfBookings(userId));
   };
 
   if (!bookings)
@@ -31,12 +39,8 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
             <div>{book.Spot.name}</div>
             <div>{book.Spot.address}</div>
           </div>
-          <div className="BookingsPage-Info-TopRight">
-            <i
-              className="fa-solid fa-trash-can"
-              // onClick={handleDelete}
-              id="trashcan-BookingsPage"
-            ></i>
+          <div className="BookingsPage-Info-TopRight" onClick={handleDelete}>
+            <i className="fa-solid fa-trash-can" id="trashcan-BookingsPage"></i>
             <button>Edit</button>
           </div>
         </div>
