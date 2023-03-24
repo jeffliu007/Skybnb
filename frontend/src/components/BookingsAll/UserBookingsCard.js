@@ -8,6 +8,17 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
   const bookings = useSelector((state) => state.bookings.user);
   const dispatch = useDispatch();
 
+  const convertDate = (date) => {
+    const newDate = new Date(date);
+    const month = newDate
+      .toLocaleDateString("default", { month: "long" })
+      .slice(0, 3);
+    const day = newDate.getDate();
+    const year = newDate.getFullYear();
+
+    return `${month} ${day + 1} ${year}`;
+  };
+
   const handleBookingClick = () => {
     history.push(`/spots/${book.spotId}`);
   };
