@@ -158,21 +158,6 @@ const spotReducer = (state = initialState, action) => {
         allSpots: { ...state.allSpots },
       };
 
-      // const newArr = Object.values(state.allSpots);
-      // console.log("neww array here", newArr);
-      // const finalAllSpots = {};
-      // newArr.forEach((spot) => {
-      //   console.log(
-      //     "forEach here --> ??",
-      //     spot.id !== +action.spotId,
-      //     spot.id,
-      //     +action.spotId
-      //   );
-      //   if (spot.id !== +action.spotId) finalAllSpots[spot.id] = spot;
-      // });
-      // console.log("final all spots", finalAllSpots);
-      // shallowState.allSpots = finalAllSpots;
-
       delete shallowState.allSpots[action.spotId];
       const shallowAllSpots = { ...shallowState.allSpots };
       delete shallowAllSpots[action.spotId];

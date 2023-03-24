@@ -27,9 +27,6 @@ export const SingleSpotPage = () => {
   const specificRev = allReviews.find((rev) => rev);
 
   useEffect(() => {
-    // if (currUser && currUser?.id === spot?.Owner?.id) console.log("yes");
-    // else console.log("no");
-
     dispatch(fetchSingleSpot(spotId)).then(() => setloadedImage(true));
   }, [dispatch, spotId, ownedUser, numOfRev]);
 
