@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { defaultDates, setEndDateChange } from "./helperDates";
+import {
+  defaultDates,
+  setEndDateChange,
+  daysToReservation,
+} from "./helperDates";
 import { createBooking, loadSelfBookings } from "../../store/bookings";
 import "./BookingsAll.css";
 
@@ -13,6 +17,16 @@ export default function NewBookingForm({ rating, numReviews, price }) {
   const [errors, setErrors] = useState([]);
   const [startDate, setStartDate] = useState(defaultDates("start"));
   const [endDate, setEndDate] = useState(defaultDates("end"));
+
+  function addCommas(num) {
+    var str = num.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+
+    while (pattern.test(str)) {
+      str = str.replace(pattern, "$1,$2");
+    }
+    return str;
+  }
 
   useEffect(() => {
     setEndDate(setEndDateChange(startDate));
@@ -31,7 +45,14 @@ export default function NewBookingForm({ rating, numReviews, price }) {
       createBooking(parseInt(spotId), createdBooking)
     ).catch(async (res) => {
       const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
+
+      if (data && data.errors) {
+        setErrors(data.errors);
+      } else if (data && data.message) {
+        setErrors([data.message]);
+      } else {
+        setErrors(["An error occurred while submitting the booking"]);
+      }
     });
 
     if (submitNewBooking) {
@@ -87,6 +108,56 @@ export default function NewBookingForm({ rating, numReviews, price }) {
             </div>
             <div className="Booking-Reserve-Button">
               <button type="submit">Reserve</button>
+              <p>You won't be charged yet</p>
+            </div>
+            <div className="Booking-Bottom-Container">
+              <div className="Booking-Bottom-Nights BB-D">
+                <div>
+                  ${price} x {daysToReservation(startDate, endDate)} nights
+                </div>
+                <div>
+                  ${addCommas(price * daysToReservation(startDate, endDate))}
+                </div>
+              </div>
+              <div className="Booking-Bottom-Cleaning BB-D">
+                <div>Cleaning fee</div>
+                <div>
+                  $
+                  {addCommas(
+                    (
+                      price *
+                      daysToReservation(startDate, endDate) *
+                      0.07
+                    ).toFixed(2)
+                  )}
+                </div>
+              </div>
+              <div className="Booking-Bottom-Service BB-D">
+                <div>Skybnb service fee</div>
+                <div>
+                  $
+                  {addCommas(
+                    (
+                      price *
+                      daysToReservation(startDate, endDate) *
+                      0.11
+                    ).toFixed(2)
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="Booking-Bottom-Total">
+              <div>Total before taxes</div>
+              <div>
+                $
+                {addCommas(
+                  (
+                    price * daysToReservation(startDate, endDate) +
+                    price * daysToReservation(startDate, endDate) * 0.07 +
+                    price * daysToReservation(startDate, endDate) * 0.11
+                  ).toFixed(2)
+                )}
+              </div>
             </div>
           </div>
         </form>

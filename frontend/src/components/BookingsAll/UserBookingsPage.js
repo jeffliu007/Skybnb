@@ -9,8 +9,6 @@ export const UserBookingsPage = () => {
   const bookings = useSelector((state) => state.bookings.user);
   let bookingsArr = Object.values(bookings);
 
-  console.log(bookingsArr);
-
   useEffect(() => {
     dispatch(fetchSelfBookings(currUser.id));
   }, [dispatch]);

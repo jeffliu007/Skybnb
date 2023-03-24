@@ -32,14 +32,14 @@ export const getMonth = (date) => {
   return month.slice(0, 3);
 };
 
-export const getDaysUntilReservation = (startDate, endDate) => {
+export const daysToReservation = (startDate, endDate) => {
   const now = new Date();
   const start = new Date(startDate);
 
   if (endDate) {
     const end = new Date(endDate);
     const difference = end.getTime() - start.getTime();
-    const convertToDays = difference / (1000 * 60 * 60 * 24) + 1;
+    const convertToDays = difference / (1000 * 60 * 60 * 24);
     return Math.round(convertToDays);
   }
 

@@ -272,15 +272,15 @@
 .SS-Bookings {
   width: 50%;
   padding-left: 30px;
-  margin-top: 91px;
+  margin-top: 48px;
 }
 
 .SS-Bookings-Container {
-  height: 59%;
-  border: 1px solid rgb(158, 158, 158);
+  height: 75%;
+  border: 1px solid rgb(222, 220, 220);
   margin-top: 51px;
   padding: 25px;
-  padding-top: 30px;
+  padding-top: 39px;
   border-radius: 11px;
   box-shadow: 7px 7px 7px rgb(207, 207, 207);
 }
