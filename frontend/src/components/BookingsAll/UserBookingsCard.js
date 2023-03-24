@@ -2,11 +2,16 @@ import { convertDate } from "./helperDates";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { loadSelfBookings, removeBooking } from "../../store/bookings";
+import OpenModalButton from "../OpenModalButton";
+import { useEffect, useRef, useState } from "react";
+import EditUserBookingForm from "./EditBookingForm";
 
 export const UserBookingsCard = ({ book, spotId, userId }) => {
   const history = useHistory();
   const bookings = useSelector((state) => state.bookings.user);
   const dispatch = useDispatch();
+  const [showMenu, setShowMenu] = useState(false);
+  const ulRef = useRef();
 
   const convertDate = (date) => {
     const newDate = new Date(date);
@@ -19,7 +24,10 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
     return `${month} ${day + 1} ${year}`;
   };
 
-  const handleBookingClick = () => {
+  const handleBookingClick = (e) => {
+    if (e.target.closest(".Bookings-Edit-Button")) {
+      return;
+    }
     history.push(`/spots/${book.spotId}`);
   };
 
@@ -28,6 +36,22 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
     history.push("/bookings");
     dispatch(loadSelfBookings(userId));
   };
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
 
   if (!bookings)
     return (
@@ -50,9 +74,20 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
             <div>{book.Spot.name}</div>
             <div>{book.Spot.address}</div>
           </div>
-          <div className="BookingsPage-Info-TopRight" onClick={handleDelete}>
-            <i className="fa-solid fa-trash-can" id="trashcan-BookingsPage"></i>
-            <button>Edit</button>
+          <div className="BookingsPage-Info-TopRight">
+            <i
+              className="fa-solid fa-trash-can"
+              id="trashcan-BookingsPage"
+              onClick={handleDelete}
+            ></i>
+            <div>
+              <OpenModalButton
+                buttonText={"Edit"}
+                onButtonClick={closeMenu}
+                modalComponent={<EditUserBookingForm />}
+                className="Bookings-Edit-Button"
+              />
+            </div>
           </div>
         </div>
         <div className="BookingsPage-Info-Bottom">

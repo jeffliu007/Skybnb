@@ -125,6 +125,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   gap: 20px;
   width: 60%;
+  z-index: 0;
 }
 .BookingsPage-Card-Holder {
   display: flex;
@@ -189,12 +190,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .BookingsPage-Info-TopRight {
-  padding: 5px;
+  padding: 9px;
   padding-right: 15px;
   display: flex;
   flex-direction: row;
   height: 22%;
   gap: 15px;
+  align-items: center;
 }
 
 .BookingsPage-Info-Bottom {
@@ -311,4 +313,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .Booking-Errors > ul {
   font-size: small;
   color: red;
+}
+
+.Bookings-Edit-Button {
+  display: flex;
+  padding: 8px;
+  z-index: 2;
+  position: relative;
+  cursor: pointer;
+  border-radius: 7px;
+  border: 1px hidden;
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  color: white;
+  cursor: pointer;
+}
+
+.Bookings-Edit-Button:hover {
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
 }
