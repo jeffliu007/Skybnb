@@ -52,7 +52,7 @@ export const SpotModalForm = () => {
       .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors([data.errors]);
+        if (data && data.errors) setErrors([...errors, ...data.errors]);
       });
   };
 
@@ -133,9 +133,10 @@ export const SpotModalForm = () => {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            min={1}
             required
             className="form-input"
-            placeholder="0"
+            placeholder="1"
           />
         </label>
         <label>

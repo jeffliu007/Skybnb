@@ -53,7 +53,7 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
 
   const closeMenu = () => setShowMenu(false);
 
-  if (!bookings)
+  if (!bookings || bookings.length === 0)
     return (
       <div className="BookingsPage-Container">
         <h1>No Upcoming Trips Available</h1>
@@ -84,7 +84,13 @@ export const UserBookingsCard = ({ book, spotId, userId }) => {
               <OpenModalButton
                 buttonText={"Edit"}
                 onButtonClick={closeMenu}
-                modalComponent={<EditUserBookingForm />}
+                modalComponent={
+                  <EditUserBookingForm
+                    spotId={spotId}
+                    book={book}
+                    price={book.Spot.price}
+                  />
+                }
                 className="Bookings-Edit-Button"
               />
             </div>

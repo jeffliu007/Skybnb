@@ -22,6 +22,13 @@ function LoginFormModal() {
       });
   };
 
+  const demoLogin = () => {
+    closeModal();
+    return dispatch(
+      sessionActions.login({ credential: "Demo-lition", password: "password" })
+    );
+  };
+
   return (
     <div className="login-form-container">
       <h1>Log In</h1>
@@ -34,7 +41,7 @@ function LoginFormModal() {
           ))}
         </ul>
         <label className="login-label">
-          Username or Email
+          Email
           <input
             type="text"
             value={credential}
@@ -55,6 +62,9 @@ function LoginFormModal() {
         </label>
         <button type="submit" className="submit-button">
           Log In
+        </button>
+        <button className="submit-button" onClick={demoLogin}>
+          Demo
         </button>
       </form>
     </div>

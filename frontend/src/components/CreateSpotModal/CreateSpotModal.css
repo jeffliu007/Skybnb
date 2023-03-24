@@ -23,6 +23,12 @@
   margin-bottom: 20px;
 }
 
+.create-spot-form ul {
+  width: 100%;
+  padding: 0;
+  color: red;
+}
+
 .form-title {
   font-size: larger;
   font-weight: bold;

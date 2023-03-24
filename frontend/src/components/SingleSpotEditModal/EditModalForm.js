@@ -131,6 +131,7 @@ export const EditModalForm = () => {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            min={1}
             required
             className="form-input"
           />

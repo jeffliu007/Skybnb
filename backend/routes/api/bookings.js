@@ -43,9 +43,9 @@ router.get("/current", requireAuth, async (req, res, next) => {
         include: [
           {
             model: SpotImage,
-            attributes: ['preview', 'url']
-          }
-        ]
+            attributes: ["preview", "url"],
+          },
+        ],
       },
     ],
   });
@@ -108,7 +108,7 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
   }
 
   if (endDate <= startDate) {
-    const err = new Error("endDate cannot be on or before startDate");
+    const err = new Error("Conflicting Dates");
     err.status = 400;
     err.title = "Validation error";
     return next(err);

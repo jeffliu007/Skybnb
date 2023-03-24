@@ -1,6 +1,21 @@
 .Booking-Main-Container {
   display: flex;
   flex-direction: column;
+  height: 54vh;
+}
+
+.Booking-Edit-Container {
+  display: flex;
+  flex-direction: column;
+  height: 53vh;
+}
+
+@media (max-width: 1600px) {
+  .Booking-Edit-Container {
+    display: flex;
+    flex-direction: column;
+    height: 58vh;
+  }
 }
 
 .Booking-Header {
@@ -8,6 +23,15 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.Booking-Edit-Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
 }
 
 .Booking-Header div:nth-child(1) {
@@ -304,6 +328,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-top: 35px;
   border-top: 1px solid rgb(158, 158, 158);
   padding-top: 25px;
+  font-weight: bold;
 }
 
 .BB-D div:nth-child(1) {
@@ -330,4 +355,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .Bookings-Edit-Button:hover {
   background: linear-gradient(90deg, #ea5f80, #dc609a);
+}
+
+.Booking-End-Date {
+  margin-right: -8px;
+}
+
+.Booking-Edit-LI {
+  display: flex;
+
+  justify-content: center;
+  width: 100%;
+  margin-left: -19px;
+}
+
+.Booking-Edit-Price {
+  justify-content: center;
+}
+
+.airplane-img {
+  height: 80%;
 }

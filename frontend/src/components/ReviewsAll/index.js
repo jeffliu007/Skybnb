@@ -45,7 +45,7 @@ export const AllSpotReviews = ({ avgStars }) => {
     <div className="spot-reviews-container">
       <div className="reviews-header">
         <h3>
-          <span>
+          <span className="reviews-header-span">
             {newAvgStars == "NaN" ? " " : newAvgStars}
             <i className="fas fa-star"></i> ·
           </span>

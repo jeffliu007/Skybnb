@@ -81,7 +81,7 @@ export const SingleSpotPage = () => {
               <div className="starPlusRev">
                 {numReviews ? (
                   <h3 className="starPlusRev2">
-                    <span>
+                    <span className="starPlusRev2-span">
                       {roundedAvgStar == "NaN" ? " " : roundedAvgStar}
                       <i className="fas fa-star"></i> ·{" "}
                     </span>
@@ -110,8 +110,9 @@ export const SingleSpotPage = () => {
                   </div>
                   <div className="single-spot-trash-can-div">
                     <i
-                      className="fa-regular fa-trash-can"
+                      className="fa-solid fa-trash-can"
                       onClick={handleDelete}
+                      id="trashcan-Reviews"
                     ></i>
                   </div>
                 </div>
@@ -122,8 +123,7 @@ export const SingleSpotPage = () => {
               <div className="Hosted-and-Price">
                 <div className="Home-Hosted-by-div">
                   <h3 className="Hosted-by-Section">
-                    Entire home hosted by {Owner?.firstName} · ${price} per
-                    night
+                    Entire home hosted by {Owner?.firstName}
                   </h3>
                 </div>
               </div>

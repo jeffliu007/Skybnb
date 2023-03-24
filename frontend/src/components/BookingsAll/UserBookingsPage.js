@@ -15,7 +15,17 @@ export const UserBookingsPage = () => {
 
   if (!currUser) return null;
 
-  if (!bookings) return null;
+  if (bookingsArr.length == 0)
+    return (
+      <div className="BookingsPage-Container">
+        <h1>No Upcoming Trips Available</h1>
+        <h2>Time to pack your bags and book a relaxing vacation!</h2>
+        <img
+          src={process.env.PUBLIC_URL + "/images/airplane.png"}
+          className="airplane-img"
+        />
+      </div>
+    );
 
   return (
     <div>
