@@ -33,7 +33,16 @@ function Navigation({ isLoaded }) {
       </div>
       {isLoaded && (
         <div className="Create-Profile">
-          <AddNewSpotModal />
+          {sessionUser && (
+            <>
+              <AddNewSpotModal />
+              <div className="nav-bookings">
+                <NavLink exact to="/bookings">
+                  <i className="fa-solid fa-suitcase"></i>
+                </NavLink>
+              </div>
+            </>
+          )}
           <div className="Nav-Profile-Button">
             <ProfileButton user={sessionUser} />
           </div>

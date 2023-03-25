@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { fetchSelfBookings } from "../../store/bookings";
 import UserBookingsCard from "./UserBookingsCard";
 
@@ -20,6 +21,11 @@ export const UserBookingsPage = () => {
       <div className="BookingsPage-Container">
         <h1>No Upcoming Trips Available</h1>
         <h2>Time to pack your bags and book a relaxing vacation!</h2>
+        <div className="noBookingsButton-plus">
+          <NavLink exact to="/" className="noBookingsButton">
+            Pick Your Dream Vacation Now
+          </NavLink>
+        </div>
         <img
           src={process.env.PUBLIC_URL + "/images/airplane.png"}
           className="airplane-img"

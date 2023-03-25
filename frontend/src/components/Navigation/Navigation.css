@@ -47,6 +47,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin-right: 4%;
+  gap: 20px;
 }
 
 .profile-button-combined {
@@ -231,4 +232,21 @@ li:not(:last-child) {
 
 .log-sign-demo:hover {
   background: linear-gradient(90deg, #ea5f80, #dc609a);
+}
+
+.nav-bookings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 18px;
+}
+
+.fa-suitcase {
+  font-size: larger;
+  color: #ff385c;
+}
+
+.fa-suitcase:hover {
+  color: #f28599;
 }
