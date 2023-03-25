@@ -8,6 +8,7 @@ export const AddNewSpotModal = () => {
       <OpenModalButtonCreateForm
         buttonText="Skybnb your home"
         modalComponent={<SpotModalForm />}
+        className="CreateFormButton"
       />
     </div>
   );

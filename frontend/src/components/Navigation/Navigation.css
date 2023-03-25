@@ -1,5 +1,5 @@
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .Nav-Main {
@@ -88,19 +88,21 @@ body {
 }
 
 .profile-dropdown {
+  width: 170px;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   list-style-type: none;
-  padding: 0;
   margin-right: 3%;
   text-align: center;
   border: 1px solid rgb(234, 234, 234);
+  top: 55px;
   padding: 20px;
   right: -12px;
-  border-radius: 20px;
+  border-radius: 12px;
   box-shadow: 0px 0px 0px #e0dfdf;
   transition: box-shadow 0.3s ease-in-out;
   background-color: white;
-  margin-top: 8px;
 }
 
 .profile-dropdown:hover {
@@ -130,24 +132,103 @@ li:not(:last-child) {
   background-color: rgb(199, 196, 196);
 }
 
-.submit-button-log-out {
-  border: 1px hidden black;
-  height: 120%;
-  width: 80%;
-  font-size: 1.1rem;
-  position: relative;
-  margin-top: 17px;
-  border-radius: 8px;
-  cursor: pointer;
-  padding: 5px;
-  background-color: white;
-}
-
-.submit-button-log-out:hover {
-  background-color: rgb(199, 196, 196);
-}
-
-.profile-dropdown-bookings {
+.profile-dropdown-li-bookings {
   text-decoration: none;
   color: black;
+}
+
+.profile-button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-dropdown-li {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 18px;
+  width: 176px;
+  margin-left: -21px;
+}
+
+.profile-create-spot {
+  background-color: transparent;
+  border: hidden;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.pd-email {
+  padding-bottom: 14px;
+}
+
+.pd-logout {
+  height: 6vh;
+  margin-bottom: -13%;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  border-top: 1px solid rgb(220, 220, 220);
+}
+
+.pd-logout button {
+  background: transparent;
+  border: hidden;
+}
+
+.profile-dropdown :nth-child(4):hover,
+.profile-dropdown :nth-child(5):hover {
+  background: rgb(234, 234, 234);
+}
+
+.profile-dropdown :nth-child(6):hover {
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  color: white;
+}
+
+.log-in-button {
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: hidden;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+}
+
+.log-in-button:hover {
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
+}
+
+.sign-up-button {
+  background: transparent;
+  border: 1px solid #e61d4d;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: #e61d4d;
+  cursor: pointer;
+}
+
+.sign-up-button:hover {
+  color: #bc1414;
+  border: 1px solid #c31313;
+}
+
+.log-sign-demo {
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: hidden;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+}
+
+.log-sign-demo:hover {
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
 }

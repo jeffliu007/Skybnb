@@ -62,30 +62,30 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li className="profile-dropdown">{user.username}</li>
-            <li className="profile-dropdown">
+            <li className="profile-dropdown-li">{user.username}</li>
+            <li className="profile-dropdown-li">
               {user.firstName} {user.lastName}
             </li>
-            <li className="profile-dropdown">{user.email}</li>
-            <li>
+            <li className="profile-dropdown-li pd-email">{user.email}</li>
+            <li className="profile-dropdown-li">
               <OpenModalButtonCreateForm
                 buttonText="Skybnb your home"
                 modalComponent={<SpotModalForm />}
+                className="profile-create-spot"
+                onButtonClick={closeMenu}
               />
             </li>
-            <li>
+            <li className="profile-dropdown-li">
               <NavLink
                 exact
                 to="/bookings"
-                className="profile-dropdown-bookings"
+                className="profile-dropdown-li-bookings"
               >
                 Bookings
               </NavLink>
             </li>
-            <li className="profile-dropdown">
-              <button onClick={logout} className="submit-button-log-out">
-                Log Out
-              </button>
+            <li className="profile-dropdown-li pd-logout" onClick={logout}>
+              <div>Log Out</div>
             </li>
           </>
         ) : (
@@ -100,13 +100,16 @@ function ProfileButton({ user }) {
             </li>
             <li>
               <OpenModalButton
+                className="sign-up-button"
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
             </li>
-            <li>
-              <OpenModalButton buttonText="Demo" onButtonClick={demoLogin} />
+            <li className="before-demo">
+              <button className="log-sign-demo" onClick={demoLogin}>
+                Demo
+              </button>
             </li>
           </>
         )}
