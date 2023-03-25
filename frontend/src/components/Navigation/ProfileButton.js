@@ -4,10 +4,15 @@ import * as sessionActions from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { OpenModalButtonCreateForm } from "../OpenModalButton";
+import SpotModalForm from "../CreateSpotModal/SpotModalForm";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const history = useHistory();
   const ulRef = useRef();
 
   const demoLogin = () => {
@@ -40,6 +45,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push("/");
     closeMenu();
   };
 
@@ -56,12 +62,27 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>
+            <li className="profile-dropdown">{user.username}</li>
+            <li className="profile-dropdown">
               {user.firstName} {user.lastName}
             </li>
-            <li>{user.email}</li>
+            <li className="profile-dropdown">{user.email}</li>
             <li>
+              <OpenModalButtonCreateForm
+                buttonText="Skybnb your home"
+                modalComponent={<SpotModalForm />}
+              />
+            </li>
+            <li>
+              <NavLink
+                exact
+                to="/bookings"
+                className="profile-dropdown-bookings"
+              >
+                Bookings
+              </NavLink>
+            </li>
+            <li className="profile-dropdown">
               <button onClick={logout} className="submit-button-log-out">
                 Log Out
               </button>

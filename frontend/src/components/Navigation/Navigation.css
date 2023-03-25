@@ -146,3 +146,8 @@ li:not(:last-child) {
 .submit-button-log-out:hover {
   background-color: rgb(199, 196, 196);
 }
+
+.profile-dropdown-bookings {
+  text-decoration: none;
+  color: black;
+}
