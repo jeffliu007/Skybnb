@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import AddNewSpotModal from "../CreateSpotModal";
+import Searchbar from "../SearchSpots";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -31,9 +32,19 @@ function Navigation({ isLoaded }) {
           />
         </NavLink>
       </div>
+      {/* <Searchbar /> */}
       {isLoaded && (
         <div className="Create-Profile">
-          <AddNewSpotModal />
+          {sessionUser && (
+            <>
+              <AddNewSpotModal />
+              <div className="nav-bookings">
+                <NavLink exact to="/bookings">
+                  <i className="fa-solid fa-suitcase"></i>
+                </NavLink>
+              </div>
+            </>
+          )}
           <div className="Nav-Profile-Button">
             <ProfileButton user={sessionUser} />
           </div>

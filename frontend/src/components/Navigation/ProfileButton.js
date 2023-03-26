@@ -4,10 +4,15 @@ import * as sessionActions from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { OpenModalButtonCreateForm } from "../OpenModalButton";
+import SpotModalForm from "../CreateSpotModal/SpotModalForm";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const history = useHistory();
   const ulRef = useRef();
 
   const demoLogin = () => {
@@ -40,6 +45,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push("/");
     closeMenu();
   };
 
@@ -56,15 +62,30 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>
+            <li className="profile-dropdown-li">{user.username}</li>
+            <li className="profile-dropdown-li">
               {user.firstName} {user.lastName}
             </li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout} className="submit-button-log-out">
-                Log Out
-              </button>
+            <li className="profile-dropdown-li pd-email">{user.email}</li>
+            <li className="profile-dropdown-li">
+              <OpenModalButtonCreateForm
+                buttonText="Skybnb your home"
+                modalComponent={<SpotModalForm />}
+                className="profile-create-spot"
+                onButtonClick={closeMenu}
+              />
+            </li>
+            <li className="profile-dropdown-li">
+              <NavLink
+                exact
+                to="/bookings"
+                className="profile-dropdown-li-bookings"
+              >
+                Bookings
+              </NavLink>
+            </li>
+            <li className="profile-dropdown-li pd-logout" onClick={logout}>
+              <div>Log Out</div>
             </li>
           </>
         ) : (
@@ -79,13 +100,16 @@ function ProfileButton({ user }) {
             </li>
             <li>
               <OpenModalButton
+                className="sign-up-button"
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
             </li>
-            <li>
-              <OpenModalButton buttonText="Demo" onButtonClick={demoLogin} />
+            <li className="before-demo">
+              <button className="log-sign-demo" onClick={demoLogin}>
+                Demo
+              </button>
             </li>
           </>
         )}

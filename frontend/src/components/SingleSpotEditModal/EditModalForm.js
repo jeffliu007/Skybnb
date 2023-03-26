@@ -59,7 +59,7 @@ export const EditModalForm = () => {
   return (
     <div className="inner-modal-Form2">
       <div className="form-title">Edit your spot</div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="edit-spot-form">
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -131,6 +131,7 @@ export const EditModalForm = () => {
             type="number"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+            min={1}
             required
             className="form-input"
           />

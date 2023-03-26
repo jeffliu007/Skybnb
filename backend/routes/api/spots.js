@@ -556,14 +556,27 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   const id = req.params.spotId;
   const { startDate, endDate } = req.body;
 
+  const convertDates = (date) => {
+    date = date.toISOString();
+    const strDate = date.split("T")[0];
+
+    const [year, month, day] = strDate.split("-");
+    const monthIndex = month - 1;
+    const dateObj = new Date(year, monthIndex, day);
+    return dateObj;
+  };
+
   const spot = await Spot.findByPk(id);
   const groupedErr = {};
+  groupedErr.errors = [];
 
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
     err.message = "Spot couldn't be found";
     err.title = "No spot found";
+    groupedErr.errors.push("Spot couldn't be found");
+
     return next(err);
   }
 
@@ -577,42 +590,64 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 
   if (endDate <= startDate) {
-    const err = new Error("endDate cannot be on or before startDate");
+    const err = new Error("Check-out cannot be on or before Check-in");
     err.status = 400;
     err.title = "Validation error";
+    groupedErr.errors.push("Check-out cannot be on or before Check-in");
     return next(err);
   }
 
   const currBuild = await Booking.build({
     startDate,
     endDate,
-    spotId: spot.id,
+    spotId: parseInt(spot.id),
     userId: user.id,
   });
 
-  allBookings.forEach((booking) => {
-    let prevStart = booking.startDate.getTime();
-    let prevEnd = booking.startDate.getTime();
-    let buildStart = currBuild.startDate.getTime();
-    let buildEnd = currBuild.endDate.getTime();
+  if (allBookings.length) {
+    const conflictingDates = [];
 
-    //account for conflicting dates
-    if (prevStart >= buildStart && prevStart <= buildEnd) {
-      groupedErr.startDate = "Start date invalid";
+    for (let i = 0; i < allBookings.length; i++) {
+      const bookingStartDateObj = convertDates(allBookings[i].startDate);
+      const bookingEndDateObj = convertDates(allBookings[i].endDate);
+      const startDateObj = convertDates(currBuild.startDate);
+      const endDateObj = convertDates(currBuild.endDate);
+
+      if (
+        startDateObj.getTime() >= bookingStartDateObj.getTime() &&
+        startDateObj.getTime() <= bookingEndDateObj.getTime()
+      ) {
+        conflictingDates.push("Start date conflicts with an existing booking");
+        break;
+      } else if (
+        endDateObj.getTime() >= bookingStartDateObj.getTime() &&
+        endDateObj.getTime() <= bookingEndDateObj.getTime()
+      ) {
+        conflictingDates.push("End date conflicts with an existing booking");
+        break;
+      } else if (
+        (startDateObj.getTime() <= bookingStartDateObj.getTime() &&
+          endDateObj.getTime() >= bookingStartDateObj.getTime()) ||
+        (startDateObj.getTime() <= bookingEndDateObj.getTime() &&
+          endDateObj.getTime() >= bookingEndDateObj.getTime())
+      ) {
+        conflictingDates.push(
+          "Booking dates conflict with an existing booking"
+        );
+        break;
+      }
     }
 
-    if (prevEnd >= buildStart && prevEnd <= buildEnd) {
-      groupedErr.endDate = "End date invalid";
+    if (conflictingDates.length > 0) {
+      const err = new Error(
+        "Sorry this spot is already booked for the specified dates"
+      );
+      err.status = 403;
+      err.title = "Spot unavailable";
+      err.message = "Sorry this spot is already booked for the specified dates";
+      err.errors = conflictingDates;
+      return next(err);
     }
-  });
-
-  if (Object.values(groupedErr).length > 0) {
-    const err = new Error(
-      "Sorry this spot is already booked for the specified dates"
-    );
-    err.status = 403;
-    err.title = "Spot unavailable";
-    return next(err);
   }
 
   await currBuild.save();

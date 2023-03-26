@@ -55,7 +55,7 @@ export const ReviewModalForm = () => {
   return (
     <div className="review-form-container">
       <div className="form-title">New Review</div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="review-form">
         <ul className="errors-ul">
           {errors.map((error, idx) => (
             <li key={idx} className="errors-li">
