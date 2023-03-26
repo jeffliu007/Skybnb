@@ -32,7 +32,7 @@ function Navigation({ isLoaded }) {
           />
         </NavLink>
       </div>
-      <Searchbar />
+      {/* <Searchbar /> */}
       {isLoaded && (
         <div className="Create-Profile">
           {sessionUser && (
