@@ -26,20 +26,20 @@
 }
 
 .submit-button-signup {
-  border: 1px hidden black;
-  height: 120%;
-  width: 130%;
-  font-size: 1.2rem;
-  position: relative;
-  margin-top: 17px;
-  border-radius: 8px;
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: hidden;
+  font-size: 17px;
+  width: 205%;
+  height: 5vh;
+  border-radius: 7px;
+  color: white;
   cursor: pointer;
-  padding: 5px;
-  background-color: white;
+  position: relative;
+  left: 2px;
 }
 
 .submit-button-signup:hover {
-  background-color: rgb(204, 204, 204);
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
 }
 
 .signup-form {

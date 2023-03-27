@@ -8,6 +8,9 @@ import EditSpotModal from "../SingleSpotEditModal";
 import AllSpotReviews from "../ReviewsAll";
 import NewBookingForm from "../BookingsAll";
 import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import * as sessionActions from "../../store/session";
 
 export const SingleSpotPage = () => {
   const [loadedImage, setloadedImage] = useState(false);
@@ -59,6 +62,12 @@ export const SingleSpotPage = () => {
     avgStarRating,
     Owner,
   } = spot;
+
+  const demoLogin = () => {
+    return dispatch(
+      sessionActions.login({ credential: "Demo-lition", password: "password" })
+    );
+  };
 
   const handleDelete = (e) => {
     dispatch(removeSpot(spotId)).then(() => history.push("/"));
@@ -183,7 +192,28 @@ export const SingleSpotPage = () => {
                   />
                 </div>
               ) : (
-                <div> Login Signup</div>
+                <div className="SS-Bookings-NoUser-Container">
+                  <p>Login to make a Booking!</p>
+                  <div className="log-in-button2-holder">
+                    <OpenModalButton
+                      className="log-in-button2"
+                      buttonText="Log In"
+                      onButtonClick={closeMenu}
+                      modalComponent={<LoginFormModal />}
+                    />
+                  </div>
+                  <div>
+                    <OpenModalButton
+                      className="sign-up-button2"
+                      buttonText="Sign Up"
+                      onButtonClick={closeMenu}
+                      modalComponent={<SignupFormModal />}
+                    />
+                  </div>
+                  <button className="log-sign-demo2" onClick={demoLogin}>
+                    Demo
+                  </button>
+                </div>
               )}
             </div>
           </div>

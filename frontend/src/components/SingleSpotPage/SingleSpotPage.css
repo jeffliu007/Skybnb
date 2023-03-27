@@ -288,3 +288,70 @@
   border-radius: 11px;
   box-shadow: 7px 7px 7px rgb(207, 207, 207);
 }
+
+.SS-Bookings-NoUser-Container {
+  border: 1px solid rgb(222, 220, 220);
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  position: relative;
+  padding-left: 38px;
+  height: 42%;
+  margin-top: 47px;
+  box-shadow: 7px 7px 7px rgb(207, 207, 207);
+}
+
+.SS-Bookings-NoUser-Container p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 16px;
+}
+
+.log-in-button2 {
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: hidden;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+}
+
+.log-in-button2:hover {
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
+}
+
+.sign-up-button2 {
+  background: transparent;
+  border: 1px solid #e61d4d;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: #e61d4d;
+  cursor: pointer;
+}
+
+.sign-up-button2:hover {
+  color: #bc1414;
+  border: 1px solid #c31313;
+}
+
+.log-sign-demo2 {
+  background: linear-gradient(90deg, #e61d4d, #d10966);
+  border: hidden;
+  font-size: 17px;
+  width: 87%;
+  height: 4vh;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+}
+
+.log-sign-demo2:hover {
+  background: linear-gradient(90deg, #ea5f80, #dc609a);
+}
