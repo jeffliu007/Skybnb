@@ -52,3 +52,7 @@ Single Spot![2](https://user-images.githubusercontent.com/98433650/221076946-5cc
 Reviews
 ![4](https://user-images.githubusercontent.com/98433650/221077018-1582ea64-d181-4976-bada-2047e57ba91a.png)
 
+Bookings
+<img width="1436" alt="Screenshot 2023-03-29 at 10 43 52 PM" src="https://user-images.githubusercontent.com/98433650/228740773-7642a4b3-8c9d-41e8-80fc-49298e81cc35.png">
+
+
