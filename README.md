@@ -18,6 +18,16 @@ Redux
 
 # Features Directions
 
+Installation
+Clone this repo
+cd into the backend folder and npm install to install the dependencies
+Run the migration and seeders
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all
+Run npm start to start the backend server
+cd into the frontend folder and npm install to install the dependencies.
+Run npm start to start the frontend server
+
 ---
 
 ## Home Page Demo User:
