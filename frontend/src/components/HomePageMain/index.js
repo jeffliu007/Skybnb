@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSpots } from "../../store/spots";
 import { SpotCards } from "./SpotCards";
 import "./HomePage.css";
+import Footer from "./footer";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const HomePage = () => {
             <SpotCards spot={spot} key={spot.id} />
           ))}
         </div>
+        <Footer />
       </div>
     </>
   );
