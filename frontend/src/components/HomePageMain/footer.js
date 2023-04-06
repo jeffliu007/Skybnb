@@ -36,7 +36,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i class="fa-solid fa-eye"></i>
+          <i className="fa-solid fa-eye"></i>
         </a>
       </div>
     </div>

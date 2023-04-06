@@ -7,6 +7,7 @@ import HomePage from "./components/HomePageMain";
 import SingleSpotPage from "./components/SingleSpotPage";
 import UserBookingsPage from "./components/BookingsAll/UserBookingsPage.js";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import NotFound from "./components/NotFoundPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
           </ProtectedRoute>
           <Route exact path={`/spots/:spotId`}>
             <SingleSpotPage />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
       )}
